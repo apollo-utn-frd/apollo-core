@@ -1,0 +1,1086 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Apollo",
+		"_postman_id": "6951a30b-302d-541c-dbc2-d9df267489ca",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Comentarios",
+			"description": "",
+			"item": [
+				{
+					"name": "Ver Comentario [Público]",
+					"request": {
+						"url": "{{URL_API}}/comments/8de40658d6ba4503871e57c91d1b89b4",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Comentario [Público]",
+					"request": {
+						"url": {
+							"raw": "{{URL_API}}/comments/search?query=buen+dia+para+ejercitarse",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"comments",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "buen+dia+para+ejercitarse",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notificaciones",
+			"description": "",
+			"item": [
+				{
+					"name": "Ver Todas las Notificaciones [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/notifications",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Todas las Notificaciones No Leidas [Usuarios]",
+					"request": {
+						"url": {
+							"raw": "{{URL_API}}/notifications?readed=false",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"notifications"
+							],
+							"query": [
+								{
+									"key": "readed",
+									"value": "false",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Marcar las Notificaciones Como Leidas [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/notifications/read",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Publicaciones",
+			"description": "",
+			"item": [
+				{
+					"name": "Ver Publicaciones [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/home",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"description": "",
+			"item": [
+				{
+					"name": "Iniciar Sesión [Público]",
+					"request": {
+						"url": {
+							"raw": "{{URL_API}}/auth/google_oauth2?auth_origin_url=http://locahost/callback",
+							"protocol": "{{URL_API}}/auth/google_oauth2?auth_origin_url=http",
+							"host": [
+								"locahost"
+							],
+							"path": [
+								"callback"
+							],
+							"query": [
+								{
+									"key": "auth_origin_url",
+									"value": "http://locahost/callback",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Validar Token [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/auth/validate_token",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Usuario [Público]",
+					"request": {
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Usuario Según Username [Público]",
+					"request": {
+						"url": "{{URL_API}}/users/username/batman",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Usuario Propio [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/me",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Imagen del Usuario [Público]",
+					"request": {
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/image",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Imagen Propia [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/me/image",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Publicaciones del Usuario [Público]",
+					"request": {
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/posts",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Publicaciones Propias [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/me/posts",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Usuarios [Público]",
+					"request": {
+						"url": {
+							"raw": "{{URL_API}}/users/search?query=oliver+queen+arrow",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "oliver+queen+arrow",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Usuario [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/me",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"jon_snow\",\n\t\"name\": \"Jon\",\n\t\"lastname\": \"Snow\",\n\t\"description\": \"Hijo de Lyanna Stark y Rhaegar Targaryen.\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Seguir Usuario [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/followers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Dejar de Seguir Usuario [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/followers",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Viajes",
+			"description": "",
+			"item": [
+				{
+					"name": "Crear Viaje Público [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/travels",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Mi mapa\",\n    \"description\": \"El mapa de mi viaje por el mundo\",\n    \"places\": [\n    \t{\"latitude\": \"40.748432\", \"longitude\": \"-73.985418\"},\n    \t{\"latitude\": \"48.858406\", \"longitude\": \"2.294514\"},\n    \t{\"latitude\": \"41.403630\", \"longitude\": \"2.174377\"},\n    \t{\"latitude\": \"-13.163329\", \"longitude\": \"-72.544834\"}\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Viaje Privado [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/travels",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Mi super mapa privado\",\n    \"description\": \"Mi super mapa de mi super viaje secreto\",\n    \"public\": false,\n    \"places\": [\n    \t{\"latitude\": \"-34.178700\", \"longitude\": \"-58.962062\"},\n    \t{\"latitude\": \"-34.112823\", \"longitude\": \"-59.020135\"}\n    ],\n    \"authorizations\": [\n        {\n            \"id\": \"83a4d27a254c4a2ab6e3c4f9b7fbaa0e\"\n        }\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar Viaje [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Viaje [Público]",
+					"request": {
+						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Imagen del Viaje [Público]",
+					"request": {
+						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e/image",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Viajes [Público]",
+					"request": {
+						"url": {
+							"raw": "{{URL_API}}/travels/search?query=descripcion+prueba",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "descripcion+prueba",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Marcar Viaje como Favorito [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e/favorites",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Desmarcar Viaje como Favorito [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e/favorites",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Comentar Viaje [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e/comments",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"Primer comentario\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

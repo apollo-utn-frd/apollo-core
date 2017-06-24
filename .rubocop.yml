@@ -1,0 +1,56 @@
+AllCops:
+  Exclude:
+    - bin/*
+    - config/**/*
+    - db/*
+    - lib/tasks/*
+    - test/*
+    - Gemfile
+    - Rakefile
+    - config.ru
+
+  TargetRubyVersion: 2.4
+
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 20
+
+Rails:
+  Enabled: true
+
+Rails/NotNullColumn:
+  Enabled: false
+
+Style/AccessorMethodName:
+  Exclude:
+    - app/controllers/devise_token_auth/custom_omniauth_callbacks_controller.rb
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  EnforcedStyle: assign_inside_condition
+
+Style/Documentation:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/RedundantSelf:
+  Exclude:
+    - app/models/*
+
+Style/SymbolArray:
+  Enabled: false
