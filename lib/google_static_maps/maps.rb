@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module GoogleStaticMapsHelper
   class Map
     remove_const :REQUIRED_OPTIONS

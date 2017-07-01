@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: notifications
@@ -29,6 +30,7 @@ class Notification < ApplicationRecord
   before_validation :set_readed_at
 
   scope :readed, -> { where(readed: true) }
+  scope :not_readed, -> { where(readed: false) }
 
   def read!
     update!(readed: true)

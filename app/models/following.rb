@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: followings
@@ -45,7 +46,7 @@ class Following < ApplicationRecord
   def validate_following
     return if valid_following?
 
-    errors.add('following_id', 'can not follow himself')
+    errors.add('follower_id', 'can not follow himself')
   end
 
   ##

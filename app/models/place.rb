@@ -3,12 +3,13 @@
 #
 # Table name: places
 #
-#  id         :uuid             not null, primary key
-#  latitude   :string           not null
-#  longitude  :string           not null
-#  travel_id  :uuid             not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :uuid             not null, primary key
+#  lonlat      :geography({:srid point, 4326
+#  title       :string           default(""), not null
+#  description :text             default(""), not null
+#  travel_id   :uuid             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 # Foreign Keys
 #
@@ -18,11 +19,24 @@
 class Place < ApplicationRecord
   belongs_to :travel, inverse_of: :places
 
-  validates :latitude, format: { with: /\A[+-]?[0-9]+\.[0-9]+\z/ }
-  validates :longitude, format: { with: /\A[+-]?[0-9]+\.[0-9]+\z/ }
-  validates :title, length: { in: 0..30 }, presence: true
-  validates :description, length: { in: 0..150 }
+  validates :title, length: { maximum: 30 }
+  validates :description, length: { maximum: 150 }
 
-  alias_attribute :lat, :latitude
-  alias_attribute :lng, :longitude
+  validate :validate_lonlat
+
+  def lat
+    lonlat.lat
+  end
+
+  def lng
+    lonlat.lon
+  end
+
+  private
+
+  def validate_lonlat
+    return if lonlat.present?
+
+    errors.add('longitude', 'or latitude is invalid')
+  end
 end

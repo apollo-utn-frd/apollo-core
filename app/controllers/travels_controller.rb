@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class TravelsController < ApplicationController
   before_action :authenticate_user!, only: [
     :create,
@@ -11,18 +12,18 @@ class TravelsController < ApplicationController
   before_action :set_travel, except: [:create, :search]
 
   def show
-    render json: @travel
+    render :show
   end
 
   def create
-    travel = nil
+    @travel = nil
 
     ActiveRecord::Base.transaction do
-      travel = Travel.create!(create_params)
-      travel.authorize_all!(authorizations_users) unless travel.publicx?
+      @travel = Travel.create!(create_params)
+      @travel.authorize_all!(authorizations_users) unless @travel.publicx?
     end
 
-    render json: travel
+    render :show
   end
 
   def destroy
@@ -36,27 +37,27 @@ class TravelsController < ApplicationController
   end
 
   def search
-    query = params.fetch(:query, '')
-    search = Travel.search(query)
+    @travels = Travel.search(search_params)
 
-    render json: search.paginate(
-      page: params[:page],
-      per_page: params[:per_page]
-    )
+    render :index
   end
 
-  def image
+  def show_image
     send_file "public/travels/#{@travel.picture_local_path}",
               type: 'image/jpeg',
               disposition: 'inline'
   end
 
   def create_comment
-    render json: Comment.create!(comment_params)
+    @comment = Comment.create!(comment_params)
+
+    render 'comments/show'
   end
 
   def create_favorite
-    render json: current_user.favorite!(@travel)
+    @favorite = current_user.favorite!(@travel)
+
+    render 'favorites/show'
   end
 
   def destroy_favorite
@@ -80,14 +81,19 @@ class TravelsController < ApplicationController
   end
 
   def create_params
-    # TODO: esto funciona?
-    # places = params.require(places: %i[latitude longitude])
-    places = params.require(:places).map do |plc|
-      plc.require(:latitude, :longitude)
+    places = params.fetch(:places).map do |plc|
+      longitude = plc.fetch(:longitude)
+      latitude = plc.fetch(:latitude)
+
+      {
+        title: plc.fetch(:title),
+        description: plc.fetch(:description),
+        lonlat: "POINT(#{longitude} #{latitude})"
+      }
     end
 
     {
-      title: params.require(:title),
+      title: params.fetch(:title),
       description: params[:description],
       publicx: params.fetch(:public, true),
       places_attributes: places,
@@ -99,8 +105,12 @@ class TravelsController < ApplicationController
     {
       user: current_user,
       travel: @travel,
-      content: params.require(:content)
+      content: params.fetch(:content)
     }
+  end
+
+  def search_params
+    params.fetch(:query, '')
   end
 
   def authorizations_users

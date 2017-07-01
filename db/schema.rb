@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20170616225117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
   enable_extension "pgcrypto"
 
   create_table "authorizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -35,9 +36,9 @@ ActiveRecord::Schema.define(version: 20170616225117) do
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "source_type"
+    t.string "source_type", null: false
     t.uuid "source_id", null: false
-    t.string "resource_type"
+    t.string "resource_type", null: false
     t.uuid "resource_id", null: false
     t.index ["resource_type", "resource_id"], name: "index_events_on_resource_type_and_resource_id"
     t.index ["source_type", "source_id"], name: "index_events_on_source_type_and_source_id"
@@ -67,8 +68,9 @@ ActiveRecord::Schema.define(version: 20170616225117) do
   end
 
   create_table "places", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "latitude", null: false
-    t.string "longitude", null: false
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.string "title", default: "", null: false
+    t.text "description", default: "", null: false
     t.uuid "travel_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -99,8 +101,8 @@ ActiveRecord::Schema.define(version: 20170616225117) do
     t.jsonb "extra", default: "[]", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uid"
-    t.text "provider"
+    t.text "uid"
+    t.string "provider"
     t.text "oauth_token"
     t.text "oauth_refresh_token"
     t.datetime "oauth_expires_at"

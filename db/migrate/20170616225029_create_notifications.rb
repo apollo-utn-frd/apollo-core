@@ -1,5 +1,8 @@
 # frozen_string_literal: true
+
 class CreateNotifications < ActiveRecord::Migration[5.1]
+  safety_assured
+
   def change
     create_table :notifications do |t|
       t.boolean :readed, default: false, null: false

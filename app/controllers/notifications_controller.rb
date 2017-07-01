@@ -1,23 +1,18 @@
 # frozen_string_literal: true
+
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    notifications = current_user.notifications.where(index_params)
+    @notifications = current_user.notifications.where(index_params)
 
-    render json: notifications.paginate(
-      page: params[:page],
-      per_page: params[:per_page]
-    )
+    render :index
   end
 
   def read
-    notifications = current_user.notifications.where(readed: false)
+    @notifications = current_user.notifications.not_readed.map(&:read!)
 
-    render json: notifications.map(&:read!).paginate(
-      page: params[:page],
-      per_page: params[:per_page]
-    )
+    render :index
   end
 
   private

@@ -7,9 +7,9 @@
 #  type          :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  source_type   :string
+#  source_type   :string           not null
 #  source_id     :uuid             not null
-#  resource_type :string
+#  resource_type :string           not null
 #  resource_id   :uuid             not null
 #
 # Indexes
@@ -39,12 +39,13 @@ class Event < ApplicationRecord
     Travel
   ].freeze
 
+  enum type: TYPES.map { |t| [t, t] }.to_h
+
   belongs_to :source, polymorphic: true
   belongs_to :resource, polymorphic: true
 
   has_many :notifications, dependent: :destroy
 
-  validates :type, inclusion: { in: TYPES }
   validates :source_type, inclusion: { in: CLASS_TYPES }
   validates :resource_type, inclusion: { in: CLASS_TYPES }
 

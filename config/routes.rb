@@ -12,34 +12,40 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: [:show, :update] do
-    resources :favorites, only: :index
-    resources :followers, only: [:index, :create, :destroy]
-    resources :followings, only: :index
+    controller 'users' do
+      get 'travels', action: 'index_travels'
+      get 'authorizations', action: 'index_authorizations'
+      get 'favorites', action: 'index_favorites'
+      get 'followings', action: 'index_followings'
+      get 'followers', action: 'index_followers'
+      post 'followers', action: 'create_followers'
+      delete 'followers', action: 'destroy_followers'
+      get 'image', action: 'show_image'
+      put 'image', action: 'update_image'
+      patch 'image', action: 'update_image'
+      get 'posts', action: 'index_posts'
 
-
-    scope '/followers' do
-
+      collection do
+        get 'search'
+        get 'username/:username', action: 'username'
+      end
     end
-
-    scope '/image' do
-
-    end
-
-    get 'followings', to: 'users#index_followings'
-
-
-    get 'posts'
-    get 'search', on: :collection
-    get 'username/:username', to: 'users#username', on: :collection
   end
 
   resources :travels, only: [:show, :create, :destroy] do
-    resources :authorizations, only: :index
-    resources :comments, only: [:index, :create]
-    resources :favorites, only: [:index, :create, :destroy]
+    controller 'travels' do
+      get 'authorizations', action: 'index_authorizations'
+      get 'favorites', action: 'index_favorites'
+      post 'favorites', action: 'create_favorites'
+      delete 'favorites', action: 'destroy_favorites'
+      get 'comments', action: 'index_comments'
+      post 'comments', action: 'create_comments'
+      get 'image', aciont: 'show_image'
 
-    get 'image'
-    get 'search', on: :collection
+      collection do
+        get 'search'
+      end
+    end
   end
 
   resources :comments, only: [:show] do

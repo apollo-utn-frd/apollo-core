@@ -1,19 +1,16 @@
 # frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :set_comment, except: [:search]
 
   def show
-    render json: @comment
+    render :show
   end
 
   def search
-    query = params.fetch(:query, '')
-    search = Comment.search(query)
+    @comments = Comment.search(search_params)
 
-    render json: search.paginate(
-      page: params[:page],
-      per_page: params[:per_page]
-    )
+    render :index
   end
 
   private
@@ -28,5 +25,9 @@ class CommentsController < ApplicationController
     end
 
     @comment
+  end
+
+  def search_params
+    params.fetch(:query, '')
   end
 end

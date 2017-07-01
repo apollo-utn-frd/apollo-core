@@ -1,5 +1,8 @@
 # frozen_string_literal: true
+
 class AddTokenAuthToUsers < ActiveRecord::Migration[5.1]
+  safety_assured
+
   def change
     add_column :users, :uid, :text
     add_column :users, :provider, :string

@@ -1,5 +1,8 @@
 # frozen_string_literal: true
+
 class CreateEvents < ActiveRecord::Migration[5.1]
+  safety_assured
+
   def change
     create_table :events do |t|
       t.string :type, null: false

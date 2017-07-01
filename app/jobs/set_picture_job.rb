@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 class SetPictureJob < ApplicationJob
   queue_as :pictures
 
   PUBLIC_FOLDER = 'public'
-  VIEWS_IMAGES_FOLDER = 'app/views/images'
+  VIEWS_FOLDER = 'app/views/'
 
   def perform(object)
     filename = filename(object)
@@ -23,7 +24,7 @@ class SetPictureJob < ApplicationJob
   end
 
   def filename(object)
-    "#{object.id}.jpg"
+    "#{object.format_id}.jpg"
   end
 
   def picture_folder(object)
@@ -31,6 +32,6 @@ class SetPictureJob < ApplicationJob
   end
 
   def default_picture_path(object)
-    "#{VIEWS_IMAGES_FOLDER}/#{object.class.table_name}/default.jpg"
+    "#{VIEWS_FOLDER}/#{object.class.table_name}/images/default.jpg"
   end
 end

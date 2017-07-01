@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -18,8 +19,8 @@
 #  extra               :jsonb            not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  uid                 :uuid
-#  provider            :text
+#  uid                 :text
+#  provider            :string
 #  oauth_token         :text
 #  oauth_refresh_token :text
 #  oauth_expires_at    :datetime
@@ -70,7 +71,7 @@ class User < ApplicationRecord
   validates :name, length: { in: 1..30 }, presence: true
   validates :lastname, length: { in: 1..30 }, presence: true
   validates :google_id, presence: true, uniqueness: true
-  validates :description, length: { in: 0..150 }
+  validates :description, length: { maximum: 150 }
   validates :gender, inclusion: { in: GENDERS }
 
   before_validation :set_username, on: :create
@@ -131,7 +132,7 @@ class User < ApplicationRecord
   # Produce que el usuario siga a otro usuario.
   #
   def follow!(user)
-    followings.find_or_create_by!(user: user)
+    followings.find_or_create_by!(following: user)
   end
 
   ##
@@ -237,8 +238,7 @@ class User < ApplicationRecord
   def set_uid!
     return if self.uid.present?
 
-    uid = self.id.delete('-')
-    update!(uid: uid)
+    update!(uid: format_id)
   end
 
   ##

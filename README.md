@@ -2,10 +2,11 @@
 Para probarla se puede instalar la aplicación [Postman](https://www.getpostman.com/) e importar la colección *"Apollo.postman_collection.json"*. En el panel de la izquierda aparecerá la colección *Apollo* con ejemplos de todas las acciones que la aplicación soporta actualmente.
 
 ## Requisitos
-* Ruby 2.4.1
-* Rails 5.1.1
+* Ruby 2.4
+* Rails 5.1
 * PostgreSQL 9.6
-* Redis 3.2.9
+* PostGIS 2.3
+* Redis 3.2
 
 ## API REST
 ### General
@@ -32,8 +33,9 @@ GET | /users/:id/followers | Público | Devuelve los seguidores del usuario.
 POST | /users/:id/followers| Usuarios | Sigue al usuario.
 DELETE | /users/:id/followers | Usuarios | Deja de seguir al usuario.
 GET | /users/:id/followings | Público | Devuelve los seguidos por el usuario.
-GET | /users/:id/travels | Público | Devuelve los seguidos por el usuario.
+GET | /users/:id/travels | Público | Devuelve los viajes del usuario.
 GET | /users/:id/favorites | Público | Devuelve los favoritos del usuario.
+GET | /users/:id/authorizations | Usuarios | Devuelve las autorizaciones del usuario.
 GET | /users/:id/image | Público | Devuelve la imagen de perfil del usuario.
 PUT | /users/:id/image | Usuarios | Actualiza la imagen de perfil del usuario.
 
@@ -54,6 +56,7 @@ POST | /travels/:id/favorites | Usuarios | Marca al viaje como favorito.
 DELETE | /travels/:id/favorites | Usuarios | Desmarca al viaje como favorito.
 GET | /travels/:id/comments | Público | Devuelve los comentarios del viaje.
 POST | /travels/:id/comments | Usuarios | Crea un comentario.
+GET | /travels/:id/authorizations | Usuarios | Devuelve las autorizaciones del viaje.
 
 ### Comentarios
 Método HTTP | URI | Autenticación | Descripción

@@ -11,9 +11,6 @@ AllCops:
 
   TargetRubyVersion: 2.4
 
-Layout/EmptyLineAfterMagicComment:
-  Enabled: false
-
 Metrics/AbcSize:
   Max: 30
 
@@ -47,6 +44,10 @@ Style/Documentation:
 
 Style/Lambda:
   Enabled: false
+
+Style/LambdaCall:
+  Exclude:
+    - app/views/*/*.jbuilder
 
 Style/RedundantSelf:
   Exclude:

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: travels
@@ -34,7 +35,7 @@ class Travel < ApplicationRecord
   has_many :favorites_users, through: :favorites, source: :user
 
   validates :title, length: { in: 2..30 }, presence: true
-  validates :description, length: { in: 0..1000 }
+  validates :description, length: { maximum: 1000 }
   validates :places, length: { in: 1..25, message: 'must be between 1 and 25' }
 
   after_create_commit :create_event!

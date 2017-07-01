@@ -1,5 +1,8 @@
 # frozen_string_literal: true
+
 class CreateTravels < ActiveRecord::Migration[5.1]
+  safety_assured
+
   def change
     create_table :travels do |t|
       t.string :title, null: false

@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+coverage
 
 # Server assets
 /public/**/*

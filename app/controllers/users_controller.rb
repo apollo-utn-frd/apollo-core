@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:update, :following, :unfollowing]
   before_action :set_user, except: [:search, :username]
   before_action :set_user_by_username, only: :username
 
   def show
-    render json: @user.sanitize(current_user)
+    render :show
   end
 
   def update
@@ -15,38 +16,35 @@ class UsersController < ApplicationController
 
     current_user.update!(update_params)
 
-    render json: current_user
-  end
-
-  def posts
-    render json: @user.posts.paginate(
-      page: params[:page],
-      per_page: params[:per_page]
-    )
+    render :show
   end
 
   def username
-    render json: @user.sanitize(current_user)
+    render :show
   end
 
   def search
-    query = params.fetch(:query, '')
-    search = User.search(query)
+    @users = User.search(search_params)
 
-    render json: search.paginate(
-      page: params[:page],
-      per_page: params[:per_page]
-    )
+    render :index
   end
 
-  def image
+  def index_posts
+    @events = @user.posts
+
+    render '/events/index'
+  end
+
+  def show_image
     send_file "public/users/#{@user.picture_local_path}",
               type: 'image/jpeg',
               disposition: 'inline'
   end
 
   def create_follower
-    render json: current_user.follow!(@user)
+    @following = current_user.follow!(@user)
+
+    render '/following/show'
   end
 
   def destroy_follower
@@ -92,5 +90,9 @@ class UsersController < ApplicationController
     end
 
     update_params
+  end
+
+  def search_params
+    params.fetch(:query, '')
   end
 end

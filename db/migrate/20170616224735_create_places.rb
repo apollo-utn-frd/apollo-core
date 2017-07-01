@@ -1,9 +1,11 @@
 # frozen_string_literal: true
+
 class CreatePlaces < ActiveRecord::Migration[5.1]
+  safety_assured
+
   def change
     create_table :places do |t|
-      t.string :latitude, null: false
-      t.string :longitude, null: false
+      t.st_point :lonlat, geographic: true
       t.string :title, default: '', null: false
       t.text :description, default: '', null: false
 

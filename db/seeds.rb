@@ -67,12 +67,10 @@ if Rails.env.development?
       user: flash,
       places_attributes: [
         {
-          latitude: '40.716014',
-          longitude: '-74.004044'
+          lonlat: 'POINT(-74.004044 40.716014)'
         },
         {
-          latitude: '30.333877',
-          longitude: '-81.653448'
+          lonlat: 'POINT(-81.653448 30.333877)'
         }
       ]
     )
@@ -94,8 +92,7 @@ if Rails.env.development?
       publicx: false,
       places_attributes: [
         {
-          latitude: '50.335556',
-          longitude: '6.9475'
+          lonlat: 'POINT(6.9475 50.335556)'
         }
       ]
     )
@@ -116,8 +113,9 @@ if Rails.env.development?
       publicx: false,
       places_attributes: [
         {
-          latitude: '32.627778',
-          longitude: '129.738333'
+          title: 'Arrowcueva',
+          description: 'Mansion Queen',
+          lonlat: 'POINT(129.738333 32.627778)'
         }
       ]
     )
@@ -136,20 +134,20 @@ if Rails.env.development?
       user: raven,
       places_attributes: [
         {
-          latitude: '25.789106',
-          longitude: '-80.226529'
+          title: 'Primer vertice',
+          lonlat: 'POINT(-80.226529 25.789106)'
         },
         {
-          latitude: '18.4663188',
-          longitude: '-66.1057427'
+          title: 'Segundo vertice',
+          lonlat: 'POINT(-66.1057427 18.4663188)'
         },
         {
-          latitude: '32.294887',
-          longitude: '-64.781380'
+          title: 'Tercer vertice',
+          lonlat: 'POINT(-64.781380 32.294887)'
         },
         {
-          latitude: '25.799246',
-          longitude: '-80.246243'
+          title: 'Primer vertice',
+          lonlat: 'POINT(-80.226529 25.789106)'
         }
       ]
     )
@@ -163,23 +161,20 @@ if Rails.env.development?
       user: raven,
       places_attributes: [
         {
-          latitude: '-33.9668613',
-          longitude: '-59.2069292'
+          lonlat: 'POINT(-59.2069292 -33.9668613)'
         },
         {
-          latitude: '-25.407217',
-          longitude: '-54.590303'
+          lonlat: 'POINT(-54.590303 -25.407217)'
         },
         {
-          latitude: '-31.061510',
-          longitude: '-71.613073'
+          lonlat: 'POINT(-71.613073 -31.061510)'
         }
       ]
     )
 
-    batman.favorite(lugares_energeticos)
-    arrow.favorite(lugares_energeticos)
-    flash.favorite(lugares_energeticos)
+    batman.favorite!(lugares_energeticos)
+    arrow.favorite!(lugares_energeticos)
+    flash.favorite!(lugares_energeticos)
 
     Travel.create!(
       title: 'Ubicacion de la Baticueva',
@@ -188,8 +183,9 @@ if Rails.env.development?
       publicx: false,
       places_attributes: [
         {
-          latitude: '-34.368214',
-          longitude: '-58.779053'
+          title: 'Baticueva',
+          description: 'Mansion Wayne',
+          lonlat: 'POINT(-58.779053 -34.368214)'
         }
       ]
     )

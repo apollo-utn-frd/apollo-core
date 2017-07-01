@@ -1,5 +1,8 @@
 # frozen_string_literal: true
+
 class CreateFollowings < ActiveRecord::Migration[5.1]
+  safety_assured
+
   def change
     create_table :followings do |t|
       t.uuid :following_id, null: false

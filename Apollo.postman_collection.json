@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "Apollo",
-		"_postman_id": "6951a30b-302d-541c-dbc2-d9df267489ca",
+		"_postman_id": "66a697e2-cefd-0777-7a7e-c718a2abfc7f",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -674,7 +674,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\": \"jon_snow\",\n\t\"name\": \"Jon\",\n\t\"lastname\": \"Snow\",\n\t\"description\": \"Hijo de Lyanna Stark y Rhaegar Targaryen.\"\n}"
+							"raw": "{\n    \"username\": \"jon_snow\",\n    \"name\": \"Jon\",\n    \"lastname\": \"Snow\",\n    \"description\": \"Hijo de Lyanna Stark y Rhaegar Targaryen.\"\n}"
 						},
 						"description": ""
 					},
@@ -785,7 +785,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Mi mapa\",\n    \"description\": \"El mapa de mi viaje por el mundo\",\n    \"places\": [\n    \t{\"latitude\": \"40.748432\", \"longitude\": \"-73.985418\"},\n    \t{\"latitude\": \"48.858406\", \"longitude\": \"2.294514\"},\n    \t{\"latitude\": \"41.403630\", \"longitude\": \"2.174377\"},\n    \t{\"latitude\": \"-13.163329\", \"longitude\": \"-72.544834\"}\n    ]\n}"
+							"raw": "{\n    \"title\": \"Mi mapa\",\n    \"description\": \"El mapa de mi viaje por el mundo\",\n    \"places\": [\n        {\n            \"title\": \"Primer titulo\",\n            \"description\": \"Primera descripcion\",\n            \"latitude\": \"40.748432\",\n            \"longitude\": \"-73.985418\"\n        },\n        {\n            \"title\": \"Segundo titulo\",\n            \"description\": \"Segunda descripcion\",\n            \"latitude\": \"48.858406\",\n            \"longitude\": \"2.294514\"\n        },\n        {\n            \"title\": \"Tercer titulo\",\n            \"description\": \"Tercera descripcion\",\n            \"latitude\": \"41.403630\",\n            \"longitude\": \"2.174377\"\n        },\n        {\n            \"title\": \"Cuarto titulo\",\n            \"description\": \"Cuarta descripcion\",\n            \"latitude\": \"-13.163329\",\n            \"longitude\": \"-72.544834\"\n        }\n    ]\n}"
 						},
 						"description": ""
 					},
@@ -820,7 +820,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Mi super mapa privado\",\n    \"description\": \"Mi super mapa de mi super viaje secreto\",\n    \"public\": false,\n    \"places\": [\n    \t{\"latitude\": \"-34.178700\", \"longitude\": \"-58.962062\"},\n    \t{\"latitude\": \"-34.112823\", \"longitude\": \"-59.020135\"}\n    ],\n    \"authorizations\": [\n        {\n            \"id\": \"83a4d27a254c4a2ab6e3c4f9b7fbaa0e\"\n        }\n    ]\n}"
+							"raw": "{\n    \"title\": \"Mi super mapa privado\",\n    \"description\": \"Mi super mapa de mi super viaje secreto\",\n    \"public\": false,\n    \"places\": [\n        {\n            \"title\": \"Primer titulo\",\n            \"description\": \"Primera descripcion\",\n            \"latitude\": \"-34.178700\",\n            \"longitude\": \"-58.962062\"\n        },\n        {\n            \"title\": \"Segundo titulo\",\n            \"description\": \"Segunda descripcion\",\n            \"latitude\": \"-34.112823\",\n            \"longitude\": \"-59.020135\"\n        }\n    ],\n    \"authorizations\": [\n        {\n            \"id\": \"83a4d27a254c4a2ab6e3c4f9b7fbaa0e\"\n        }\n    ]\n}"
 						},
 						"description": ""
 					},
@@ -853,7 +853,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -885,7 +888,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -970,7 +976,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Los parametros 'page' y 'per_page' son opcionales."
 					},
 					"response": []
@@ -1074,7 +1083,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"content\": \"Primer comentario\"\n}"
+							"raw": "{\n    \"content\": \"Primer comentario\"\n}"
 						},
 						"description": ""
 					},
