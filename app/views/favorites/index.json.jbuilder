@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-favorites = @favorites.paginate(
-  page: params[:page],
-  per_page: params[:per_page]
-)
+favorites = @favorites.readables(current_user).paginate(params)
 
 json.partial! 'favorites/favorite', collection: favorites, as: :favorite

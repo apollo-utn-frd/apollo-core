@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-followings = @followings.paginate(
-  page: params[:page],
-  per_page: params[:per_page]
-)
+followings = @followings.readables(current_user).paginate(params)
 
 json.partial! 'followings/following', collection: followings, as: :following

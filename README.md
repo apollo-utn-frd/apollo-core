@@ -2,7 +2,7 @@
 Para probarla se puede instalar la aplicación [Postman](https://www.getpostman.com/) e importar la colección *"Apollo.postman_collection.json"*. En el panel de la izquierda aparecerá la colección *Apollo* con ejemplos de todas las acciones que la aplicación soporta actualmente.
 
 ## Requisitos
-* Ruby 2.4
+* Ruby 2.4.1
 * Rails 5.1
 * PostgreSQL 9.6
 * PostGIS 2.3
@@ -21,14 +21,13 @@ GET | /auth/google_oauth2 | Público | Autentica al usuario con su cuenta de Goo
 GET | /auth/validate | Público | Devuelve información sobre el token de acceso.
 
 ### Usuarios
+En este endpoint, :id se puede sustituir por el username del usuario o por 'me' para referenciar al usuario logueado.
+
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
-GET | /users/me | Usuarios | Devuelve el usuario logueado.
-PUT | /users/me | Usuarios | Actualiza el usuario logueado.
-GET | /users/:id | Público | Devuelve el usuario segun un id.
-GET | /users/?username=:username | Público | Devuelve el usuario segun un nombre de usuario.
+GET | /users/:id | Público | Devuelve el usuario.
+PUT | /users/:id | Usuarios | Actualiza el usuario logueado.
 GET | /users/:id/posts | Público | Devuelve las últimas publicaciones del usuario.
-GET | /users/search | Público | Busca usuarios.
 GET | /users/:id/followers | Público | Devuelve los seguidores del usuario.
 POST | /users/:id/followers| Usuarios | Sigue al usuario.
 DELETE | /users/:id/followers | Usuarios | Deja de seguir al usuario.
@@ -38,6 +37,7 @@ GET | /users/:id/favorites | Público | Devuelve los favoritos del usuario.
 GET | /users/:id/authorizations | Usuarios | Devuelve las autorizaciones del usuario.
 GET | /users/:id/image | Público | Devuelve la imagen de perfil del usuario.
 PUT | /users/:id/image | Usuarios | Actualiza la imagen de perfil del usuario.
+GET | /users/search | Público | Busca usuarios.
 
 ### Últimas publicaciones
 Método HTTP | URI | Autenticación | Descripción
@@ -70,3 +70,6 @@ Método HTTP | URI | Autenticación | Descripción
 GET | /notifications | Usuarios | Devuelve todas las notificaciones.
 GET | /notifications?readed=false | Usuarios | Devuelve las notificaciones no leídas.
 POST | /notifications/read | Usuarios | Marca todas las notificaciones como leídas.
+
+### Notas
+* Todos los endpoints que devuelven multiples recursos permiten la paginación a traves de los parametros 'page' y 'per_page'. Si no se utilizan se devuelven los primeros 20 recursos por defecto.

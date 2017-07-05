@@ -63,10 +63,6 @@ class User < ApplicationRecord
   has_many :followings_users, through: :followings, source: :following
 
   validates :username, length: { in: 4..30 }, presence: true, uniqueness: true
-  validates :username, format: {
-    with: /\A\w+\z/,
-    message: 'can contain numbers, letters and underscore only'
-  }
   validates :email, presence: true, uniqueness: true
   validates :name, length: { in: 1..30 }, presence: true
   validates :lastname, length: { in: 1..30 }, presence: true
@@ -74,7 +70,11 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 150 }
   validates :gender, inclusion: { in: GENDERS }
 
+  validate :validate_username_format
+  validate :validate_username_reserved
+
   before_validation :set_username, on: :create
+  before_validation :downcase_username
   before_validation :set_confirmed_at
 
   after_create :set_uid!
@@ -107,9 +107,7 @@ class User < ApplicationRecord
   # Devuelve todas las publicaciones de la home de un usuario.
   #
   def home_posts
-    followings_posts = followings_users.flat_map(&:posts).select do |post|
-      post.readable?(self)
-    end
+    followings_posts = followings_users.flat_map(&:posts)
 
     posts.to_a.concat(followings_posts).sort_by(&:created_at).reverse
   end
@@ -166,8 +164,8 @@ class User < ApplicationRecord
   ##
   # Devuelve si los datos del usuario pueden ser accedidos por un determinado usuario.
   #
-  def readable?(_user)
-    true
+  def readable?(user)
+    confirmed? || self == user
   end
 
   ##
@@ -175,19 +173,6 @@ class User < ApplicationRecord
   #
   def manageable?(user)
     self == user
-  end
-
-  ##
-  # Devuelve al usuario habiéndole eliminado todas las referencias a viajes privados
-  # que un usuario dado como parámetro no puede acceder.
-  #
-  # TODO
-  def sanitize(_user)
-    # self.travels = self.travels.select { |travel| travel.readable?(user) }
-    # self.favorites = self.favorites.select { |favorite| favorite.readable?(user) }
-    # self.comments = self.comments.select { |comment| comment.readable?(user) }
-
-    self
   end
 
   ##
@@ -233,38 +218,62 @@ class User < ApplicationRecord
   end
 
   ##
-  # Asigna el uid al usuario.
+  # Valida el formato del nombre de usuario.
   #
-  def set_uid!
-    return if self.uid.present?
+  def validate_username_format
+    return if /\A[a-z0-9_]+\z/.match?(self.username)
 
-    update!(uid: format_id)
+    errors.add('username', 'can contain numbers, letters and underscore only')
   end
 
   ##
-  # Asigna el username al usuario si no tiene uno.
+  # Valida si el nombre de usuario es una palabra reservada.
+  #
+  def validate_username_reserved
+    return unless self.username.reserved?
+
+    errors.add('username', 'can not be a reserved word')
+  end
+
+  ##
+  # Genera un nombre de usuario dada una string base.
+  #
+  def generate_username(base)
+    base.tap do |username|
+      i = 0
+
+      while User.exists?(username: username)
+        username = "#{base}#{i}"
+        i += 1
+      end
+    end
+  end
+
+  ##
+  # Asigna el nombre de usuario.
   #
   def set_username
-    return if self.username.present?
-
     base = self.email.partition('@').first.tr('.', '_')
 
     self.username = generate_username(base)
   end
 
-  ##
-  # Genera un username dada un username base.
+  ###
+  # Convierte el nombre de usuario a minusculas.
   #
-  def generate_username(base)
-    username = base
+  def downcase_username
+    return unless username_changed?
 
-    i = 0
-    while User.exists?(username: username)
-      username = "#{base}#{i}"
-      i += 1
-    end
+    self.username = self.username.downcase
+  end
 
-    username
+  ##
+  # Asigna el uid.
+  #
+  def set_uid!
+    return if self.uid.present?
+
+    update!(uid: format_id)
   end
 
   ##

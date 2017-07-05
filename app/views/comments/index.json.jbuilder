@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-comments = @comments.paginate(
-  page: params[:page],
-  per_page: params[:per_page]
-)
+comments = @comments.readables(current_user).paginate(params)
 
 json.partial! 'comments/comment', collection: comments, as: :comment

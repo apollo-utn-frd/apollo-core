@@ -17,16 +17,16 @@ json.places travel.places do |place|
 end
 
 json.favorites do
-  json.count travel.favorites.length
+  json.count travel.favorites.readables(current_user).length
   json.href travel_favorites_path(travel.format_id)
 end
 
 json.comments do
-  json.count travel.comments.length
+  json.count travel.comments.readables(current_user).length
   json.href travel_comments_path(travel.format_id)
 end
 
 json.authorizations do
-  json.count travel.authorizations.length
+  json.count travel.authorizations.readables(current_user).length
   json.href travel_authorizations_path(travel.format_id)
 end

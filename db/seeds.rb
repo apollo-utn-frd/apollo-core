@@ -17,7 +17,8 @@ if Rails.env.development?
       lastname: 'Wayne',
       gender: 'male',
       picture_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
-      description: 'I\'m Batman'
+      description: 'I\'m Batman',
+      confirmed: true
     )
 
     flash = User.create!(
@@ -29,7 +30,8 @@ if Rails.env.development?
       lastname: 'Allen',
       gender: 'male',
       picture_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJV2Z2Y0szc0RoYlU',
-      description: 'The fastest man alive'
+      description: 'The fastest man alive',
+      confirmed: true
     )
 
     arrow = User.create!(
@@ -41,7 +43,8 @@ if Rails.env.development?
       lastname: 'Queen',
       gender: 'male',
       picture_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJZzhRQW5FTVFXVWc',
-      description: 'You have failed this city'
+      description: 'You have failed this city',
+      confirmed: true
     )
 
     raven = User.create!(
@@ -53,7 +56,8 @@ if Rails.env.development?
       lastname: 'Roth',
       gender: 'female',
       picture_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJOTVDeDJ2MWdwTTQ',
-      description: 'Azarath Metreon Zinthos'
+      description: 'Azarath Metreon Zinthos',
+      confirmed: true
     )
 
     batman.follow!(arrow)

@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-users = @users.paginate(
-  page: params[:page],
-  per_page: params[:per_page]
-)
+users = @users.readables(current_user).paginate(params)
 
 json.partial! 'users/user', collection: users, as: :user

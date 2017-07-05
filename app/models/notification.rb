@@ -32,10 +32,20 @@ class Notification < ApplicationRecord
   scope :readed, -> { where(readed: true) }
   scope :not_readed, -> { where(readed: false) }
 
+  ##
+  # Marca como leída la notificación.
+  #
   def read!
     update!(readed: true)
 
     self
+  end
+
+  ##
+  # Devuelve si la notificación puede ser accedida por un determinado usuario.
+  #
+  def readable?(user)
+    user == self.user
   end
 
   private

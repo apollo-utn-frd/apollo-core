@@ -25,25 +25,17 @@ module ErrorHandlingConcern
     {
       status: 403,
       error: 'Forbidden',
-      message: "Not authorized to #{e.action} #{model_name} with id = '#{resource.id}'"
+      message: "Not authorized to #{e.action} #{model_name} with id = '#{resource.format_id}'"
     }
   end
 
   def record_not_found(e)
     model_name = e.model.to_s.downcase
-    id = e.id
-
-    if id.is_a?(Array)
-      id_to_s = id.to_s.tr('"', "'")
-      message = "Couldn't find all #{model_name} with #{e.primary_key} in #{id_to_s}"
-    else
-      message = "Couldn't find #{model_name} with #{e.primary_key} = '#{id}'"
-    end
 
     {
       status: 404,
       error: 'Not Found',
-      message: message
+      message: "Couldn't find #{model_name} with #{e.primary_key} = '#{e.id}'"
     }
   end
 end

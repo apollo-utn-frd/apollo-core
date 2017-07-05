@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-travels = @travels.paginate(
-  page: params[:page],
-  per_page: params[:per_page]
-)
+travels = @travels.readables(current_user).paginate(params)
 
 json.partial! 'travels/travel', collection: travels, as: :travel

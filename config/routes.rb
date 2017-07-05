@@ -2,6 +2,13 @@
 
 require 'sidekiq/web'
 
+if Rails.env.production?
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == Rails.application.secrets.sidekiq_username &&
+      password == Rails.application.secrets.sidekiq_password
+  end
+end
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -27,7 +34,6 @@ Rails.application.routes.draw do
 
       collection do
         get 'search'
-        get 'username/:username', action: 'username'
       end
     end
   end

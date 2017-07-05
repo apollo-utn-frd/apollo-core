@@ -2,24 +2,19 @@
 
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:update, :following, :unfollowing]
-  before_action :set_user, except: [:search, :username]
-  before_action :set_user_by_username, only: :username
+  before_action :set_user, except: [:search]
 
   def show
     render :show
   end
 
   def update
-    unless @user == current_user
+    unless @user.manageable?(current_user)
       raise Apollo::UserNotAuthorized.new(@user, :update)
     end
 
-    current_user.update!(update_params)
+    @user.update!(update_params)
 
-    render :show
-  end
-
-  def username
     render :show
   end
 
@@ -61,17 +56,11 @@ class UsersController < ApplicationController
     if user_id == 'me' && user_signed_in?
       @user = current_user
     else
-      @user = User.find(user_id)
+      @user = User.find_by(username: user_id) || User.find(user_id)
     end
-  end
 
-  def set_user_by_username
-    user_username = params[:username]
-
-    @user = User.find_by(username: user_username)
-
-    unless @user
-      raise ActiveRecord::RecordNotFound.new(nil, User, :username, user_username)
+    unless @user.readable?(current_user)
+      raise ActiveRecord::RecordNotFound.new(nil, User, :id, user_id)
     end
 
     @user
@@ -84,7 +73,7 @@ class UsersController < ApplicationController
       :description
     )
 
-    unless current_user.confirmed?
+    unless @user.confirmed?
       update_params[:username] = params[:username] if params.include?(:username)
       update_params[:confirmed] = true
     end
