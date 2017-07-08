@@ -1,15 +1,20 @@
 # frozen_string_literal: true
 
 class TravelsController < ApplicationController
-  before_action :authenticate_user!, only: [
-    :create,
-    :delete,
-    :comment,
-    :favorite,
-    :unfavorite
+  before_action :authenticate_user!, only: %i[
+    create
+    destroy
+    create_comments
+    create_favorites
+    destroy_favorites
   ]
 
-  before_action :set_travel, except: [:create, :search]
+  before_action :set_travel, except: %i[
+    create
+    search
+  ]
+
+  before_action :only_manager_users, only: %i[destroy]
 
   def show
     render :show
@@ -27,10 +32,6 @@ class TravelsController < ApplicationController
   end
 
   def destroy
-    unless @travel.deleteable?(current_user)
-      raise Apollo::UserNotAuthorized.new(@travel, :destroy)
-    end
-
     @travel.destroy!
 
     head :no_content
@@ -48,19 +49,37 @@ class TravelsController < ApplicationController
               disposition: 'inline'
   end
 
-  def create_comment
-    @comment = Comment.create!(comment_params)
+  def index_authorizations
+    @authorizations = @travel.authorizations
+
+    render 'authorizations/index'
+  end
+
+  def index_comments
+    @comments = @travel.comments
+
+    render 'comments/index'
+  end
+
+  def create_comments
+    @comment = current_user.comment!(@travel, comment_params)
 
     render 'comments/show'
   end
 
-  def create_favorite
+  def index_favorites
+    @favorites = @travel.favorites
+
+    render 'favorites/index'
+  end
+
+  def create_favorites
     @favorite = current_user.favorite!(@travel)
 
     render 'favorites/show'
   end
 
-  def destroy_favorite
+  def destroy_favorites
     current_user.unfavorite!(@travel)
 
     head :no_content
@@ -102,11 +121,7 @@ class TravelsController < ApplicationController
   end
 
   def comment_params
-    {
-      user: current_user,
-      travel: @travel,
-      content: params.fetch(:content)
-    }
+    params.fetch(:content)
   end
 
   def search_params
@@ -123,5 +138,12 @@ class TravelsController < ApplicationController
     end
 
     User.find(ids.compact)
+  end
+
+  def only_manager_users
+    return if @travel.manageable?(current_user)
+
+    action = params[:action].tr('_', ' ')
+    raise Apollo::UserNotAuthorized.new(@travel, action)
   end
 end

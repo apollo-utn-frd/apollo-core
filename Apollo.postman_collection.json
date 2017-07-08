@@ -223,7 +223,7 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"description": ""
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
 					},
 					"response": []
 				}
@@ -348,7 +348,7 @@
 					"response": []
 				},
 				{
-					"name": "Ver Usuario [Público]",
+					"name": "Ver Usuario Segun ID [Público]",
 					"request": {
 						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e",
 						"method": "GET",
@@ -385,7 +385,7 @@
 				{
 					"name": "Ver Usuario Según Username [Público]",
 					"request": {
-						"url": "{{URL_API}}/users/username/batman",
+						"url": "{{URL_API}}/users/batman",
 						"method": "GET",
 						"header": [
 							{
@@ -453,10 +453,80 @@
 					"response": []
 				},
 				{
+					"name": "Actualizar Usuario [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/me",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"jon_snow\",\n    \"name\": \"Jon\",\n    \"lastname\": \"Snow\",\n    \"description\": \"Hijo de Lyanna Stark y Rhaegar Targaryen.\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "Ver Imagen del Usuario [Público]",
 					"request": {
 						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/image",
 						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Se puede sustituir el id del usuario por el nombre de usuario o por 'me'."
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Imagen del Usuario [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/me/image",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -488,9 +558,9 @@
 					"response": []
 				},
 				{
-					"name": "Ver Imagen Propia [Usuarios]",
+					"name": "Ver Viajes del Usuario [Público]",
 					"request": {
-						"url": "{{URL_API}}/users/me/image",
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/travels",
 						"method": "GET",
 						"header": [
 							{
@@ -518,7 +588,7 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"description": ""
+						"description": "Se puede sustituir el id del usuario por el nombre de usuario o por 'me'.  \nLos parametros 'page' y 'per_page' son opcionales."
 					},
 					"response": []
 				},
@@ -553,14 +623,189 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"description": "Los parametros 'page' y 'per_page' son opcionales."
+						"description": "Se puede sustituir el id del usuario por el nombre de usuario o por 'me'.  \nLos parametros 'page' y 'per_page' son opcionales."
 					},
 					"response": []
 				},
 				{
-					"name": "Ver Publicaciones Propias [Usuarios]",
+					"name": "Ver Favoritos del Usuario [Público]",
 					"request": {
-						"url": "{{URL_API}}/users/me/posts",
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/favorites",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Se puede sustituir el id del usuario por el nombre de usuario o por 'me'.  \nLos parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Seguidos del Usuario [Público]",
+					"request": {
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/followings",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Se puede sustituir el id del usuario por el nombre de usuario o por 'me'.  \nLos parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Seguidores del Usuario [Público]",
+					"request": {
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/followers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Se puede sustituir el id del usuario por el nombre de usuario o por 'me'.  \nLos parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Seguir Usuario [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/followers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Se puede sustituir el id del usuario por el nombre de usuario."
+					},
+					"response": []
+				},
+				{
+					"name": "Dejar de Seguir Usuario [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/followers",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Se puede sustituir el id del usuario por el nombre de usuario."
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Autorizaciones del Usuario [Usuarios]",
+					"request": {
+						"url": "{{URL_API}}/users/me/authorizations",
 						"method": "GET",
 						"header": [
 							{
@@ -642,111 +887,6 @@
 							"raw": ""
 						},
 						"description": "Los parametros 'page' y 'per_page' son opcionales."
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar Usuario [Usuarios]",
-					"request": {
-						"url": "{{URL_API}}/users/me",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Access-Token",
-								"value": "{{ACCESS_TOKEN}}",
-								"description": ""
-							},
-							{
-								"key": "UID",
-								"value": "{{UID}}",
-								"description": ""
-							},
-							{
-								"key": "Client",
-								"value": "{{CLIENT_ID}}",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\": \"jon_snow\",\n    \"name\": \"Jon\",\n    \"lastname\": \"Snow\",\n    \"description\": \"Hijo de Lyanna Stark y Rhaegar Targaryen.\"\n}"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Seguir Usuario [Usuarios]",
-					"request": {
-						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/followers",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Access-Token",
-								"value": "{{ACCESS_TOKEN}}",
-								"description": ""
-							},
-							{
-								"key": "UID",
-								"value": "{{UID}}",
-								"description": ""
-							},
-							{
-								"key": "Client",
-								"value": "{{CLIENT_ID}}",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Dejar de Seguir Usuario [Usuarios]",
-					"request": {
-						"url": "{{URL_API}}/users/83a4d27a254c4a2ab6e3c4f9b7fbaa0e/followers",
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Access-Token",
-								"value": "{{ACCESS_TOKEN}}",
-								"description": ""
-							},
-							{
-								"key": "UID",
-								"value": "{{UID}}",
-								"description": ""
-							},
-							{
-								"key": "Client",
-								"value": "{{CLIENT_ID}}",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": ""
 					},
 					"response": []
 				}
@@ -923,36 +1063,15 @@
 								"description": ""
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
 				},
 				{
-					"name": "Buscar Viajes [Público]",
+					"name": "Ver Favoritos del Viaje [Público]",
 					"request": {
-						"url": {
-							"raw": "{{URL_API}}/travels/search?query=descripcion+prueba",
-							"host": [
-								"{{URL_API}}"
-							],
-							"path": [
-								"travels",
-								"search"
-							],
-							"query": [
-								{
-									"key": "query",
-									"value": "descripcion+prueba",
-									"equals": true,
-									"description": ""
-								}
-							],
-							"variable": []
-						},
+						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e/favorites",
 						"method": "GET",
 						"header": [
 							{
@@ -976,10 +1095,7 @@
 								"description": ""
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"description": "Los parametros 'page' y 'per_page' son opcionales."
 					},
 					"response": []
@@ -1055,6 +1171,38 @@
 					"response": []
 				},
 				{
+					"name": "Ver Comentarios del Viaje [Público]",
+					"request": {
+						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e/comments",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
 					"name": "Comentar Viaje [Usuarios]",
 					"request": {
 						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e/comments",
@@ -1086,6 +1234,91 @@
 							"raw": "{\n    \"content\": \"Primer comentario\"\n}"
 						},
 						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Autorizaciones del Viaje [Público]",
+					"request": {
+						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e/authorizations",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Viajes [Público]",
+					"request": {
+						"url": {
+							"raw": "{{URL_API}}/travels/search?query=descripcion+prueba",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "descripcion+prueba",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Access-Token",
+								"value": "{{ACCESS_TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "UID",
+								"value": "{{UID}}",
+								"description": ""
+							},
+							{
+								"key": "Client",
+								"value": "{{CLIENT_ID}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Los parametros 'page' y 'per_page' son opcionales."
 					},
 					"response": []
 				}

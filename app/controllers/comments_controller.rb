@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_comment, except: [:search]
+  before_action :set_comment, except: %i[search]
 
   def show
     render :show

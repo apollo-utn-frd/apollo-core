@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: places
@@ -24,13 +25,10 @@ class Place < ApplicationRecord
 
   validate :validate_lonlat
 
-  def lat
-    lonlat.lat
-  end
+  delegate :lat, to: :lonlat
+  delegate :lon, to: :lonlat
 
-  def lng
-    lonlat.lon
-  end
+  alias lng lon
 
   private
 

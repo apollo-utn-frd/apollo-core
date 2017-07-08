@@ -162,14 +162,31 @@ class User < ApplicationRecord
   end
 
   ##
-  # Devuelve si los datos del usuario pueden ser accedidos por un determinado usuario.
+  # Devuelve si el usuario comentó un viaje.
+  #
+  def comment?(travel)
+    comments_travels.include?(travel)
+  end
+
+  ##
+  # Produce que el usuario comente un viaje.
+  #
+  def comment!(travel, content)
+    comments.create!(
+      travel: travel,
+      content: content
+    )
+  end
+
+  ##
+  # Devuelve si el usuario puede ser accedido por un determinado usuario.
   #
   def readable?(user)
     confirmed? || self == user
   end
 
   ##
-  # Devuelve si los datos privados del usuario pueden ser accedidos por un determinado usuario.
+  # Devuelve si el usuario puede ser gestionado por un determinado usuario.
   #
   def manageable?(user)
     self == user
@@ -230,7 +247,7 @@ class User < ApplicationRecord
   # Valida si el nombre de usuario es una palabra reservada.
   #
   def validate_username_reserved
-    return unless self.username.reserved?
+    return unless ReservedUsernames.include?(self.username)
 
     errors.add('username', 'can not be a reserved word')
   end

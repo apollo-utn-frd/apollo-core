@@ -12,6 +12,6 @@ class AddTokenAuthToUsers < ActiveRecord::Migration[5.1]
     add_column :users, :tokens, :json
 
     add_index :users, :uid, unique: true
-    add_index :users, [:google_id, :provider], unique: true
+    add_index :users, %i[google_id provider], unique: true
   end
 end

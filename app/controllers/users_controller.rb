@@ -1,18 +1,27 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:update, :following, :unfollowing]
-  before_action :set_user, except: [:search]
+  before_action :authenticate_user!, only: %i[
+    update
+    update_image
+    index_authorizations
+    create_followers
+    destroy_followers
+  ]
+
+  before_action :set_user, except: %i[search]
+
+  before_action :only_manager_users, only: %i[
+    update
+    update_image
+    index_authorizations
+  ]
 
   def show
     render :show
   end
 
   def update
-    unless @user.manageable?(current_user)
-      raise Apollo::UserNotAuthorized.new(@user, :update)
-    end
-
     @user.update!(update_params)
 
     render :show
@@ -24,28 +33,61 @@ class UsersController < ApplicationController
     render :index
   end
 
-  def index_posts
-    @events = @user.posts
-
-    render '/events/index'
-  end
-
   def show_image
     send_file "public/users/#{@user.picture_local_path}",
               type: 'image/jpeg',
               disposition: 'inline'
   end
 
-  def create_follower
-    @following = current_user.follow!(@user)
+  # TODO
+  def update_image; end
 
-    render '/following/show'
+  def index_travels
+    @travels = @user.travels
+
+    render '/travels/index'
   end
 
-  def destroy_follower
+  def index_authorizations
+    @authorizations = @user.authorizations
+
+    render '/authorizations/index'
+  end
+
+  def index_favorites
+    @favorites = @user.favorites
+
+    render '/favorites/index'
+  end
+
+  def index_followings
+    @followings = @user.followings
+
+    render '/followings/index'
+  end
+
+  def index_followers
+    @followings = @user.followers
+
+    render '/followings/index'
+  end
+
+  def create_followers
+    @following = current_user.follow!(@user)
+
+    render '/followings/show'
+  end
+
+  def destroy_followers
     current_user.unfollow!(@user)
 
     head :no_content
+  end
+
+  def index_posts
+    @events = @user.posts
+
+    render '/events/index'
   end
 
   private
@@ -83,5 +125,12 @@ class UsersController < ApplicationController
 
   def search_params
     params.fetch(:query, '')
+  end
+
+  def only_manager_users
+    return if @user.manageable?(current_user)
+
+    action = params[:action].tr('_', ' ')
+    raise Apollo::UserNotAuthorized.new(@user, action)
   end
 end

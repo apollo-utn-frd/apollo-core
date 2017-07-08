@@ -21,7 +21,7 @@ GET | /auth/google_oauth2 | Público | Autentica al usuario con su cuenta de Goo
 GET | /auth/validate | Público | Devuelve información sobre el token de acceso.
 
 ### Usuarios
-En este endpoint, :id se puede sustituir por el username del usuario o por 'me' para referenciar al usuario logueado.
+En este endpoint, *:id* se puede sustituir por el username del usuario o por *'me'* para referenciar al usuario logueado.
 
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
@@ -72,4 +72,4 @@ GET | /notifications?readed=false | Usuarios | Devuelve las notificaciones no le
 POST | /notifications/read | Usuarios | Marca todas las notificaciones como leídas.
 
 ### Notas
-* Todos los endpoints que devuelven multiples recursos permiten la paginación a traves de los parametros 'page' y 'per_page'. Si no se utilizan se devuelven los primeros 20 recursos por defecto.
+* Todos los endpoints que devuelven multiples recursos permiten la paginación a traves de los parametros *'page'* y *'per_page'*. Si no se utilizan se devuelven los primeros 20 recursos por defecto.

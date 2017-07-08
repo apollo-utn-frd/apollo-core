@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
-class String
-  RESERVED_WORDS = %w[
+module ReservedUsernames
+  module_function
+
+  LIST = %w[
     about
     admin
     apollo
     auth
     authorization
+    blog
     create
     comment
     contact
@@ -21,6 +24,8 @@ class String
     home
     image
     index
+    login
+    logout
     me
     new
     notification
@@ -30,12 +35,14 @@ class String
     root
     search
     show
+    signin
+    term
     travel
     update
     user
   ].freeze
 
-  def reserved?
-    RESERVED_WORDS.include?(self.downcase.singularize)
+  def include?(username)
+    LIST.include?(username.downcase.singularize)
   end
 end

@@ -54,9 +54,9 @@ class Travel < ApplicationRecord
   end
 
   ##
-  # Devuelve si el viaje puede ser eliminado por un determinado usuario.
+  # Devuelve si el viaje puede ser gestionado por un determinado usuario.
   #
-  def deleteable?(user)
+  def manageable?(user)
     user == self.user
   end
 

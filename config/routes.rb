@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     omniauth_callbacks:  'devise_token_auth/custom_omniauth_callbacks'
   }
 
-  resources :users, only: [:show, :update] do
+  resources :users, only: %i[show update] do
     controller 'users' do
       get 'travels', action: 'index_travels'
       get 'authorizations', action: 'index_authorizations'
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :travels, only: [:show, :create, :destroy] do
+  resources :travels, only: %i[show create destroy] do
     controller 'travels' do
       get 'authorizations', action: 'index_authorizations'
       get 'favorites', action: 'index_favorites'
@@ -54,11 +54,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :comments, only: [:show] do
+  resources :comments, only: %i[show] do
     get 'search', on: :collection
   end
 
-  resources :notifications, only: [:index] do
+  resources :notifications, only: %i[index] do
     post 'read', on: :collection
   end
 

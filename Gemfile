@@ -12,7 +12,7 @@ end
 gem 'rails', '~> 5.1.2'
 
 # Use Puma as the app server
-# https://github.com/puma/puma/
+# https://github.com/puma/puma
 gem 'puma', '~> 3.7'
 
 # This is a small gem which causes rails console to open pry

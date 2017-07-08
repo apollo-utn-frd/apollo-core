@@ -52,6 +52,3 @@ Style/LambdaCall:
 Style/RedundantSelf:
   Exclude:
     - app/models/*
-
-Style/SymbolArray:
-  Enabled: false
