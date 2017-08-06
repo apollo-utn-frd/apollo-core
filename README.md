@@ -1,6 +1,7 @@
-[![Dependency Status](https://gemnasium.com/badges/github.com/apollo-utn-frd/apollo-core.svg)](https://gemnasium.com/github.com/apollo-utn-frd/apollo-core)
-
 # Apollo API
+
+[![Build Status](https://travis-ci.org/apollo-utn-frd/apollo-core.svg?branch=master)](https://travis-ci.org/apollo-utn-frd/apollo-core)  [![Dependency Status](https://gemnasium.com/badges/github.com/apollo-utn-frd/apollo-core.svg)](https://gemnasium.com/github.com/apollo-utn-frd/apollo-core)
+
 Para probarla se puede instalar la aplicación [Postman](https://www.getpostman.com/) e importar la colección *"Apollo.postman_collection.json"*. En el panel de la izquierda aparecerá la colección *Apollo* con ejemplos de todas las acciones que la aplicación soporta actualmente.
 
 ## Requisitos

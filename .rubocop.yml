@@ -5,6 +5,7 @@ AllCops:
     - db/*
     - lib/tasks/*
     - test/*
+    - vendor/**/*
     - Gemfile
     - Rakefile
     - config.ru
