@@ -79,7 +79,8 @@ ActiveRecord::Schema.define(version: 20170616225117) do
   create_table "travels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.text "description", default: "", null: false
-    t.text "picture_local_path"
+    t.text "image_filename"
+    t.text "thumbnail_filename"
     t.boolean "publicx", default: true, null: false
     t.uuid "user_id", null: false
     t.datetime "created_at", null: false
@@ -93,8 +94,9 @@ ActiveRecord::Schema.define(version: 20170616225117) do
     t.string "lastname", null: false
     t.string "google_id", null: false
     t.string "gender", null: false
-    t.text "picture_url", null: false
-    t.text "picture_local_path"
+    t.text "image_url", null: false
+    t.text "image_filename"
+    t.text "thumbnail_filename"
     t.text "description", default: "", null: false
     t.boolean "confirmed", default: false, null: false
     t.datetime "confirmed_at"

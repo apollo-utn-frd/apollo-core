@@ -11,8 +11,9 @@
 #  lastname            :string           not null
 #  google_id           :string           not null
 #  gender              :string           not null
-#  picture_url         :text             not null
-#  picture_local_path  :text
+#  image_url           :text             not null
+#  image_filename      :text
+#  thumbnail_filename  :text
 #  description         :text             default(""), not null
 #  confirmed           :boolean          default(FALSE), not null
 #  confirmed_at        :datetime
@@ -43,6 +44,7 @@ class User < ApplicationRecord
 
   devise :omniauthable
 
+  include Imageable
   include DeviseTokenAuth::Concerns::User
   include Searchable::User
 
@@ -80,7 +82,7 @@ class User < ApplicationRecord
   after_create :set_uid!
 
   after_create_commit :create_event!
-  after_create_commit :download_picture!
+  after_create_commit :download_image!
 
   scope :confirmed, -> { where(confirmed: true) }
 
@@ -92,7 +94,7 @@ class User < ApplicationRecord
       end
 
       user.email = auth.info.email
-      user.picture_url = auth.info.image
+      user.image_url = auth.info.image
       user.gender = auth.extra.raw_info.gender
       user.extra = [auth.info.slice(:urls)]
       user.oauth_token = auth.credentials.token
@@ -213,7 +215,7 @@ class User < ApplicationRecord
   # Crea el evento de la creación del usuario.
   #
   def create_event!
-    CreationEventJob.perform_later(
+    EventCreationJob.perform_later(
       source: self,
       resource: self
     )
@@ -222,8 +224,8 @@ class User < ApplicationRecord
   ##
   # Descarga la imagen de perfil y ajusta la ruta de destino de la imagen.
   #
-  def download_picture!
-    SetPictureJob.perform_later(self)
+  def download_image!
+    UserImageCreationJob.perform_later(self)
   end
 
   ##

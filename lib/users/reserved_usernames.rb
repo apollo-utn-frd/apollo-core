@@ -12,6 +12,7 @@ module ReservedUsernames
     blog
     create
     comment
+    config
     contact
     delete
     destroy
@@ -22,24 +23,38 @@ module ReservedUsernames
     following
     help
     home
+    html
     image
     index
+    jpg
+    json
     login
     logout
     me
     new
     notification
     place
+    png
     post
+    private
+    profile
+    public
     rail
+    robot
     root
     search
     show
     signin
+    signup
     term
+    thumb
+    thumbnail
+    txt
     travel
     update
     user
+    username
+    validate
   ].freeze
 
   def include?(username)

@@ -49,6 +49,9 @@ Style/LambdaCall:
   Exclude:
     - app/views/*/*.jbuilder
 
+Style/RaiseArgs:
+  Enabled: false
+
 Style/RedundantSelf:
   Exclude:
     - app/models/*

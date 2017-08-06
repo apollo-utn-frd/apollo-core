@@ -1,3 +1,5 @@
 :queues:
   - events
-  - pictures
+  - user_images
+  - travel_images
+  - thumbnails

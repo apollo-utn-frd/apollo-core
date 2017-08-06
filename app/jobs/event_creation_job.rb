@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreationEventJob < ApplicationJob
+class EventCreationJob < ApplicationJob
   queue_as :events
 
   def perform(source:, resource:, notify_to: [])

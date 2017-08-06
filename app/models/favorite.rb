@@ -53,7 +53,7 @@ class Favorite < ApplicationRecord
   def create_event!
     noficable_user = travel.user unless travel.user == user
 
-    CreationEventJob.perform_later(
+    EventCreationJob.perform_later(
       source: user,
       resource: self,
       notify_to: noficable_user

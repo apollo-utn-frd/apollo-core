@@ -2,11 +2,12 @@
 Para probarla se puede instalar la aplicación [Postman](https://www.getpostman.com/) e importar la colección *"Apollo.postman_collection.json"*. En el panel de la izquierda aparecerá la colección *Apollo* con ejemplos de todas las acciones que la aplicación soporta actualmente.
 
 ## Requisitos
-* Ruby 2.4.1
-* Rails 5.1
-* PostgreSQL 9.6
-* PostGIS 2.3
-* Redis 3.2
+* Ruby ~> 2.4
+* Rails ~> 5.1
+* PostgreSQL ~> 9.6
+* PostGIS ~> 2.3
+* Redis ~> 3.2
+* ImageMagick ~> 7.0
 
 ## API REST
 ### General
@@ -72,4 +73,4 @@ GET | /notifications?readed=false | Usuarios | Devuelve las notificaciones no le
 POST | /notifications/read | Usuarios | Marca todas las notificaciones como leídas.
 
 ### Notas
-* Todos los endpoints que devuelven multiples recursos permiten la paginación a traves de los parametros *'page'* y *'per_page'*. Si no se utilizan se devuelven los primeros 20 recursos por defecto.
+* Todos los endpoints que devuelven multiples recursos permiten la paginación a traves de los parametros *'page'* y *'per_page'*. Por defecto se devuelven los primeros 20 recursos.

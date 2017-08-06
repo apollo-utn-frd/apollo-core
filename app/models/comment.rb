@@ -53,7 +53,7 @@ class Comment < ApplicationRecord
   def create_event!
     noficable_users = travel.comments_users + [travel.user] - [user]
 
-    CreationEventJob.perform_later(
+    EventCreationJob.perform_later(
       source: user,
       resource: self,
       notify_to: noficable_users

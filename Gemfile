@@ -9,11 +9,11 @@ end
 
 # Ruby on Rails
 # https://github.com/rails/rails
-gem 'rails', '~> 5.1.2'
+gem 'rails', '~> 5.1.3'
 
 # Use Puma as the app server
 # https://github.com/puma/puma
-gem 'puma', '~> 3.7'
+gem 'puma'
 
 # This is a small gem which causes rails console to open pry
 # https://github.com/rweng/pry-rails
@@ -38,7 +38,7 @@ gem 'ar-uuid'
 
 # Simple, efficient background processing for Ruby
 # https://github.com/mperham/sidekiq
-gem 'sidekiq', '~> 5.0.2'
+gem 'sidekiq'
 
 # Use Redis adapter to run Action Cable in production
 # https://github.com/redis/redis-rb
@@ -59,6 +59,10 @@ gem 'omniauth-google-oauth2'
 # Provides a simple interface to the Google Static Maps V2 API
 # https://github.com/thhermansen/google_static_maps_helper
 gem 'google_static_maps_helper'
+
+# A ruby wrapper for ImageMagick or GraphicsMagick command line
+# https://github.com/minimagick/minimagick
+gem 'mini_magick'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS)
 # https://github.com/cyu/rack-cors
@@ -87,12 +91,12 @@ group :development do
 
   # The Listen gem listens to file modifications and notifies you about the changes
   # https://github.com/guard/listen
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
 
   # Spring speeds up development by keeping your application running in the background
   # https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'
 end
 
 group :test do

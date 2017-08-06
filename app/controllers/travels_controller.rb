@@ -44,7 +44,13 @@ class TravelsController < ApplicationController
   end
 
   def show_image
-    send_file "public/travels/#{@travel.picture_local_path}",
+    send_file "#{Travel.images_folder}/#{@travel.image_filename}",
+              type: 'image/jpeg',
+              disposition: 'inline'
+  end
+
+  def show_thumbnail
+    send_file "#{Travel.images_folder}/#{@travel.thumbnail_filename}",
               type: 'image/jpeg',
               disposition: 'inline'
   end
@@ -143,7 +149,6 @@ class TravelsController < ApplicationController
   def only_manager_users
     return if @travel.manageable?(current_user)
 
-    action = params[:action].tr('_', ' ')
-    raise Apollo::UserNotAuthorized.new(@travel, action)
+    raise Apollo::UserNotAuthorized.new(@travel, params[:action])
   end
 end

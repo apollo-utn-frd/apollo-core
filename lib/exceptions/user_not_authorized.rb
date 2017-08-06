@@ -6,7 +6,7 @@ module Apollo
 
     def initialize(resource, action)
       @resource = resource
-      @action = action
+      @action = action.tr('_', ' ')
     end
   end
 end

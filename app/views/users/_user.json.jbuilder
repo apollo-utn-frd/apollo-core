@@ -4,7 +4,8 @@ json.id user.format_id
 
 json.(user, :username, :name, :lastname, :description, :created_at)
 
-json.picture_url user_image_path(user.format_id)
+json.image_url user_image_path(user.format_id)
+json.thumbnail_url user_thumbnail_path(user.format_id)
 
 json.travels do
   json.count user.travels.readables(current_user).length

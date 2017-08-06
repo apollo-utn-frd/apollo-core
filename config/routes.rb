@@ -29,10 +29,12 @@ Rails.application.routes.draw do
       delete 'followers', action: 'destroy_followers'
       get 'image', action: 'show_image'
       put 'image', action: 'update_image'
+      get 'thumbnail', action: 'show_thumbnail'
       patch 'image', action: 'update_image'
       get 'posts', action: 'index_posts'
 
       collection do
+        get 'validate'
         get 'search'
       end
     end
@@ -47,6 +49,7 @@ Rails.application.routes.draw do
       get 'comments', action: 'index_comments'
       post 'comments', action: 'create_comments'
       get 'image', aciont: 'show_image'
+      get 'thumbnail', action: 'show_thumbnail'
 
       collection do
         get 'search'

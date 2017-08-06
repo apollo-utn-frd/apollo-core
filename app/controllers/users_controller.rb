@@ -9,7 +9,10 @@ class UsersController < ApplicationController
     destroy_followers
   ]
 
-  before_action :set_user, except: %i[search]
+  before_action :set_user, except: %i[
+    validate
+    search
+  ]
 
   before_action :only_manager_users, only: %i[
     update
@@ -27,6 +30,9 @@ class UsersController < ApplicationController
     render :show
   end
 
+  # TODO
+  def validate; end
+
   def search
     @users = User.search(search_params)
 
@@ -34,13 +40,25 @@ class UsersController < ApplicationController
   end
 
   def show_image
-    send_file "public/users/#{@user.picture_local_path}",
+    send_file "#{User.images_folder}/#{@user.image_filename}",
               type: 'image/jpeg',
               disposition: 'inline'
   end
 
-  # TODO
-  def update_image; end
+  def show_thumbnail
+    send_file "#{User.images_folder}/#{@user.thumbnail_filename}",
+              type: 'image/jpeg',
+              disposition: 'inline'
+  end
+
+  def update_image
+    @user.image = params.fetch(:image).open
+    @user.save!
+
+    ThumbnailCreationJob.perform_later(@user)
+
+    head :ok
+  end
 
   def index_travels
     @travels = @user.travels

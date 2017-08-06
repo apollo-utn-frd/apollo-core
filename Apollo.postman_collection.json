@@ -550,8 +550,15 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": ""
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
 						},
 						"description": ""
 					},
@@ -1238,7 +1245,7 @@
 					"response": []
 				},
 				{
-					"name": "Ver Autorizaciones del Viaje [Público]",
+					"name": "Ver Autorizaciones del Viaje [Usuarios]",
 					"request": {
 						"url": "{{URL_API}}/travels/17c5585d2e65472e8993f73a08026e8e/authorizations",
 						"method": "GET",

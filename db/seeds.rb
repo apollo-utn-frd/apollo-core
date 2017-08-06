@@ -16,7 +16,7 @@ if Rails.env.development?
       name: 'Bruce',
       lastname: 'Wayne',
       gender: 'male',
-      picture_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
+      image_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
       description: 'I\'m Batman',
       confirmed: true
     )
@@ -29,7 +29,7 @@ if Rails.env.development?
       name: 'Barry',
       lastname: 'Allen',
       gender: 'male',
-      picture_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJV2Z2Y0szc0RoYlU',
+      image_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJV2Z2Y0szc0RoYlU',
       description: 'The fastest man alive',
       confirmed: true
     )
@@ -42,7 +42,7 @@ if Rails.env.development?
       name: 'Oliver',
       lastname: 'Queen',
       gender: 'male',
-      picture_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJZzhRQW5FTVFXVWc',
+      image_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJZzhRQW5FTVFXVWc',
       description: 'You have failed this city',
       confirmed: true
     )
@@ -55,7 +55,7 @@ if Rails.env.development?
       name: 'Rachel',
       lastname: 'Roth',
       gender: 'female',
-      picture_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJOTVDeDJ2MWdwTTQ',
+      image_url: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJOTVDeDJ2MWdwTTQ',
       description: 'Azarath Metreon Zinthos',
       confirmed: true
     )

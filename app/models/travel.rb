@@ -7,7 +7,8 @@
 #  id                 :uuid             not null, primary key
 #  title              :string           not null
 #  description        :text             default(""), not null
-#  picture_local_path :text
+#  image_filename     :text
+#  thumbnail_filename :text
 #  publicx            :boolean          default(TRUE), not null
 #  user_id            :uuid             not null
 #  created_at         :datetime         not null
@@ -19,6 +20,7 @@
 #
 
 class Travel < ApplicationRecord
+  include Imageable
   include Searchable::Travel
 
   belongs_to :user
@@ -39,7 +41,7 @@ class Travel < ApplicationRecord
   validates :places, length: { in: 1..25, message: 'must be between 1 and 25' }
 
   after_create_commit :create_event!
-  after_create_commit :download_picture!
+  after_create_commit :download_image!
 
   accepts_nested_attributes_for :places
 
@@ -77,7 +79,7 @@ class Travel < ApplicationRecord
   ##
   # Devuelve la URL de la imagen de previsualización de un viaje dado.
   #
-  def picture_url
+  def image_url
     map = GoogleStaticMapsHelper::Map.new
 
     places.each_with_index do |place, i|
@@ -104,7 +106,7 @@ class Travel < ApplicationRecord
   # Crea el evento de la creación del viaje.
   #
   def create_event!
-    CreationEventJob.perform_later(
+    EventCreationJob.perform_later(
       source: user,
       resource: self
     )
@@ -113,7 +115,7 @@ class Travel < ApplicationRecord
   ##
   # Descarga la imagen de previsualización y ajusta la ruta de destino de la imagen.
   #
-  def download_picture!
-    SetPictureJob.perform_later(self)
+  def download_image!
+    TravelImageCreationJob.perform_later(self)
   end
 end
