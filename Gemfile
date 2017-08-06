@@ -21,7 +21,7 @@ gem 'pry-rails'
 
 # Pg is the Ruby interface to the PostgreSQL RDBMS
 # https://bitbucket.org/ged/ruby-pg/wiki/Home
-gem 'pg', '~> 0.20.0'
+gem 'pg'
 
 # PostGIS ActiveRecord Adapter
 # https://github.com/rgeo/activerecord-postgis-adapter
@@ -42,7 +42,7 @@ gem 'sidekiq'
 
 # Use Redis adapter to run Action Cable in production
 # https://github.com/redis/redis-rb
-gem 'redis', '~> 3.0'
+gem 'redis'
 
 # Flexible authentication solution for Rails with Warden
 # https://github.com/plataformatec/devise
