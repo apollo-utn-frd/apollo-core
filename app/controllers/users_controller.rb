@@ -52,12 +52,19 @@ class UsersController < ApplicationController
   end
 
   def update_image
-    @user.image = params.fetch(:image).open
+    tempfile = ImageService.from_base64(image_params)
+
+    @user.image = tempfile
     @user.save!
 
     ThumbnailCreationJob.perform_later(@user)
 
-    head :ok
+    render :show
+  ensure
+    if tempfile.present?
+      tempfile.close
+      tempfile.unlink
+    end
   end
 
   def index_travels
@@ -139,6 +146,10 @@ class UsersController < ApplicationController
     end
 
     update_params
+  end
+
+  def image_params
+    params.fetch(:image)
   end
 
   def search_params

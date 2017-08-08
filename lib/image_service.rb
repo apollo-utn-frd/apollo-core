@@ -15,6 +15,12 @@ module ImageService
     MiniMagick::Image.new(path).format(to_format)
   end
 
+  def from_base64(base)
+    tempfile = Tempfile.new
+    IO.binwrite(tempfile, Base64.decode64(base))
+    tempfile
+  end
+
   def valid?(path)
     MiniMagick::Image.new(path).valid?
   end
