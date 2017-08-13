@@ -25,7 +25,7 @@ class Comment < ApplicationRecord
 
   has_one :event, as: :resource, dependent: :destroy
 
-  validates :content, length: { in: 1..300 }, presence: true
+  validates :content, length: { in: 1..300 }
 
   validate :validate_travel_readable
 
@@ -44,7 +44,7 @@ class Comment < ApplicationRecord
   def validate_travel_readable
     return if readable?(user)
 
-    errors.add('user_id', 'can not access the travel')
+    errors.add(:user_id, :unauthorized_travel)
   end
 
   ##

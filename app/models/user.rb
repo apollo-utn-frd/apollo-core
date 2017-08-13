@@ -64,10 +64,10 @@ class User < ApplicationRecord
   has_many :followers_users, through: :followers, source: :follower
   has_many :followings_users, through: :followings, source: :following
 
-  validates :username, length: { in: 4..30 }, presence: true, uniqueness: true
+  validates :username, length: { in: 4..30 }, uniqueness: true
   validates :email, presence: true, uniqueness: true
-  validates :name, length: { in: 1..30 }, presence: true
-  validates :lastname, length: { in: 1..30 }, presence: true
+  validates :name, length: { in: 1..30 }
+  validates :lastname, length: { in: 1..30 }
   validates :google_id, presence: true, uniqueness: true
   validates :description, length: { maximum: 150 }
   validates :gender, inclusion: { in: GENDERS }
@@ -237,21 +237,35 @@ class User < ApplicationRecord
   end
 
   ##
+  # Devuelve si el formato del nombre de usuario es válido.
+  #
+  def valid_username_format?
+    /\A[a-z0-9_]+\z/.match?(self.username)
+  end
+
+  ##
+  # Devuelve si el nombre de usuario es una palabra reservada.
+  #
+  def username_reserved?
+    ReservedUsernames.include?(self.username)
+  end
+
+  ##
   # Valida el formato del nombre de usuario.
   #
   def validate_username_format
-    return if /\A[a-z0-9_]+\z/.match?(self.username)
+    return if valid_username_format?
 
-    errors.add('username', 'can contain numbers, letters and underscore only')
+    errors.add(:username, :invalid_characters)
   end
 
   ##
   # Valida si el nombre de usuario es una palabra reservada.
   #
   def validate_username_reserved
-    return unless ReservedUsernames.include?(self.username)
+    return unless username_reserved?
 
-    errors.add('username', 'can not be a reserved word')
+    errors.add(:username, :exclusion)
   end
 
   ##
@@ -272,6 +286,8 @@ class User < ApplicationRecord
   # Asigna el nombre de usuario.
   #
   def set_username
+    return if self.email.blank?
+
     base = self.email.partition('@').first.tr('.', '_')
 
     self.username = generate_username(base)

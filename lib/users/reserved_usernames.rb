@@ -58,6 +58,6 @@ module ReservedUsernames
   ].freeze
 
   def include?(username)
-    LIST.include?(username.downcase.singularize)
+    LIST.include?(username.to_s.downcase.singularize)
   end
 end

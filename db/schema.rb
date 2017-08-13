@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20170616225117) do
   end
 
   create_table "places", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.geography "coordinates", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.string "title", default: "", null: false
     t.text "description", default: "", null: false
     t.uuid "travel_id", null: false

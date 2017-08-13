@@ -22,10 +22,7 @@ class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :event
 
-  validates :user_id, uniqueness: {
-    scope: :event_id,
-    message: 'already has notification for this event'
-  }
+  validates :user_id, uniqueness: { scope: :event_id }
 
   before_validation :set_readed_at
 

@@ -113,7 +113,7 @@ class TravelsController < ApplicationController
       {
         title: plc.fetch(:title),
         description: plc.fetch(:description),
-        lonlat: "POINT(#{longitude} #{latitude})"
+        coordinates: "POINT(#{longitude} #{latitude})"
       }
     end
 

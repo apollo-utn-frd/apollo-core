@@ -22,10 +22,7 @@ class Following < ApplicationRecord
 
   has_one :event, as: :resource, dependent: :destroy
 
-  validates :follower_id, uniqueness: {
-    scope: :following_id,
-    message: 'already follows user'
-  }
+  validates :follower_id, uniqueness: { scope: :following_id }
 
   validate :validate_following
 
@@ -46,7 +43,7 @@ class Following < ApplicationRecord
   def validate_following
     return if valid_following?
 
-    errors.add('follower_id', 'can not follow himself')
+    errors.add(:follower_id, :follow_himself)
   end
 
   ##

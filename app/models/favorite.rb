@@ -22,10 +22,7 @@ class Favorite < ApplicationRecord
 
   has_one :event, as: :resource, dependent: :destroy
 
-  validates :user_id, uniqueness: {
-    scope: :travel_id,
-    message: 'already has favorite for this travel'
-  }
+  validates :user_id, uniqueness: { scope: :travel_id }
 
   validate :validate_travel_readable
 
@@ -44,7 +41,7 @@ class Favorite < ApplicationRecord
   def validate_travel_readable
     return if readable?(user)
 
-    errors.add('user_id', 'can not access the travel')
+    errors.add(:user_id, :unauthorized_travel)
   end
 
   ##

@@ -71,10 +71,10 @@ if Rails.env.development?
       user: flash,
       places_attributes: [
         {
-          lonlat: 'POINT(-74.004044 40.716014)'
+          coordinates: 'POINT(-74.004044 40.716014)'
         },
         {
-          lonlat: 'POINT(-81.653448 30.333877)'
+          coordinates: 'POINT(-81.653448 30.333877)'
         }
       ]
     )
@@ -96,7 +96,7 @@ if Rails.env.development?
       publicx: false,
       places_attributes: [
         {
-          lonlat: 'POINT(6.9475 50.335556)'
+          coordinates: 'POINT(6.9475 50.335556)'
         }
       ]
     )
@@ -119,7 +119,7 @@ if Rails.env.development?
         {
           title: 'Arrowcueva',
           description: 'Mansion Queen',
-          lonlat: 'POINT(129.738333 32.627778)'
+          coordinates: 'POINT(129.738333 32.627778)'
         }
       ]
     )
@@ -139,19 +139,19 @@ if Rails.env.development?
       places_attributes: [
         {
           title: 'Primer vertice',
-          lonlat: 'POINT(-80.226529 25.789106)'
+          coordinates: 'POINT(-80.226529 25.789106)'
         },
         {
           title: 'Segundo vertice',
-          lonlat: 'POINT(-66.1057427 18.4663188)'
+          coordinates: 'POINT(-66.1057427 18.4663188)'
         },
         {
           title: 'Tercer vertice',
-          lonlat: 'POINT(-64.781380 32.294887)'
+          coordinates: 'POINT(-64.781380 32.294887)'
         },
         {
           title: 'Primer vertice',
-          lonlat: 'POINT(-80.226529 25.789106)'
+          coordinates: 'POINT(-80.226529 25.789106)'
         }
       ]
     )
@@ -165,13 +165,13 @@ if Rails.env.development?
       user: raven,
       places_attributes: [
         {
-          lonlat: 'POINT(-59.2069292 -33.9668613)'
+          coordinates: 'POINT(-59.2069292 -33.9668613)'
         },
         {
-          lonlat: 'POINT(-54.590303 -25.407217)'
+          coordinates: 'POINT(-54.590303 -25.407217)'
         },
         {
-          lonlat: 'POINT(-71.613073 -31.061510)'
+          coordinates: 'POINT(-71.613073 -31.061510)'
         }
       ]
     )
@@ -189,7 +189,7 @@ if Rails.env.development?
         {
           title: 'Baticueva',
           description: 'Mansion Wayne',
-          lonlat: 'POINT(-58.779053 -34.368214)'
+          coordinates: 'POINT(-58.779053 -34.368214)'
         }
       ]
     )

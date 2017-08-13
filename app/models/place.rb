@@ -5,7 +5,7 @@
 # Table name: places
 #
 #  id          :uuid             not null, primary key
-#  lonlat      :geography({:srid point, 4326
+#  coordinates :geography({:srid point, 4326
 #  title       :string           default(""), not null
 #  description :text             default(""), not null
 #  travel_id   :uuid             not null
@@ -23,18 +23,18 @@ class Place < ApplicationRecord
   validates :title, length: { maximum: 30 }
   validates :description, length: { maximum: 150 }
 
-  validate :validate_lonlat
+  validate :validate_coordinates
 
-  delegate :lat, to: :lonlat
-  delegate :lon, to: :lonlat
+  delegate :lat, to: :coordinates
+  delegate :lon, to: :coordinates
 
   alias lng lon
 
   private
 
-  def validate_lonlat
-    return if lonlat.present?
+  def validate_coordinates
+    return if coordinates.present?
 
-    errors.add('longitude', 'or latitude is invalid')
+    errors.add(:coordinates, :bad_format)
   end
 end

@@ -5,7 +5,7 @@ class CreatePlaces < ActiveRecord::Migration[5.1]
 
   def change
     create_table :places do |t|
-      t.st_point :lonlat, geographic: true
+      t.st_point :coordinates, geographic: true
       t.string :title, default: '', null: false
       t.text :description, default: '', null: false
 

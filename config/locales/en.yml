@@ -30,4 +30,53 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        unauthorized_travel: can not access to the travel
+
+      models:
+        authorization:
+          attributes:
+            travel_id:
+              public: must be private
+            user_id:
+              authorize_himself: can not authorize himself
+              not_follower: not follow the creator of the travel
+              taken: already has authorization for this travel
+
+        favorite:
+          attributes:
+            user_id:
+              taken: already has favorite for this travel
+
+        following:
+          attributes:
+            follower_id:
+              follow_himself: can not follow himself
+              taken: already follows user
+
+        notification:
+          attributes:
+            user_id:
+              taken: already has notification for this event
+
+        place:
+          attributes:
+            coordinates:
+              bad_format: longitude or latitude is invalid
+
+        travel:
+          attributes:
+            places:
+              too_long:
+                one: "is too long (maximum is 1 place)"
+                other: "is too long (maximum is %{count} places)"
+              too_short:
+                one: "is too short (minimum is 1 place)"
+                other: "is too short (minimum is %{count} places)"
+
+        user:
+          attributes:
+            username:
+              invalid_characters: can contain numbers, letters and underscore only

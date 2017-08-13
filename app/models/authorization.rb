@@ -22,10 +22,7 @@ class Authorization < ApplicationRecord
 
   has_one :event, as: :resource, dependent: :destroy
 
-  validates :user_id, uniqueness: {
-    scope: :travel_id,
-    message: 'already has authorization for this travel'
-  }
+  validates :user_id, uniqueness: { scope: :travel_id }
 
   validate :validate_user_following
   validate :validate_user_not_same
@@ -46,7 +43,7 @@ class Authorization < ApplicationRecord
   def validate_travel_private
     return unless travel.publicx?
 
-    errors.add('travel_id', 'must be private')
+    errors.add(:travel_id, :public)
   end
 
   ##
@@ -56,7 +53,7 @@ class Authorization < ApplicationRecord
     return if user.follow?(travel.user)
     return if user == travel.user
 
-    errors.add('user_id', 'not follow the creator of the travel')
+    errors.add(:user_id, :not_follower)
   end
 
   ##
@@ -65,7 +62,7 @@ class Authorization < ApplicationRecord
   def validate_user_not_same
     return if user != travel.user
 
-    errors.add('user_id', 'can not authorize himself')
+    errors.add(:user_id, :authorize_himself)
   end
 
   ##

@@ -36,9 +36,9 @@ class Travel < ApplicationRecord
   has_many :comments_users, through: :comments, source: :user
   has_many :favorites_users, through: :favorites, source: :user
 
-  validates :title, length: { in: 2..30 }, presence: true
+  validates :title, length: { in: 2..30 }
   validates :description, length: { maximum: 1000 }
-  validates :places, length: { in: 1..25, message: 'must be between 1 and 25' }
+  validates :places, length: { in: 1..25 }
 
   after_create_commit :create_event!
   after_create_commit :download_image!
