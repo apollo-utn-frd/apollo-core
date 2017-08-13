@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show update] do
     controller 'users' do
+      post 'validate'
       get 'travels', action: 'index_travels'
       get 'authorizations', action: 'index_authorizations'
       get 'favorites', action: 'index_favorites'
@@ -34,7 +35,6 @@ Rails.application.routes.draw do
       get 'posts', action: 'index_posts'
 
       collection do
-        get 'validate'
         get 'search'
       end
     end

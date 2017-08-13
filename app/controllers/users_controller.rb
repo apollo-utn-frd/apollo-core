@@ -3,6 +3,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[
     update
+    validate
     update_image
     index_authorizations
     create_followers
@@ -10,12 +11,12 @@ class UsersController < ApplicationController
   ]
 
   before_action :set_user, except: %i[
-    validate
     search
   ]
 
   before_action :only_manager_users, only: %i[
     update
+    validate
     update_image
     index_authorizations
   ]
@@ -30,8 +31,12 @@ class UsersController < ApplicationController
     render :show
   end
 
-  # TODO
-  def validate; end
+  def validate
+    @user.attributes = update_params
+    @errors = @user.details_errors
+
+    render :validate
+  end
 
   def search
     @users = User.search(search_params)
@@ -138,14 +143,14 @@ class UsersController < ApplicationController
       :name,
       :lastname,
       :description
-    )
+    ).to_h
 
     unless @user.confirmed?
-      update_params[:username] = params[:username] if params.include?(:username)
+      update_params[:username] = params[:username]
       update_params[:confirmed] = true
     end
 
-    update_params
+    update_params.compact
   end
 
   def image_params
