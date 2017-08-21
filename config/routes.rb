@@ -48,7 +48,7 @@ Rails.application.routes.draw do
       delete 'favorites', action: 'destroy_favorites'
       get 'comments', action: 'index_comments'
       post 'comments', action: 'create_comments'
-      get 'image', aciont: 'show_image'
+      get 'image', action: 'show_image'
       get 'thumbnail', action: 'show_thumbnail'
 
       collection do
