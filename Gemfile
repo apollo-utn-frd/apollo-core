@@ -104,3 +104,13 @@ group :test do
   # https://github.com/colszowka/simplecov
   gem 'simplecov'
 end
+
+group :production do
+  # Ruby gem for detailed Rails application performance analysis
+  # https://github.com/scoutapp/scout_apm_ruby
+  gem 'scout_apm'
+
+  # New Relic Agent
+  # https://github.com/newrelic/rpm
+  gem 'newrelic_rpm'
+end

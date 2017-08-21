@@ -83,6 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: apollo_production
-  username: apollo
-  password: <%= ENV['APOLLO_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'].try(:sub, "postgres:", "postgis:") %>
