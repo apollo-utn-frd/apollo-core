@@ -1,3 +1,4 @@
+:concurrency: <%= ENV.fetch('WORKER_COUNT', 10).to_i %>
 :queues:
   - events
   - user_images
