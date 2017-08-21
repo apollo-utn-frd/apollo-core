@@ -47,6 +47,9 @@ class Notification < ApplicationRecord
 
   private
 
+  ##
+  # Asigna la fecha de lectura.
+  #
   def set_readed_at
     return unless readed? && readed_at.blank?
 

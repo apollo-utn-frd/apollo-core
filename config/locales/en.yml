@@ -34,6 +34,8 @@ en:
     errors:
       messages:
         unauthorized_travel: can not access to the travel
+        image_too_big: size should be less than 3 MB
+        invalid_image: content type must be a image type
 
       models:
         authorization:

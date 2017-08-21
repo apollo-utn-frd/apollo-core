@@ -32,6 +32,9 @@ class Place < ApplicationRecord
 
   private
 
+  ##
+  # Valida el formato de las coordenadas.
+  #
   def validate_coordinates
     return if coordinates.present?
 

@@ -86,15 +86,18 @@ class User < ApplicationRecord
 
   scope :confirmed, -> { where(confirmed: true) }
 
+  ##
+  # Devuelve un usuario dado sus datos de autenticacion. Si no existe lo crea.
+  #
   def self.from_omniauth(auth)
-    where(provider: auth.provider, google_id: auth.uid).first_or_initialize.tap do |user|
+    find_or_initialize_by(provider: auth.provider, google_id: auth.uid).tap do |user|
       if user.new_record?
         user.name = auth.info.first_name
         user.lastname = auth.info.last_name
+        user.image_url = auth.info.image
+        user.email = auth.info.email
       end
 
-      user.email = auth.info.email
-      user.image_url = auth.info.image
       user.gender = auth.extra.raw_info.gender
       user.extra = [auth.info.slice(:urls)]
       user.oauth_token = auth.credentials.token
@@ -272,14 +275,15 @@ class User < ApplicationRecord
   # Genera un nombre de usuario dada una string base.
   #
   def generate_username(base)
-    base.tap do |username|
-      i = 0
+    username = base
 
-      while User.exists?(username: username)
-        username = "#{base}#{i}"
-        i += 1
-      end
+    suffix = 0
+    while User.exists?(username: username)
+      username = "#{base}#{suffix}"
+      suffix += 1
     end
+
+    username
   end
 
   ##

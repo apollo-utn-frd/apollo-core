@@ -75,6 +75,9 @@ class Event < ApplicationRecord
 
   private
 
+  ##
+  # Asigna el tipo de evento.
+  #
   def set_type
     self.type = resource_type.downcase
   end
