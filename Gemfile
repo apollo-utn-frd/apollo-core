@@ -113,4 +113,8 @@ group :production do
   # New Relic Agent
   # https://github.com/newrelic/rpm
   gem 'newrelic_rpm'
+
+  # Sentry Client
+  # https://github.com/getsentry/raven-ruby
+  gem 'sentry-raven'
 end

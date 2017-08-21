@@ -182,6 +182,8 @@ GEM
     ruby-progressbar (1.8.1)
     ruby_dep (1.5.0)
     scout_apm (2.1.30)
+    sentry-raven (2.6.3)
+      faraday (>= 0.7.6, < 1.0)
     sidekiq (5.0.4)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -242,6 +244,7 @@ DEPENDENCIES
   redis
   rubocop
   scout_apm
+  sentry-raven
   sidekiq
   simplecov
   spring
