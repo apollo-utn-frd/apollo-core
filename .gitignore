@@ -15,4 +15,4 @@
 coverage
 
 # Server assets
-/public/**/*
+/public/**/*.jpg

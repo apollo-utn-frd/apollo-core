@@ -70,7 +70,7 @@ class User < ApplicationRecord
   validates :lastname, length: { in: 1..30 }
   validates :google_id, presence: true, uniqueness: true
   validates :description, length: { maximum: 150 }
-  validates :gender, inclusion: { in: GENDERS }
+  validates :gender, inclusion: { in: GENDERS }, allow_blank: true
 
   validate :validate_username_format
   validate :validate_username_reserved

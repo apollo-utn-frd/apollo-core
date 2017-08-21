@@ -42,12 +42,14 @@ module Apollo
     # https://stackoverflow.com/questions/33560898/rails-4-devise-rails-api-undefined-method-flash
     config.middleware.use ActionDispatch::Flash
 
-    # Raven / Sentry configuration
-    Raven.configure do |config|
-      raven_key = Rails.application.secrets.raven_key
-      raven_secret = Rails.application.secrets.raven_secret
-      raven_id = Rails.application.secrets.raven_id
-      config.dsn = "https://#{raven_key}:#{raven_secret}@sentry.io/#{raven_id}"
+    if Rails.env.production?
+      # Raven / Sentry configuration
+      Raven.configure do |config|
+        raven_key = Rails.application.secrets.raven_key
+        raven_secret = Rails.application.secrets.raven_secret
+        raven_id = Rails.application.secrets.raven_id
+        config.dsn = "https://#{raven_key}:#{raven_secret}@sentry.io/#{raven_id}"
+      end
     end
   end
 end
