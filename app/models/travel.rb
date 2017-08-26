@@ -4,15 +4,15 @@
 #
 # Table name: travels
 #
-#  id                 :uuid             not null, primary key
-#  title              :string           not null
-#  description        :text             default(""), not null
-#  image_filename     :text
-#  thumbnail_filename :text
-#  publicx            :boolean          default(TRUE), not null
-#  user_id            :uuid             not null
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id                   :uuid             not null, primary key
+#  title                :string           not null
+#  description          :text             default(""), not null
+#  image_public_url     :text
+#  thumbnail_public_url :text
+#  publicx              :boolean          default(TRUE), not null
+#  user_id              :uuid             not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
 #
 # Foreign Keys
 #

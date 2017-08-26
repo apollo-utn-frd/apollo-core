@@ -3,16 +3,16 @@
 module ImageService
   module_function
 
-  def save(file, path_to)
-    File.open(path_to, 'wb') { |file_to| file_to.puts file.read }
-  end
-
-  def thumbnail(path, size = '75x75')
-    MiniMagick::Image.open(path).resize(size).tempfile.open
-  end
-
-  def convert(path, to_format)
-    MiniMagick::Image.new(path).format(to_format)
+  def upload(image, public_id, tags = [])
+    Cloudinary::Uploader.upload(
+      image,
+      public_id: public_id,
+      format: 'png',
+      tags: Array(tags) + [Rails.env],
+      eager: {
+        transformation: 'media_lib_thumb'
+      }
+    )
   end
 
   def from_base64(base)

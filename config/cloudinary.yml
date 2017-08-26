@@ -1,0 +1,21 @@
+---
+development:
+  cloud_name: apollo-core
+  api_key: '<%= Rails.application.secrets.cloudinary_key %>'
+  api_secret: <%= Rails.application.secrets.cloudinary_secret %>
+  enhance_image_tag: true
+  static_image_support: false
+
+production:
+  cloud_name: apollo-core
+  api_key: '<%= Rails.application.secrets.cloudinary_key %>'
+  api_secret: <%= Rails.application.secrets.cloudinary_secret %>
+  enhance_image_tag: true
+  static_image_support: true
+
+test:
+  cloud_name: apollo-core
+  api_key: '<%= Rails.application.secrets.cloudinary_key %>'
+  api_secret: <%= Rails.application.secrets.cloudinary_secret %>
+  enhance_image_tag: true
+  static_image_support: false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616225117) do
+ActiveRecord::Schema.define(version: 20170826171917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20170616225117) do
   create_table "travels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.text "description", default: "", null: false
-    t.text "image_filename"
-    t.text "thumbnail_filename"
+    t.text "image_public_url"
+    t.text "thumbnail_public_url"
     t.boolean "publicx", default: true, null: false
     t.uuid "user_id", null: false
     t.datetime "created_at", null: false
@@ -90,13 +90,13 @@ ActiveRecord::Schema.define(version: 20170616225117) do
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "username", null: false
     t.string "email", null: false
-    t.string "name", null: false
-    t.string "lastname", null: false
-    t.string "google_id", null: false
-    t.string "gender", null: false
-    t.text "image_url", null: false
-    t.text "image_filename"
-    t.text "thumbnail_filename"
+    t.string "name"
+    t.string "lastname"
+    t.string "google_id"
+    t.string "gender"
+    t.text "image_url"
+    t.text "image_public_url"
+    t.text "thumbnail_public_url"
     t.text "description", default: "", null: false
     t.boolean "confirmed", default: false, null: false
     t.datetime "confirmed_at"

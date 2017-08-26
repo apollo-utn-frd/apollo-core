@@ -28,9 +28,7 @@ Rails.application.routes.draw do
       get 'followers', action: 'index_followers'
       post 'followers', action: 'create_followers'
       delete 'followers', action: 'destroy_followers'
-      get 'image', action: 'show_image'
       put 'image', action: 'update_image'
-      get 'thumbnail', action: 'show_thumbnail'
       patch 'image', action: 'update_image'
       get 'posts', action: 'index_posts'
 
@@ -48,8 +46,6 @@ Rails.application.routes.draw do
       delete 'favorites', action: 'destroy_favorites'
       get 'comments', action: 'index_comments'
       post 'comments', action: 'create_comments'
-      get 'image', action: 'show_image'
-      get 'thumbnail', action: 'show_thumbnail'
 
       collection do
         get 'search'

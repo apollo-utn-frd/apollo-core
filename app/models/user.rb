@@ -4,28 +4,28 @@
 #
 # Table name: users
 #
-#  id                  :uuid             not null, primary key
-#  username            :string           not null
-#  email               :string           not null
-#  name                :string           not null
-#  lastname            :string           not null
-#  google_id           :string           not null
-#  gender              :string           not null
-#  image_url           :text             not null
-#  image_filename      :text
-#  thumbnail_filename  :text
-#  description         :text             default(""), not null
-#  confirmed           :boolean          default(FALSE), not null
-#  confirmed_at        :datetime
-#  extra               :jsonb            not null
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  uid                 :text
-#  provider            :string
-#  oauth_token         :text
-#  oauth_refresh_token :text
-#  oauth_expires_at    :datetime
-#  tokens              :json
+#  id                   :uuid             not null, primary key
+#  username             :string           not null
+#  email                :string           not null
+#  name                 :string
+#  lastname             :string
+#  google_id            :string
+#  gender               :string
+#  image_url            :text
+#  image_public_url     :text
+#  thumbnail_public_url :text
+#  description          :text             default(""), not null
+#  confirmed            :boolean          default(FALSE), not null
+#  confirmed_at         :datetime
+#  extra                :jsonb            not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  uid                  :text
+#  provider             :string
+#  oauth_token          :text
+#  oauth_refresh_token  :text
+#  oauth_expires_at     :datetime
+#  tokens               :json
 #
 # Indexes
 #

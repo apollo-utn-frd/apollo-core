@@ -44,32 +44,12 @@ class UsersController < ApplicationController
     render :index
   end
 
-  def show_image
-    send_file "#{User.images_folder}/#{@user.image_filename}",
-              type: 'image/jpeg',
-              disposition: 'inline'
-  end
-
-  def show_thumbnail
-    send_file "#{User.images_folder}/#{@user.thumbnail_filename}",
-              type: 'image/jpeg',
-              disposition: 'inline'
-  end
-
   def update_image
     tempfile = ImageService.from_base64(image_params)
 
-    @user.image = tempfile
-    @user.save!
-
-    ThumbnailCreationJob.perform_later(@user)
+    @user.upload_image!(tempfile)
 
     render :show
-  ensure
-    if tempfile.present?
-      tempfile.close
-      tempfile.unlink
-    end
   end
 
   def index_travels

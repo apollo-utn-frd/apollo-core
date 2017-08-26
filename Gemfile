@@ -64,6 +64,11 @@ gem 'google_static_maps_helper'
 # https://github.com/minimagick/minimagick
 gem 'mini_magick'
 
+# Cloudinary is a cloud-based service that provides an end-to-end image
+# management solution
+# https://github.com/cloudinary/cloudinary_gem
+gem 'cloudinary'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS)
 # https://github.com/cyu/rack-cors
 gem 'rack-cors'

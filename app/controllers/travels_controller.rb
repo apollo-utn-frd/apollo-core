@@ -43,18 +43,6 @@ class TravelsController < ApplicationController
     render :index
   end
 
-  def show_image
-    send_file "#{Travel.images_folder}/#{@travel.image_filename}",
-              type: 'image/jpeg',
-              disposition: 'inline'
-  end
-
-  def show_thumbnail
-    send_file "#{Travel.images_folder}/#{@travel.thumbnail_filename}",
-              type: 'image/jpeg',
-              disposition: 'inline'
-  end
-
   def index_authorizations
     @authorizations = @travel.authorizations
 

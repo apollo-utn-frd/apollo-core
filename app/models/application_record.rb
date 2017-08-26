@@ -10,6 +10,13 @@ class ApplicationRecord < ActiveRecord::Base
     self.id.delete('-')
   end
 
+  ##
+  # Devuelve el nombre de la tabla.
+  #
+  def table_name
+    self.class.table_name
+  end
+
   ###
   # Devuelve una lista de los errores de validación con el atributo, el error
   # tipificado y un mensaje.
