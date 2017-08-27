@@ -4,8 +4,8 @@ json.id user.format_id
 
 json.(user, :username, :name, :lastname, :description, :created_at)
 
-json.image_url user.image_public_url
-json.thumbnail_url user.thumbnail_public_url
+json.image_url user.image_public_url || user.image_public_default_url
+json.thumbnail_url user.thumbnail_public_url || user.thumbnail_public_default_url
 
 if user.manageable?(current_user)
   json.(user, :email, :confirmed)

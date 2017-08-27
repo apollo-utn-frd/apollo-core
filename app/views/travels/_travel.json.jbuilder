@@ -8,8 +8,8 @@ json.user do
   json.partial! 'users/user', user: travel.user
 end
 
-json.image_url travel.image_public_url
-json.thumbnail_url travel.thumbnail_public_url
+json.image_url travel.image_public_url.presence || travel.image_public_default_url
+json.thumbnail_url travel.thumbnail_public_url || travel.thumbnail_public_default_url
 
 json.public travel.publicx
 

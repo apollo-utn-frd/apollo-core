@@ -3,10 +3,10 @@
 module Imageable
   extend ActiveSupport::Concern
 
-  def upload_image!(file = nil)
+  def upload_image!(image = nil)
     return unless Rails.env.production?
 
-    cdn_image = upload_image_cdn!(file)
+    cdn_image = upload_image_cdn!(image)
 
     update!(
       image_public_url: cdn_image['secure_url'],
@@ -14,23 +14,23 @@ module Imageable
     )
   end
 
-  private
-
-  def upload_image_cdn!(file = nil)
-    image = file.presence || image_url
-
-    ImageService.upload(image, image_public_id, table_name)
-  rescue => e
-    if file.present?
-      errors.add(:image, e.message)
-      raise ActiveRecord::RecordInvalid.new(self)
-    end
-
-    ImageService.upload(image_default_path, image_public_id, table_name)
+  def image_public_default_url
+    ImageService.url(image_public_id)
   end
 
-  def image_default_path
-    Rails.root.join('app', 'views', table_name, 'images', 'default.jpg')
+  def thumbnail_public_default_url
+    ImageService.thumbnail_url(image_public_id)
+  end
+
+  private
+
+  def upload_image_cdn!(image = nil)
+    image_param = image.presence || image_url
+
+    ImageService.upload(image_param, image_public_id, table_name)
+  rescue => e
+    errors.add(:image, e.message)
+    raise ActiveRecord::RecordInvalid.new(self)
   end
 
   def image_public_id
