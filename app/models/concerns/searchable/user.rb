@@ -6,6 +6,8 @@ module Searchable
     include Searchable::Search
 
     included do
+      scope :confirmed, ->(confirmed) { where(confirmed: confirmed) }
+
       scope :username_like, ->(query) { where('username ILIKE ?', "%#{query}%") }
       scope :name_like, ->(query) { where('name ILIKE ?', "%#{query}%") }
       scope :lastname_like, ->(query) { where('lastname ILIKE ?', "%#{query}%") }

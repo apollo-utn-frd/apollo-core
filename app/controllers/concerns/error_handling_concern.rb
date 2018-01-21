@@ -20,7 +20,7 @@ module ErrorHandlingConcern
 
   def user_not_authorized(e)
     resource = e.resource
-    model_name = resource.class.to_s.downcase
+    model_name = resource.class.model_name.singular
 
     {
       status: 403,

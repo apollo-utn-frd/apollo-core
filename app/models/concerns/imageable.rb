@@ -28,7 +28,7 @@ module Imageable
     image_param = image.presence || image_url
 
     ImageService.upload(image_param, image_public_id, table_name)
-  rescue => e
+  rescue StandardError => e
     errors.add(:image, e.message)
     raise ActiveRecord::RecordInvalid.new(self)
   end

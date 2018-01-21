@@ -12,6 +12,5 @@ Para instalar el proyecto se necesita lo siguiente:
 * PostgreSQL ~> 9.6
 * PostGIS ~> 2.3
 * Redis ~> 3.2
-* ImageMagick ~> 7.0
 
 La documentación de la API de Apollo, junto con ejemplos, se puede encontrar [aquí](https://documenter.getpostman.com/view/558378/apollo/6n31uZf).

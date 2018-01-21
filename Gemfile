@@ -21,7 +21,7 @@ gem 'pry-rails'
 
 # Pg is the Ruby interface to the PostgreSQL RDBMS
 # https://bitbucket.org/ged/ruby-pg/wiki/Home
-gem 'pg'
+gem 'pg', '~> 0.18'
 
 # PostGIS ActiveRecord Adapter
 # https://github.com/rgeo/activerecord-postgis-adapter
@@ -59,10 +59,6 @@ gem 'omniauth-google-oauth2'
 # Provides a simple interface to the Google Static Maps V2 API
 # https://github.com/thhermansen/google_static_maps_helper
 gem 'google_static_maps_helper'
-
-# A ruby wrapper for ImageMagick or GraphicsMagick command line
-# https://github.com/minimagick/minimagick
-gem 'mini_magick'
 
 # Cloudinary is a cloud-based service that provides an end-to-end image
 # management solution

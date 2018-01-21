@@ -84,8 +84,6 @@ class User < ApplicationRecord
   after_create_commit :create_event!
   after_create_commit :download_image!
 
-  scope :confirmed, -> { where(confirmed: true) }
-
   ##
   # Devuelve un usuario dado sus datos de autenticacion. Si no existe lo crea.
   #
@@ -135,14 +133,14 @@ class User < ApplicationRecord
   # Produce que el usuario siga a otro usuario.
   #
   def follow!(user)
-    followings.find_or_create_by!(following: user)
+    followings.find_or_create_by!(following_id: user.id)
   end
 
   ##
   # Produce que el usuario deje de seguir a otro usuario.
   #
   def unfollow!(user)
-    followings.find_by(user: user).try(&:destroy!)
+    followings.find_by(user_id: user.id)&.destroy!
   end
 
   ##
@@ -156,14 +154,14 @@ class User < ApplicationRecord
   # Produce que el usuario marque como favorito a un viaje.
   #
   def favorite!(travel)
-    favorites.find_or_create_by!(travel: travel)
+    favorites.find_or_create_by!(travel_id: travel.id)
   end
 
   ##
   # Produce que el usuario deje de marcar como favorito a un viaje.
   #
   def unfavorite!(travel)
-    favorites.find_by(travel: travel).try(&:destroy!)
+    favorites.find_by(travel_id: travel.id)&.destroy!
   end
 
   ##
@@ -178,7 +176,7 @@ class User < ApplicationRecord
   #
   def comment!(travel, content)
     comments.create!(
-      travel: travel,
+      travel_id: travel.id,
       content: content
     )
   end
@@ -243,14 +241,14 @@ class User < ApplicationRecord
   # Devuelve si el formato del nombre de usuario es válido.
   #
   def valid_username_format?
-    /\A[a-z0-9_]+\z/.match?(self.username)
+    /\A[a-z0-9_]+\z/.match?(username)
   end
 
   ##
   # Devuelve si el nombre de usuario es una palabra reservada.
   #
   def username_reserved?
-    ReservedUsernames.include?(self.username)
+    ReservedUsernames.include?(username)
   end
 
   ##
@@ -290,9 +288,9 @@ class User < ApplicationRecord
   # Asigna el nombre de usuario.
   #
   def set_username
-    return if self.email.blank?
+    return unless email?
 
-    base = self.email.partition('@').first.tr('.', '_')
+    base = email.partition('@').first.tr('.', '_')
 
     self.username = generate_username(base)
   end
@@ -303,14 +301,14 @@ class User < ApplicationRecord
   def downcase_username
     return unless username_changed?
 
-    self.username = self.username.downcase
+    self.username = username.downcase
   end
 
   ##
   # Asigna el uid.
   #
   def set_uid!
-    return if self.uid.present?
+    return if uid?
 
     update!(uid: format_id)
   end
@@ -319,7 +317,7 @@ class User < ApplicationRecord
   # Asigna la fecha de confirmación del usuario.
   #
   def set_confirmed_at
-    return unless confirmed? && confirmed_at.blank?
+    return unless confirmed? && !confirmed_at?
 
     self.confirmed_at = Time.current
   end

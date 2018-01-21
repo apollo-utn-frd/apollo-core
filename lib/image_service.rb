@@ -23,10 +23,6 @@ module ImageService
     tempfile
   end
 
-  def valid?(path)
-    MiniMagick::Image.new(path).valid?
-  end
-
   def url(public_id)
     "#{cloudinary_url}/image/upload/#{public_id}.#{format}"
   end
