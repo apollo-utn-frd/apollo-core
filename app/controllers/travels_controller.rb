@@ -28,7 +28,7 @@ class TravelsController < ApplicationController
       @travel.authorize_all!(authorizations_users) unless @travel.publicx?
     end
 
-    render :show
+    render :show, status: :created
   end
 
   def destroy
@@ -58,7 +58,7 @@ class TravelsController < ApplicationController
   def create_comments
     @comment = current_user.comment!(@travel, comment_params)
 
-    render 'comments/show'
+    render 'comments/show', status: :created
   end
 
   def index_favorites

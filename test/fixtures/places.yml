@@ -1,0 +1,41 @@
+# == Schema Information
+#
+# Table name: places
+#
+#  id          :uuid             not null, primary key
+#  coordinates :geography({:srid point, 4326
+#  title       :string           default(""), not null
+#  description :text             default(""), not null
+#  travel_id   :uuid             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Foreign Keys
+#
+#  fk_rails_...  (travel_id => travels.id) ON DELETE => cascade
+#
+
+public_first:
+  title: Primer Lugar
+  coordinates: 'POINT(-74.004044 40.716014)'
+  travel: public
+
+public_second:
+  title: Segunda Lugar
+  coordinates: 'POINT(-81.653448 30.333877)'
+  travel: public
+
+private_first:
+  title: Primer Lugar Privado
+  coordinates: 'POINT(-59.2069292 -33.9668613)'
+  travel: private
+
+private_second:
+  title: Segundo Lugar Privado
+  coordinates: 'POINT(-54.590303 -25.407217)'
+  travel: private
+
+private_third:
+  title: Tercer Lugar Privado
+  coordinates: 'POINT(-71.613073 -31.061510)'
+  travel: private

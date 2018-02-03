@@ -71,9 +71,11 @@ if Rails.env.development?
       user: flash,
       places_attributes: [
         {
+          title: 'Federal Bureau of Investigation',
           coordinates: 'POINT(-74.004044 40.716014)'
         },
         {
+          title: 'Confederate Park',
           coordinates: 'POINT(-81.653448 30.333877)'
         }
       ]
@@ -96,6 +98,7 @@ if Rails.env.development?
       publicx: false,
       places_attributes: [
         {
+          title: 'Flashcueva',
           coordinates: 'POINT(6.9475 50.335556)'
         }
       ]
@@ -165,12 +168,15 @@ if Rails.env.development?
       user: raven,
       places_attributes: [
         {
+          title: 'Atucha',
           coordinates: 'POINT(-59.2069292 -33.9668613)'
         },
         {
+          title: 'Itaipu',
           coordinates: 'POINT(-54.590303 -25.407217)'
         },
         {
+          title: 'Parque Eolico Monte redondo',
           coordinates: 'POINT(-71.613073 -31.061510)'
         }
       ]

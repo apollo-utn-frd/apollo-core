@@ -11,4 +11,28 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def auth_env
+    auth_env_as(users(:mati))
+  end
+
+  def auth_env_as(user)
+    user.create_new_auth_token
+    user.create_new_auth_token
+    user.create_new_auth_token
+    token = user.tokens.to_a.sample
+
+    {
+      'UID' => user.uid,
+      'Access-Token' => token.second['token'],
+      'Client' => token.first
+    }
+  end
+
+  def response_body
+    JSON(response.body, symbolize_names: true)
+  end
+
+  def response_id
+    response_body[:id]
+  end
 end

@@ -20,7 +20,7 @@
 class Place < ApplicationRecord
   belongs_to :travel, inverse_of: :places
 
-  validates :title, length: { maximum: 30 }
+  validates :title, presence: true, length: { in: 1..65 }
   validates :description, length: { maximum: 150 }
 
   validate :validate_coordinates
