@@ -17,7 +17,7 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_user
-    return super unless Rails.env.test?
+    return unless Rails.env.test?
 
     user = User.find_by(uid: request.headers[:UID])
     token = request.headers['Access-Token']

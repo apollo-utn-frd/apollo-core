@@ -140,7 +140,7 @@ class User < ApplicationRecord
   # Produce que el usuario deje de seguir a otro usuario.
   #
   def unfollow!(user)
-    followings.find_by(user_id: user.id)&.destroy!
+    followings.find_by(following_id: user.id)&.destroy!
   end
 
   ##

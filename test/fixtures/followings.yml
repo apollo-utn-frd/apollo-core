@@ -1,3 +1,7 @@
 juan_to_mati:
   follower: juan
   following: mati
+
+fede_to_juan:
+  follower: fede
+  following: juan

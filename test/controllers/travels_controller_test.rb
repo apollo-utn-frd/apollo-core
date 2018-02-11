@@ -24,8 +24,14 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
       ]
     }
 
+    @comment_params = {
+      content: 'Un comentario'
+    }
+
     @public = travels(:public)
     @private = travels(:private)
+    @atlantis = travels(:atlantis)
+
     @mati = users(:mati)
     @fede = users(:fede)
     @juan = users(:juan)
@@ -372,5 +378,199 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
 
     assert Travel.exists?(id: @public.id)
+  end
+
+  test 'should comment public travel' do
+    assert_difference('Comment.count') do
+      post travel_comments_path(@public), env: auth_env_as(@fede),
+                                          params: @comment_params
+    end
+
+    assert_response :created
+
+    response = response_body
+
+    assert_not_nil response[:id]
+    assert_equal response[:content], @comment_params[:content]
+    assert_equal response[:user][:id], @fede.format_id
+    assert_equal response[:travel][:id], @public.format_id
+
+    comment = Comment.find(response[:id])
+
+    assert_equal comment.content, @comment_params[:content]
+    assert_equal comment.user, @fede
+    assert_equal comment.travel, @public
+  end
+
+  test 'should comment private travel if was created by user' do
+    assert_difference('Comment.count') do
+      post travel_comments_path(@private), env: auth_env,
+                                           params: @comment_params
+    end
+
+    assert_response :created
+
+    response = response_body
+
+    assert_not_nil response[:id]
+    assert_equal response[:content], @comment_params[:content]
+    assert_equal response[:user][:id], @mati.format_id
+    assert_equal response[:travel][:id], @private.format_id
+
+    comment = Comment.find(response[:id])
+
+    assert_equal comment.content, @comment_params[:content]
+    assert_equal comment.user, @mati
+    assert_equal comment.travel, @private
+  end
+
+  test 'should comment private travel if was authorized' do
+    assert_difference('Comment.count') do
+      post travel_comments_path(@private), env: auth_env_as(@juan),
+                                           params: @comment_params
+    end
+
+    assert_response :created
+
+    response = response_body
+
+    assert_not_nil response[:id]
+    assert_equal response[:content], @comment_params[:content]
+    assert_equal response[:user][:id], @juan.format_id
+    assert_equal response[:travel][:id], @private.format_id
+
+    comment = Comment.find(response[:id])
+
+    assert_equal comment.content, @comment_params[:content]
+    assert_equal comment.user, @juan
+    assert_equal comment.travel, @private
+  end
+
+  test 'should not comment private travel if was not authorized' do
+    assert_no_difference('Comment.count') do
+      post travel_comments_path(@private), env: auth_env_as(@fede),
+                                           params: @comment_params
+    end
+
+    assert_response :not_found
+
+    refute Comment.exists?(
+      user: @fede,
+      travel: @private
+    )
+  end
+
+  test 'should favorite public travel' do
+    assert_difference('Favorite.count') do
+      post travel_favorites_path(@public), env: auth_env_as(@fede)
+    end
+
+    assert_response :ok
+
+    response = response_body
+
+    assert_equal response[:user][:id], @fede.format_id
+    assert_equal response[:travel][:id], @public.format_id
+
+    assert Favorite.exists?(
+      user: @fede,
+      travel: @public
+    )
+  end
+
+  test 'should favorite private travel if was created by user' do
+    assert_difference('Favorite.count') do
+      post travel_favorites_path(@private), env: auth_env
+    end
+
+    assert_response :ok
+
+    response = response_body
+
+    assert_equal response[:user][:id], @mati.format_id
+    assert_equal response[:travel][:id], @private.format_id
+
+    assert Favorite.exists?(
+      user: @mati,
+      travel: @private
+    )
+  end
+
+  test 'should favorite private travel if was authorized' do
+    assert_difference('Favorite.count') do
+      post travel_favorites_path(@private), env: auth_env_as(@juan)
+    end
+
+    assert_response :ok
+
+    response = response_body
+
+    assert_equal response[:user][:id], @juan.format_id
+    assert_equal response[:travel][:id], @private.format_id
+
+    assert Favorite.exists?(
+      user: @juan,
+      travel: @private
+    )
+  end
+
+  test 'should not favorite private travel if was not authorized' do
+    assert_no_difference('Favorite.count') do
+      post travel_favorites_path(@private), env: auth_env_as(@fede)
+    end
+
+    assert_response :not_found
+
+    refute Favorite.exists?(
+      user: @fede,
+      travel: @private
+    )
+  end
+
+  test 'should unfavorite public travel' do
+    assert_difference('Favorite.count', -1) do
+      delete travel_favorites_path(@public), env: auth_env_as(@juan)
+    end
+
+    assert_response :no_content
+
+    refute Favorite.exists?(
+      user: @juan,
+      travel: @public
+    )
+  end
+
+  test 'should unfavorite private travel if was created by user' do
+    assert_difference('Favorite.count', -1) do
+      delete travel_favorites_path(@atlantis), env: auth_env
+    end
+
+    assert_response :no_content
+
+    refute Favorite.exists?(
+      user: @mati,
+      travel: @atlantis
+    )
+  end
+
+  test 'should unfavorite private travel if was authorized' do
+    assert_difference('Favorite.count', -1) do
+      delete travel_favorites_path(@atlantis), env: auth_env_as(@juan)
+    end
+
+    assert_response :no_content
+
+    refute Favorite.exists?(
+      user: @juan,
+      travel: @atlantis
+    )
+  end
+
+  test 'should not unfavorite private travel if was not authorized' do
+    assert_no_difference('Favorite.count') do
+      delete travel_favorites_path(@private), env: auth_env_as(@fede)
+    end
+
+    assert_response :not_found
   end
 end

@@ -1,3 +1,7 @@
 private_juan:
   user: juan
   travel: private
+
+atlantis_juan:
+  user: juan
+  travel: atlantis

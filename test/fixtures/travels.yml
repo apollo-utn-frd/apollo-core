@@ -27,3 +27,14 @@ private:
   description: Capital al Valhalla
   user: mati
   publicx: false
+
+atlantis:
+  title: Viaje al Atlantis
+  description: Capital al Atlantis
+  user: mati
+  publicx: false
+
+fede_travel:
+  title: Viaje al Tártato
+  description: Capital al Tártato
+  user: fede

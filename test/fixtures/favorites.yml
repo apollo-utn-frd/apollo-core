@@ -1,0 +1,11 @@
+juan_public:
+  travel: public
+  user: juan
+
+juan_atlantis:
+  travel: atlantis
+  user: juan
+
+mati_atlantis:
+  travel: atlantis
+  user: mati
