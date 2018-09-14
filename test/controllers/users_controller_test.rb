@@ -27,9 +27,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal response[:lastname], @fede.lastname
     assert_equal response[:image_url], @fede.image_public_default_url
     assert_equal response[:thumbnail_url], @fede.thumbnail_public_default_url
-    refute response.key?(:email)
-    refute response.key?(:confirmed)
-    refute response.key?(:authorizations)
+    assert_not response.key?(:email)
+    assert_not response.key?(:confirmed)
+    assert_not response.key?(:authorizations)
   end
 
   test 'should show private profile of user' do
@@ -220,7 +220,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :no_content
 
-    refute Following.exists?(
+    assert_not Following.exists?(
       follower_id: @juan.id,
       following_id: @mati.id
     )
@@ -233,7 +233,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
 
-    refute Following.exists?(
+    assert_not Following.exists?(
       follower_id: @mati.id,
       following_id: @mati.id
     )

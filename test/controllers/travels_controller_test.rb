@@ -367,7 +367,7 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :no_content
 
-    refute Travel.exists?(id: @public.id)
+    assert_not Travel.exists?(id: @public.id)
   end
 
   test 'should not destroy travel if user is not the creator of travel' do
@@ -454,7 +454,7 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :not_found
 
-    refute Comment.exists?(
+    assert_not Comment.exists?(
       user: @fede,
       travel: @private
     )
@@ -521,7 +521,7 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :not_found
 
-    refute Favorite.exists?(
+    assert_not Favorite.exists?(
       user: @fede,
       travel: @private
     )
@@ -534,7 +534,7 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :no_content
 
-    refute Favorite.exists?(
+    assert_not Favorite.exists?(
       user: @juan,
       travel: @public
     )
@@ -547,7 +547,7 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :no_content
 
-    refute Favorite.exists?(
+    assert_not Favorite.exists?(
       user: @mati,
       travel: @atlantis
     )
@@ -560,7 +560,7 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :no_content
 
-    refute Favorite.exists?(
+    assert_not Favorite.exists?(
       user: @juan,
       travel: @atlantis
     )

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Apollo</title>
+    <%= csrf_meta_tags %>
+
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"></script>
+
+    <%= javascript_include_tag 'moment-with-locales.min.js' %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <script type="text/javascript">
+    moment.locale('es');
+
+    $(function() {
+      var $displays = $('.moment-display');
+
+      $displays.each(e => {
+        let $e = $($displays[e])
+        let time = moment($e.data('time'));
+        let text = time.fromNow();
+        text = text.charAt(0).toUpperCase() + text.slice(1);
+        $e.text(text);
+      });
+    })
+  </script>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Apollo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <% if user_signed_in? %>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        </div>
+
+        <div>
+          <%= form_tag destroy_user_session_path, {method: 'DELETE'} do %>
+            <button type="submit" class="btn btn-link">Cerrar sesión</button>
+          <% end %>
+        </div>
+      <% end %>
+    </nav>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

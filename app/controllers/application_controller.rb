@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
   include ActionController::RequestForgeryProtection
   include ErrorHandlingConcern
@@ -20,23 +20,27 @@ class ApplicationController < ActionController::API
     return unless Rails.env.test?
 
     user = User.find_by(uid: request.headers[:UID])
+    user_token = user.tokens[request.headers['Client']]&.fetch('token')
     token = request.headers['Access-Token']
 
-    if user.present? && token.present? && user.tokens[request.headers['Client']]&.fetch('token') == token
-      @current_user = user
-    end
+    return if user.blank?
+    return if token.blank?
+    return unless ActiveSupport::SecurityUtils.secure_compare(token, user_token)
+
+    @current_user = user
   end
 
   def authenticate_user!
     return super unless Rails.env.test?
 
     user = User.find_by!(uid: request.headers[:UID])
+    user_token = user.tokens[request.headers['Client']]&.fetch('token')
     token = request.headers['Access-Token']
 
-    if token.present? && user.tokens[request.headers['Client']]&.fetch('token') == token
-      @current_user = user
-    else
+    if token.blank? || !ActiveSupport::SecurityUtils.secure_compare(token, user_token)
       raise Apollo::UserNotAuthorized
     end
+
+    @current_user = user
   end
 end

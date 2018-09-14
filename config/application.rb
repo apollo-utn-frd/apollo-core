@@ -1,16 +1,6 @@
 require_relative 'boot'
 
-require "rails"
-# Pick the frameworks you want:
-require "active_model/railtie"
-require "active_job/railtie"
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "action_cable/engine"
-# require "sprockets/railtie"
-require "rails/test_unit/railtie"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -28,7 +18,7 @@ module Apollo
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
-    config.api_only = true
+    # config.api_only = true
 
     # Active Job is a framework for declaring jobs and making them run on a variety of queuing
     # backends.
@@ -40,7 +30,7 @@ module Apollo
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
 
     # https://stackoverflow.com/questions/33560898/rails-4-devise-rails-api-undefined-method-flash
-    config.middleware.use ActionDispatch::Flash
+    # config.middleware.use ActionDispatch::Flash
 
     if Rails.env.production?
       # Raven / Sentry configuration

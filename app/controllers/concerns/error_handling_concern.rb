@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Naming/UncommunicativeMethodParamName
+
 module ErrorHandlingConcern
   extend ActiveSupport::Concern
 

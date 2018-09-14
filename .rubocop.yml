@@ -4,13 +4,16 @@ AllCops:
     - config/**/*
     - db/*
     - lib/tasks/*
-    - test/*
+    - test/**/*
     - vendor/**/*
     - Gemfile
     - Rakefile
     - config.ru
 
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
+
+Lint/MissingCopEnableDirective:
+  Enabled: false
 
 Metrics/AbcSize:
   Max: 30
@@ -24,6 +27,10 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 20
 
+Naming/AccessorMethodName:
+  Exclude:
+    - app/controllers/devise_token_auth/custom_omniauth_callbacks_controller.rb
+
 Rails:
   Enabled: true
 
@@ -32,10 +39,6 @@ Rails/InverseOf:
 
 Rails/NotNullColumn:
   Enabled: false
-
-Style/AccessorMethodName:
-  Exclude:
-    - app/controllers/devise_token_auth/custom_omniauth_callbacks_controller.rb
 
 Style/AsciiComments:
   Enabled: false
@@ -55,7 +58,3 @@ Style/LambdaCall:
 
 Style/RaiseArgs:
   Enabled: false
-
-Style/RedundantSelf:
-  Exclude:
-    - app/models/*

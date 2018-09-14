@@ -7,7 +7,7 @@ class ApplicationRecord < ActiveRecord::Base
   # Devuelve el id sin guiones.
   #
   def format_id
-    self.id.delete('-')
+    id.delete('-')
   end
 
   ##
