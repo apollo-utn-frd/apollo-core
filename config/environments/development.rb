@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+REDIS_URL = "redis://#{ENV.fetch('REDIS_HOSTNAME', 'localhost')}:#{ENV.fetch('REDIS_PORT', 6379)}"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
