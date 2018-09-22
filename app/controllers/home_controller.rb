@@ -10,6 +10,6 @@ class HomeController < ApplicationController
   end
 
   def root
-    render '/root'
+    render 'root/root'
   end
 end

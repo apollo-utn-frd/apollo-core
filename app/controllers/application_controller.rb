@@ -7,14 +7,9 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery unless: -> { request.format.json? }
 
-  before_action :set_response_format
   before_action :authenticate_user
 
   protected
-
-  def set_response_format
-    request.format = :json
-  end
 
   def authenticate_user
     return unless Rails.env.test?
