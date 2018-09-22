@@ -87,7 +87,7 @@ a:focus {
   width: 100%;
   height: auto;
   text-align: center;
-  background: url('assets/img/viajeros.jpg') no-repeat bottom center scroll;
+  background: url('viajeros.jpg') no-repeat bottom center scroll;
   background-color: #000;
   color: #154771;
   -webkit-background-size: cover;
@@ -295,4 +295,27 @@ img::-moz-selection {
 
 .equipo-img:hover {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.contenido {
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+.navbar {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  background-color: #4C5151;
+  width: 100%;
+  border-radius: 0;
+  border-width: 0;
+}
+
+.navbar a {
+  color: #fff;
+}
+
+.navbar .active a {
+  color: #fff;
+  background-color: transparent;
 }
