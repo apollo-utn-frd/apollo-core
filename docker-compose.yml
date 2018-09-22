@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:4.0
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - 3502:6379
+  db:
+    image:  mdillon/postgis:10
+    volumes:
+      - 'volume_db:/var/lib/postgresql/db-data'
+      - ./tmp:/tmp
+      - ./scripts/docker/import:/docker-entrypoint-initdb.d
+  jobs:
+    depends_on:
+      - redis
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: containers/sidekiq/Dockerfile
+    environment:
+      - SECRET_KEY_BASE
+      - REDIS_HOSTNAME=redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
+    volumes:
+      - .:/usr/app/apollo-core
+  app:
+    depends_on:
+      - db
+      - redis
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    environment:
+      - SECRET_KEY_BASE
+      - PGUSER="postgres"
+      - PGDBNAME="produciton"
+      - DB_HOSTNAME=db
+      - REDIS_HOSTNAME=redis
+      - PORT=3000
+    volumes:
+      - .:/usr/app/apollo-core
+volumes:
+  volume_db:
