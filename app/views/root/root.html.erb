@@ -7,9 +7,11 @@
           <div class="col-md-10 col-md-offset-1">
             <h1 class="brand-heading">Apollo</h1>
             <p class="pintro">Comparte tu viaje con el mundo o inspírate</p>
-            <a href="http://localhost:8080/auth/google" class="btn btn-default btn-lg">
-              <i class="fa fa-google fa-fw"></i><span class="network-name">Sign In</span>
-            </a>
+
+            <%= link_to '/auth/google_oauth2' do %>
+              <i class="fab fa-google mr-2"></i><span class="network-name">Sign In</span>
+            <% end %>
+
             <div>
               <a href="#about" class="btn btn-circle page-scroll">
                   <i class="fa fa-angle-double-down animated"></i>

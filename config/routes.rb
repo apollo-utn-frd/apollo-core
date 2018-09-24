@@ -20,9 +20,11 @@ Rails.application.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
-  mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-    omniauth_callbacks:  'devise_token_auth/custom_omniauth_callbacks'
-  }
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+
+  resources :sessions, only: %i[create destroy]
 
   resources :users, only: %i[show update] do
     controller 'users' do

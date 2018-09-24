@@ -45,7 +45,6 @@ class User < ApplicationRecord
   devise :omniauthable
 
   include Imageable
-  include DeviseTokenAuth::Concerns::User
   include Searchable::User
 
   has_one :event, as: :resource, dependent: :destroy

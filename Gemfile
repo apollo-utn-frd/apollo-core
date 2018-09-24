@@ -1,15 +1,21 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
+
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
-  "https://github.com/#{repo_name}.git"
-end
-
 # Ruby on Rails
 # https://github.com/rails/rails
-gem 'rails', '~> 5.1.5'
+gem 'rails'
+
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS)
+# https://github.com/cyu/rack-cors
+gem 'rack-cors'
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap'
 
 # Use Puma as the app server
 # https://github.com/puma/puma
@@ -21,7 +27,7 @@ gem 'pry-rails'
 
 # Pg is the Ruby interface to the PostgreSQL RDBMS
 # https://bitbucket.org/ged/ruby-pg/wiki/Home
-gem 'pg', '~> 0.21'
+gem 'pg'
 
 # PostGIS ActiveRecord Adapter
 # https://github.com/rgeo/activerecord-postgis-adapter
@@ -50,7 +56,7 @@ gem 'devise'
 
 # Token based authentication for Rails JSON APIs
 # https://github.com/lynndylanhurley/devise_token_auth
-gem 'devise_token_auth'
+# gem 'devise_token_auth'
 
 # Oauth2 strategy for Google
 # https://github.com/zquestz/omniauth-google-oauth2
@@ -65,10 +71,6 @@ gem 'google_static_maps_helper'
 # https://github.com/cloudinary/cloudinary_gem
 gem 'cloudinary'
 
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS)
-# https://github.com/cyu/rack-cors
-gem 'rack-cors'
-
 # Build JSON APIs with ease
 # https://github.com/rails/jbuilder
 gem 'jbuilder'
@@ -78,10 +80,10 @@ gem 'jbuilder'
 gem 'will_paginate'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 group :development do
   # Annotate Rails classes with schema and routes info

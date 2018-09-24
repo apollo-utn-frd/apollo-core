@@ -1,9 +1,18 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-SimpleCov.start
 
-require File.expand_path('../../config/environment', __FILE__)
+SimpleCov.start do
+  add_filter '/test/'
+  add_filter '/config/'
+end
+
+require 'sidekiq/testing'
+Sidekiq::Testing.fake!
+
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
