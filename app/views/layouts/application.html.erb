@@ -45,7 +45,13 @@
         <div class="navbar-header">
           <a href="/" class="navbar-brand">
             <%= image_tag 'logo.png', alt: 'Apollo' %>
-            <div class="titulo">Apollo</div>
+
+            <% if current_user %>
+              <div class="titulo">Signed in as <strong><%= current_user.name %></strong>!</div>
+              <%= link_to "Sign out", signout_path, id: "sign_out" %>
+            <% else %>
+              <div class="titulo">Apollo</div>
+            <% end %>
           </a>
         </div>
       </a>
