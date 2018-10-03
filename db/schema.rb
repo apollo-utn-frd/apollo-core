@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826171917) do
+ActiveRecord::Schema.define(version: 2017_08_26_171917) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "postgis"
-  enable_extension "pgcrypto"
 
   create_table "authorizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false

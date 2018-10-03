@@ -9,6 +9,10 @@ class HomeController < ApplicationController
     render 'events/index'
   end
 
+  def home
+    @posts = User.first.home_posts
+  end
+
   def root
     render 'root/root'
   end

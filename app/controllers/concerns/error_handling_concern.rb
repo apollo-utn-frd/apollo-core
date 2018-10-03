@@ -28,13 +28,18 @@ module ErrorHandlingConcern
   end
 
   def user_not_authorized(e)
+    action = e.action
     resource = e.resource
-    model_name = resource.class.to_s.downcase
+
+    message = 'Not authorized'
+    message << " to #{action}" if action.present?
+    message << " #{resource.class.to_s.downcase}" if resource.present?
+    message << " with id = '#{resource.id}'" if resource.try(:id).present?
 
     @error = {
       status: 403,
       error: 'Forbidden',
-      message: "Not authorized to #{e.action} #{model_name} with id = '#{resource.id}'"
+      message:  message
     }
 
     render '/errors/show', status: :forbidden

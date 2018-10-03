@@ -69,7 +69,7 @@ Rails.application.routes.draw do
     post 'read', on: :collection
   end
 
-  get '/home', to: 'home#posts'
+  get '/home', to: 'home#home'
 
   root 'home#root'
 end
