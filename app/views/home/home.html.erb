@@ -1,0 +1,13 @@
+<div class="col-4">
+  <%= render partial: 'users/partials/user_lateral',
+             locals: {
+               user: current_user
+             }
+  %>
+</div>
+
+<div class="col-8">
+  <% @posts.each do |post| %>
+    <%= render partial: 'posts/partials/post', post: post %>
+  <% end %>
+</div>

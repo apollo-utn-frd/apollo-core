@@ -105,6 +105,10 @@ class User < ApplicationRecord
     end
   end
 
+  def full_name
+    "#{name} #{lastname}".squish
+  end
+
   ##
   # Devuelve todas las publicaciones de la home de un usuario.
   #

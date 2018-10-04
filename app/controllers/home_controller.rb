@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  before_action :authenticate_user!, only: %i[posts]
+  before_action :authenticate_user!, only: %i[posts home]
 
   def posts
     @events = current_user.home_posts
