@@ -1,8 +1,33 @@
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+<div class="card my-1">
+  <%= link_to travel_path(travel.format_id) do %>
+    <%= image_tag travel.image_public_url, class: 'card-img-top' %>
+  <% end %>
+
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title">
+      <%= travel.title %>
+    </h5>
+
+    <p class="card-text">
+      <%= travel.description %>
+    </p>
+  </div>
+
+  <div class="d-flex flex-row-reverse travel-buttons">
+    <% comment_class = 'active' if user.comment?(travel) %>
+
+    <button type="button" class="btn btn-comment btn-link no-decoration <%= comment_class %>">
+      <i class="far fa-fw fa-comment"></i>
+      <i class="fas fa-fw fa-comment"></i>
+      <%= travel.comments.count %>
+    </button>
+
+    <% favorite_class = 'active' if user.favorite?(travel) %>
+
+    <button type="button" class="btn btn-favorite btn-link no-decoration <%= favorite_class %>">
+      <i class="far fa-fw fa-star"></i>
+      <i class="fas fa-fw fa-star"></i>
+      <%= travel.favorites.count %>
+    </button>
   </div>
 </div>

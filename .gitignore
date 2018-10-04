@@ -16,3 +16,9 @@ coverage
 
 # Server assets
 /public/**/*.jpg
+
+# Database files. Becase we don't pay attention to what we push and merge.
+*.dump
+*.rdb
+.rspec
+.DS_Store

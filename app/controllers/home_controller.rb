@@ -10,6 +10,7 @@ class HomeController < ApplicationController
   end
 
   def home
+    @user = User.first
     @posts = User.first.home_posts
   end
 

@@ -324,10 +324,46 @@ img::-moz-selection {
   border-radius: 0;
 }
 
-.decoration-none {
+.no-decoration {
   text-decoration: none;
 }
 
-.decoration-none:hover {
+.no-decoration:hover {
   text-decoration: none;
+}
+
+.travel-buttons .btn {
+  color: #6c757d!important;
+}
+
+.travel-buttons .btn .far {
+  display: none;
+}
+
+.travel-buttons .btn .fas {
+  display: inline-block;
+}
+
+.travel-buttons .btn:hover .far {
+  display: inline-block;
+}
+
+.travel-buttons .btn:hover .fas {
+  display: none;
+}
+
+.travel-buttons .btn.btn-comment:hover {
+  color: #007bff!important;
+}
+
+.travel-buttons .btn.btn-favorite:hover {
+  color: #ffc107!important;
+}
+
+.travel-buttons .btn.btn-comment.active {
+  color: #007bff!important;
+}
+
+.travel-buttons .btn.btn-favorite.active {
+  color: #ffc107!important;
 }
