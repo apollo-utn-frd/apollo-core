@@ -24,34 +24,36 @@
   </header>
 
   <!-- Acerca de Section -->
-  <section id="about" class="container content-section text-center">
+  <section id="about" class="container content-section">
     <div class="row">
-      <div class="col-md-10 col-md-offset-1">
         <h2>Acerca de Apollo</h2>
         <p>Apollo es una red social para compartir viajes. Te permite llevar a cabo la planificación de un viaje y el descubrimiento de nuevos destinos turísticos sin tener que pasar horas buscando información sobre el mismo en internet; tan solo debes entrar en la aplicación y ver los viajes y recomendaciones de otras personas que te alcanzarán para crear tu viaje ideal.</p>
         <p>A través de esta aplicación, se intenta resolver el problema de miles de personas que buscan realizar un viaje con éxito y con el menor esfuerzo posible, de la mano de viajeros que ya estuvieron en el lugar o quieren realizar la misma travesía.</p>
         <p>Apollo es un proyecto que comenzó en la catedra de Ingeniería de Software en la <a href="http://www.frd.utn.edu.ar">UTN FRD</a>.</p>
-      </div>
     </div>
   </section>
 
   <hr>
 
   <!-- Nosotros Section -->
-  <section id="nosotros" class="container content-section text-center">
+  <section id="nosotros" class="container content-section">
     <div class="row">
-      <h2>Nosotros</h2>
-      <div class="equipo">
-        <a href="https://ar.linkedin.com/in/juan-bono-62803685">
-        <%= image_tag 'equipo/juan.jpg', class: 'equipo-img' %>
+      <div class="row">
+        <h2>Nosotros</h2>
       </div>
-      <div class="equipo">
-        <a href="https://ar.linkedin.com/in/matías-mangiantini-668001126">
-        <%= image_tag 'equipo/matias.jpg', class: 'equipo-img' %>
-      </div>
-      <div class="equipo">
-        <a href="https://ar.linkedin.com/in/federico-sanches">
-        <%= image_tag 'equipo/federico.jpg', class: 'equipo-img' %>
+      <div class="row">
+        <div class="col-sm">
+          <a href="https://ar.linkedin.com/in/juan-bono-62803685">
+          <%= image_tag 'equipo/juan.jpg', class: 'equipo-img' %>
+        </div>
+        <div class="col-sm">
+          <a href="https://ar.linkedin.com/in/matías-mangiantini-668001126">
+          <%= image_tag 'equipo/matias.jpg', class: 'equipo-img' %>
+        </div>
+        <div class="col-sm">
+          <a href="https://ar.linkedin.com/in/federico-sanches">
+          <%= image_tag 'equipo/federico.jpg', class: 'equipo-img' %>
+        </div>
       </div>
     </div>
   </section>
@@ -66,21 +68,15 @@
 
         <p>Estamos en las redes sociales.</p>
         <ul class="list-inline banner-social-buttons">
-          <li>
+          <li class="mb-2">
             <a href="https://www.facebook.com/pg/apollocom-238918739899778" class="btn btn-default btn-lg">
-              <i class="fa fa-facebook fa-fw"></i>
+              <i class="fab fa-facebook-f fa-fw"></i>
               <span class="network-name">Facebook</span>
             </a>
           </li>
           <li>
-            <a href="#" class="btn btn-default btn-lg">
-              <i class="fa fa-twitter fa-fw"></i>
-              <span class="network-name">Twitter</span>
-            </a>
-          </li>
-          <li>
             <a href="https://github.com/apollo-utn-frd/apollo" class="btn btn-default btn-lg">
-              <i class="fa fa-github fa-fw"></i>
+              <i class="fab fa-github fa-fw"></i>
               <span class="network-name">Github</span>
             </a>
           </li>
@@ -91,12 +87,5 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container text-center">
-      <p>Copyright &copy; Apollo Corp. 2016</p>
-    </div>
-  </footer>
 
 </div>
