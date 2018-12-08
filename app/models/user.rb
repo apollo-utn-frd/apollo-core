@@ -87,12 +87,12 @@ class User < ApplicationRecord
   # Devuelve un usuario dado sus datos de autenticacion. Si no existe lo crea.
   #
   def self.from_omniauth(auth)
-    find_or_initialize_by(provider: auth.provider, google_id: auth.uid).tap do |user|
+    find_or_initialize_by(provider: auth.provider, email: auth.info.email).tap do |user|
       if user.new_record?
         user.name = auth.info.first_name
         user.lastname = auth.info.last_name
         user.image_url = auth.info.image
-        user.email = auth.info.email
+        user.google_id = auth.uid
       end
 
       user.gender = auth.extra.raw_info.gender
