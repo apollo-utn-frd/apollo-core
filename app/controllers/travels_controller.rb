@@ -7,17 +7,23 @@ class TravelsController < ApplicationController
     create_comments
     create_favorites
     destroy_favorites
+    new
   ]
 
   before_action :set_travel, except: %i[
     create
     search
+    new
   ]
 
   before_action :only_manager_users, only: %i[destroy]
 
   def show
     render :show
+  end
+
+  def new
+    render 'travels/new'
   end
 
   def create

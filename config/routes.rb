@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :travels, only: %i[show create destroy] do
+  resources :travels, only: %i[show create destroy new] do
     controller 'travels' do
       get 'authorizations', action: 'index_authorizations'
       get 'favorites', action: 'index_favorites'
