@@ -38,7 +38,7 @@ module ErrorHandlingConcern
     @error = {
       status: 403,
       error: 'Forbidden',
-      message:  message
+      message: message
     }
 
     render '/errors/show', status: :forbidden

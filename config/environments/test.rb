@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 REDIS_URL = nil
+CACHE_EXPIRES_HOURS = ENV.fetch('CACHE_EXPIRES_HOURS', 2).to_i
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.

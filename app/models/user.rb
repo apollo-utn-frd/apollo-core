@@ -87,12 +87,12 @@ class User < ApplicationRecord
   # Devuelve un usuario dado sus datos de autenticacion. Si no existe lo crea.
   #
   def self.from_omniauth(auth)
-    find_or_initialize_by(provider: auth.provider, google_id: auth.uid).tap do |user|
+    find_or_initialize_by(provider: auth.provider, email: auth.info.email).tap do |user|
       if user.new_record?
         user.name = auth.info.first_name
         user.lastname = auth.info.last_name
         user.image_url = auth.info.image
-        user.email = auth.info.email
+        user.google_id = auth.uid
       end
 
       user.gender = auth.extra.raw_info.gender
@@ -202,7 +202,7 @@ class User < ApplicationRecord
   # Notifica al usuario de un evento.
   #
   def notify!(event)
-    notifications.create!(event: event)
+    notifications.find_or_create_by!(event: event)
   end
 
   ##
@@ -219,7 +219,7 @@ class User < ApplicationRecord
   # Crea el evento de la creación del usuario.
   #
   def create_event!
-    EventCreationJob.perform_later(
+    EventCreationJob.new.perform(
       source: self,
       resource: self
     )
@@ -229,7 +229,7 @@ class User < ApplicationRecord
   # Descarga la imagen de perfil y ajusta la ruta de destino de la imagen.
   #
   def download_image!
-    UserImageCreationJob.perform_later(self)
+    UserImageCreationJob.new.perform(self)
   end
 
   ##

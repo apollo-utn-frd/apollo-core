@@ -1,29 +1,31 @@
 # frozen_string_literal: true
 
-if Rails.env.development?
-  # Perform Sidekiq jobs immediately in development,
-  # so you don't have to run a separate process.
-  # You'll also benefit from code reloading.
-  require 'sidekiq/testing'
+redis_url = if ENV['REDIS_PORT'].present?
+              # Silly hack to use gitlab's REDIS_URL
+              ENV['REDIS_PORT'].sub('tcp://', 'redis://')
+            elsif ENV['REDIS_URL'].present?
+              ENV['REDIS_URL']
+            elsif REDIS_URL.present?
+              REDIS_URL
+            end
 
-  Sidekiq::Testing.inline!
-else
-  Sidekiq.configure_server do |config|
-    pool_size = ENV.fetch('WORKER_COUNT', 10).to_i + 2
-
+Sidekiq.configure_server do |config|
+  pool_size = ENV.fetch('REDIS_POOL_SIZE', 12).to_i
+  if redis_url.present?
     config.redis = {
-      url: ENV['REDIS_URL'],
+      url: redis_url,
       size: pool_size
     }
-
-    ActiveRecord::Base.configurations['production']['pool'] = pool_size
-    ActiveRecord::Base.establish_connection
   end
+  ActiveRecord::Base.configurations['production']['pool'] = pool_size
+  ActiveRecord::Base.establish_connection
+end
 
-  Sidekiq.configure_client do |config|
+Sidekiq.configure_client do |config|
+  if redis_url.present?
     config.redis = {
-      url: ENV['REDIS_URL'],
-      size: 5
+      url: redis_url,
+      size: ENV.fetch('REDIS_CLIENT_SIZE', 5).to_i
     }
   end
 end

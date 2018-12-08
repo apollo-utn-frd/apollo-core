@@ -13,7 +13,7 @@ batman = User.create!(
   username: 'batman',
   provider: 'google_oauth2',
   google_id: 117610751969512663627,
-  email: 'batman@gmail.com',
+  email: 'federicohernansanches@gmail.com',
   name: 'Bruce',
   lastname: 'Wayne',
   gender: 'male',

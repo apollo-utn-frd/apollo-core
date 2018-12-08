@@ -52,10 +52,16 @@ class UsersController < ApplicationController
     render :show
   end
 
-  def index_travels
+  def index_travels_json
     @travels = @user.travels
 
     render '/travels/index'
+  end
+
+  def index_travels
+    @travels = @user.travels
+
+    render '/travels/list'
   end
 
   def index_authorizations
@@ -65,6 +71,12 @@ class UsersController < ApplicationController
   end
 
   def index_favorites
+    @travels = @user.favorites_travels
+
+    render '/travels/list'
+  end
+
+  def index_favorites_json
     @favorites = @user.favorites
 
     render '/favorites/index'

@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-8 p-2">
+        <%= image_tag 'https://res.cloudinary.com/apollo-core/image/upload/v1518474352/travels/a86e4b160a6d49e2a7997292dc03d368.png', class: 'w-100' %>
+
+        <h3 class="d-inline"><%= @travel.title %></h3>
+        <p class="m-0">Por: @ <%= @travel.user.username %> hace <span class="date"> el <%= @travel.created_at %></span></p>
+        <p><%= @travel.description %></p>
+        <div class="actions">
+            <button class="btn btn-warning m-2" title="Mandar a favoritos">
+
+                <span class="cantidad"><%= @travel.favorites.count %>  favoritos</span>
+            </button>
+            <button class="btn btn-info m-2" title="Comentar">
+         
+                <span class="cantidad"><%= @travel.comments.count %> comentarios</span>
+            </button>
+        </div>
+
+        <% @travel.comments.each do |comment| %>
+            <%= render partial: "travels/partials/comment",
+                    locals: {
+                        comment:comment
+                    }
+            %>
+        <% end %>
+
+        <%= form_for :comment, url: travel_comments_path(travel_id: @travel.id) do |f|%>
+            <div class="form-group">
+                <label>Comentario</label>
+                <textarea class="form-control" name="content" rows="3" maxlength="300"></textarea>                
+                <br />
+            </div>
+            <%= f.submit "Comentar" %>
+        <% end %>
+
+    </div>
+
+    <div class="col-md-4 p-2">
+        <% @travel.places.each_with_index do |place, index| %>
+            <%= render partial: "travels/partials/place",
+                    locals: {
+                        place:place,
+                        index:index
+                    }
+            %>
+        <% end %>    
+    </div>
+
+</div>

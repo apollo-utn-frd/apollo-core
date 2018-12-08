@@ -18,14 +18,18 @@ class TravelsController < ApplicationController
 
   before_action :only_manager_users, only: %i[destroy]
 
-  def show
+  def show_json
     render :show
   end
 
   def new
     render 'travels/new'
   end
-
+  
+  def show
+    render "travels/viewrvs"
+  end
+  
   def create
     @travel = nil
 
@@ -64,7 +68,7 @@ class TravelsController < ApplicationController
   def create_comments
     @comment = current_user.comment!(@travel, comment_params)
 
-    render 'comments/show', status: :created
+    redirect_to travel_path(@comment.travel_id)
   end
 
   def index_favorites

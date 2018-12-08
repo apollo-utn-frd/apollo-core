@@ -42,18 +42,27 @@
   </script>
 
   <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-primary">
-      <a class="page-scroll" href="#page-top">
-        <div class="navbar-header">
-          <a href="/" class="navbar-brand">
-            <% if current_user %>
-              <div class="titulo">Signed in as <strong><%= current_user.name %></strong>!</div>
-              <%= link_to "Sign out", signout_path, id: "sign_out" %>
-            <% else %>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary mb-2">
+        <% if current_user %>              
+          <a class="navbar-brand text-white" href="../home">Apollo</a>
+          <div class="collapse navbar-collapse">
+              <ul class="navbar-nav w-100">
+                  <li class="nav-item dropdown ml-auto">
+                      <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <strong><%= current_user.name %></strong>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <%= link_to "Sign out", signout_path, id: "sign_out", class:"dropdown-item d-inline text-dark" %>                        
+                      </div>
+                  </li>
+              </ul>
+          </div>
+        <% else %>
+        <a href="/" class="navbar-brand">
+            
               <div class="titulo text-white">APOLLO</div>
-            <% end %>
           </a>
-        </div>
       </a>
 
       <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -73,7 +82,7 @@
           </li>
         </ul>
       </div>
-
+      <% end %>
     </nav>
 
     <div class="container-fluid">

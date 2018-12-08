@@ -4,7 +4,7 @@ module Imageable
   extend ActiveSupport::Concern
 
   def upload_image!(image = nil)
-    return unless Rails.env.production?
+    return if Rails.env.test?
 
     cdn_image = upload_image_cdn!(image)
 

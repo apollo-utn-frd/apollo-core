@@ -57,7 +57,7 @@ class Following < ApplicationRecord
   # Crea el evento de la creación del seguimiento.
   #
   def create_event!
-    EventCreationJob.perform_later(
+    EventCreationJob.new.perform(
       source: follower,
       resource: self,
       notify_to: following

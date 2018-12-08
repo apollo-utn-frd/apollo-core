@@ -8,11 +8,11 @@
   </div>
 
   <div class="col-10">
-    <% @posts.each do |post| %>
-      <%= render partial: "posts/partials/#{post.type}_post",
+    <% @travels.each do |travel| %>
+      <%= render partial: "travels/partials/travel_min",
                  locals: {
-                   user: @user,
-                   post: post
+                   travel: travel,
+                   user: @user
                  }
       %>
     <% end %>
