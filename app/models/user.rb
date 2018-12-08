@@ -229,7 +229,7 @@ class User < ApplicationRecord
   # Descarga la imagen de perfil y ajusta la ruta de destino de la imagen.
   #
   def download_image!
-    UserImageCreationJob.perform_later(self)
+    UserImageCreationJob.new.perform(self)
   end
 
   ##
