@@ -12,3 +12,6 @@ migrate_db:
 
 seed_db:
 	docker-compose run app rake db:seed
+
+routes:
+	docker-compose run app rake routes
