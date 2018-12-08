@@ -62,7 +62,7 @@ class TravelsController < ApplicationController
   def create_comments
     @comment = current_user.comment!(@travel, comment_params)
 
-    render 'comments/show', status: :created
+    redirect_to travel_path(@comment.travel_id)
   end
 
   def index_favorites

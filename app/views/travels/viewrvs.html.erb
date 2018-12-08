@@ -24,6 +24,15 @@
             %>
         <% end %>
 
+        <%= form_for :comment, url: travel_comments_path(travel_id: @travel.id) do |f|%>
+            <div class="form-group">
+                <label>Comentario</label>
+                <textarea class="form-control" name="content" rows="3" maxlength="300"></textarea>                
+                <br />
+            </div>
+            <%= f.submit "Comentar" %>
+        <% end %>
+
     </div>
 
     <div class="col-md-4 p-2">
@@ -34,7 +43,7 @@
                         index:index
                     }
             %>
-        <% end %>
+        <% end %>    
     </div>
 
 </div>

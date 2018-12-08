@@ -202,7 +202,7 @@ class User < ApplicationRecord
   # Notifica al usuario de un evento.
   #
   def notify!(event)
-    notifications.create!(event: event)
+    notifications.find_or_create_by!(event: event)
   end
 
   ##
