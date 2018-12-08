@@ -6,7 +6,7 @@ services:
     volumes:
       - ./data/redis:/data
     ports:
-      - 3502:6379
+      - 6379:6379
   db:
     image:  mdillon/postgis:10
     volumes:
@@ -15,6 +15,7 @@ services:
       - ./scripts/docker/import:/docker-entrypoint-initdb.d
   jobs:
     depends_on:
+      - db
       - redis
     tty: true
     stdin_open: true

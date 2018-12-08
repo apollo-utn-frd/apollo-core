@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-REDIS_URL = "redis://#{ENV.fetch('REDIS_HOSTNAME', 'localhost')}:#{ENV.fetch('REDIS_PORT', 6379)}"
+REDIS_HOSTNAME = ENV.fetch('REDIS_HOSTNAME', 'localhost')
+REDIS_PORT = ENV.fetch('REDIS_PORT', 6379)
+REDIS_URL = "redis://#{REDIS_HOSTNAME}:#{REDIS_PORT}"
+CACHE_EXPIRES_HOURS = ENV.fetch('CACHE_EXPIRES_HOURS', 24).to_i
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
