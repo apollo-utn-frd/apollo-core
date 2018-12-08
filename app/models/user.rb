@@ -219,7 +219,7 @@ class User < ApplicationRecord
   # Crea el evento de la creación del usuario.
   #
   def create_event!
-    EventCreationJob.perform_later(
+    EventCreationJob.new.perform(
       source: self,
       resource: self
     )

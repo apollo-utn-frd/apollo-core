@@ -16,8 +16,12 @@ class TravelsController < ApplicationController
 
   before_action :only_manager_users, only: %i[destroy]
 
-  def show
+  def show_json
     render :show
+  end
+
+  def show
+    render "travels/viewrvs"
   end
 
   def create

@@ -106,7 +106,7 @@ class Travel < ApplicationRecord
   # Crea el evento de la creación del viaje.
   #
   def create_event!
-    EventCreationJob.perform_later(
+    EventCreationJob.new.perform(
       source: user,
       resource: self
     )
@@ -116,6 +116,6 @@ class Travel < ApplicationRecord
   # Descarga la imagen de previsualización y ajusta la ruta de destino de la imagen.
   #
   def download_image!
-    TravelImageCreationJob.perform_later(self)
+    TravelImageCreationJob.new.perform(self)
   end
 end

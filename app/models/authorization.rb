@@ -69,7 +69,7 @@ class Authorization < ApplicationRecord
   # Crea el evento de la creación de la autorización.
   #
   def create_event!
-    EventCreationJob.perform_later(
+    EventCreationJob.new.perform(
       source: travel.user,
       resource: self,
       notify_to: user
