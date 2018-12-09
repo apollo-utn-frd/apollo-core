@@ -365,12 +365,12 @@ img::-moz-selection {
 
 .marker-name {
   border-radius: 50%;
-  background-color: red;
+  background-color: #ff8181;
   width: 40px;
-  display: flex;
   height: 40px;
   align-items: center;
   justify-content: center;
+  display: inline-flex;
 }
 
 .img-comentario {
@@ -378,5 +378,5 @@ img::-moz-selection {
 }
 
 .comentario {
-  background-color: gainsboro;
+  background-color: #d0d3f633;
 }

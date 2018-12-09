@@ -5,7 +5,7 @@
         <div class="d-inline p-2">
             <a class="d-block">
                 <strong class="user-nombre"><%= comment.user.name.to_s + ' ' + comment.user.lastname.to_s %></strong>
-                <span class="username"><%= comment.user.username %></span>
+                <span class="username">@<%= comment.user.username %></span>
             </a>
             <span class="d-block"><%= comment.created_at %></span>
         </div>

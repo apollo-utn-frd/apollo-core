@@ -43,7 +43,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-primary mb-2">
         <% if current_user %>              
-          <a class="navbar-brand text-white" href="../home">Apollo</a>
+          <a class="navbar-brand text-white" href="../home">APOLLO</a>
           <div class="collapse navbar-collapse">
               <ul class="navbar-nav w-100">
                   <li class="nav-item dropdown ml-auto">
@@ -51,7 +51,7 @@
                         <strong><%= current_user.name %></strong>
                       </a>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <%= link_to "Sign out", signout_path, id: "sign_out", class:"dropdown-item d-inline text-dark" %>                        
+                        <%= link_to "Cerrar sesion", signout_path, id: "sign_out", class:"dropdown-item d-inline text-dark" %>                        
                       </div>
                   </li>
               </ul>
