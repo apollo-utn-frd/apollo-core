@@ -69,7 +69,7 @@ gem 'google_static_maps_helper'
 # Cloudinary is a cloud-based service that provides an end-to-end image
 # management solution
 # https://github.com/cloudinary/cloudinary_gem
-gem 'cloudinary'
+gem 'cloudinary', '1.10.1.pre.rc'
 
 # Build JSON APIs with ease
 # https://github.com/rails/jbuilder
