@@ -83,12 +83,24 @@ class UsersController < ApplicationController
   end
 
   def index_followings
+    @followings = @user.followings_users
+
+    render '/followings/list'
+  end
+
+  def index_followings_json
     @followings = @user.followings
 
     render '/followings/index'
   end
 
   def index_followers
+    @followings = @user.followers_users
+
+    render '/followings/list'
+  end
+
+  def index_followers_json
     @followings = @user.followers
 
     render '/followings/index'

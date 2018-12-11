@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-2">
+    <%= render partial: 'users/partials/user_lateral',
+               locals: {
+                 user: @user
+               }
+    %>
+  </div>
+
+  <div class="col-10" align="center">
+    <ul class="list-group w-50">
+      <% @followings.each do |follower| %>
+        <%= render partial: "followings/partials/follower",
+                  locals: {
+                    follower: follower
+                  }
+        %>
+      <% end %>
+    </ul>
+  </div>
+</div>
