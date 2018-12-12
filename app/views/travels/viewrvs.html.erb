@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8 p-2">
-        <%= image_tag 'https://res.cloudinary.com/apollo-core/image/upload/v1518474352/travels/a86e4b160a6d49e2a7997292dc03d368.png', class: 'w-100' %>
+        <%= image_tag @travel.image_public_url, class: 'w-100' %>
 
         <h3 class="d-inline"><%= @travel.title %></h3>
         <p class="m-0">Por: @<%= @travel.user.username %><span class="date"> el <%= @travel.created_at %></span></p>

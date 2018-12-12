@@ -1,11 +1,11 @@
 <div class="comentario border-top border-bottom">
     <section class="info">
     <div class="d-flex">
-        <a class="d-inline"><%= image_tag comment.user.thumbnail_public_url, class: 'img-comentario p-2' %></a>
+        <a class="d-inline"><%= image_tag comment.user.image_url, class: 'img-comentario p-2' %></a>
         <div class="d-inline p-2">
             <a class="d-block">
                 <strong class="user-nombre"><%= comment.user.name.to_s + ' ' + comment.user.lastname.to_s %></strong>
-                <span class="username">@<%= comment.user.username %></span>
+                <%= link_to user_path(comment.user.format_id) do %><span class="username">@<%= comment.user.username %></span><% end %>
             </a>
             <span class="d-block"><%= comment.created_at %></span>
         </div>
