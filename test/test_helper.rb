@@ -25,15 +25,12 @@ class ActiveSupport::TestCase
   end
 
   def auth_env_as(user)
-    user.create_new_auth_token
-    user.create_new_auth_token
-    user.create_new_auth_token
     token = user.tokens.to_a.sample
 
     {
       'UID' => user.uid,
-      'Access-Token' => token.second['token'],
-      'Client' => token.first
+      'Access-Token' => token&.second&.dig('token'),
+      'Client' => token&.first
     }
   end
 

@@ -21,7 +21,7 @@ class TravelsController < ApplicationController
   end
 
   def show
-    render "travels/viewrvs"
+    render 'travels/viewrvs'
   end
 
   def create
