@@ -1,0 +1,157 @@
+<div class="travel_create row">
+    <div class="col-4">
+      <div class="title-row row">Creacion de Ruta de Viaje</div>
+      <div class="option-row row">
+        <%= form_with url: travels_url do |form| %>
+          <%= form.label :titulo %><br/>
+          <%= form.text_field :title, class: "form-control" %><br/>
+          <%= form.label "Descripción" %><br/>
+          <%= form.text_area :description, class: "form-control" %>
+          <%= form.submit %>
+        <% end %>
+      </div>
+      <div id="place-list" class="option-row row">
+        <div>Lugares:</div><br/>
+        <ul id="plist">
+        </ul>
+      </div>
+    </div>
+    <div class="col-8">
+      <input id="pac-input" class="form-control controls" type="text" placeholder="Buscar">
+      <div id="map"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDq3NecbODiLHacTBHMESwUYVBYW5I_F48&libraries=places&language=es&region=AR"></script>
+        <script>
+          var line = null;
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 8,
+            zoomControl: true,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+          });
+        </script>
+    </div>
+</div>
+
+
+<script>
+var markers = []
+const mkMarker = (map, lat, lang, title) => {
+  return new google.maps.Marker({
+    position: {lat: lat, lng: lang},
+    map: map,
+    title: title
+  })
+}
+
+map.addListener('click', e => {
+  const m = mkMarker(map, e.latLng.lat(), e.latLng.lng(), "Marker")
+  markers.push(m)
+  draw_line(map, markers);
+  add_place(e.latLng.lat(), e.latLng.lng());
+});
+
+map.addListener('mousedown', e => {
+  if (e.ua.buttons === 2) {
+    removedMarker = markers.pop();
+    removedMarker.setMap(null);
+    draw_line(map, markers);
+    remove_place();
+  }
+});
+
+const add_place = (lat, lng) => {
+  var li = document.createElement('li');
+  var plist = document.getElementById('plist');
+  var newPlaceCoords = newPlaceForm(lat, lng);
+  var newItem = document.createTextNode(newPlaceCoords);
+  li.appendChild(newPlaceCoords);
+  plist.appendChild(li);
+}
+
+
+const newPlaceForm = (lat, lng) => {
+  var node = `
+  <div class="place-item">
+    <p >Lat: ${lat}, Lng: ${lng}</p>
+    <input id="place-item-title" class="form-control" placeholder="Titulo" type="text" />
+    <input id="place-item-desc" class="form-control" placeholder="Descripción" type="textarea" />
+  </div>
+  `
+
+  return createElementFromHTML(node);
+}
+
+const createElementFromHTML = htmlString => {
+  var div = document.createElement('div');
+  div.innerHTML = htmlString.trim();
+
+  // Change this to div.childNodes to support multiple top-level nodes
+  return div.firstChild;
+}
+
+const remove_place = () => {
+  $('li:last-child', $('#plist')).remove();
+}
+
+const draw_line = (map, markers) => {
+  line ? line.setMap(null) : null;
+  line = new google.maps.Polyline({
+    path: markers.map(marker => marker.position),
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+
+  line.setMap(map);
+}
+
+const initAutocomplete = (map) => {
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', () => searchBox.setBounds(map.getBounds()))
+
+    // For each place, get the icon, name and location.
+    var bounds = new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+      if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+      var icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      if (place.geometry.viewport) {
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    })
+    map.fitBounds(bounds)
+});
+}
+
+
+initAutocomplete(map)
+
+</script>

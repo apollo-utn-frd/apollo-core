@@ -15,4 +15,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w[
   moment-with-locales.min.js
   application.css
+  new_travel.css
 ]

@@ -7,11 +7,13 @@ class TravelsController < ApplicationController
     create_comments
     create_favorites
     destroy_favorites
+    new
   ]
 
   before_action :set_travel, except: %i[
     create
     search
+    new
   ]
 
   before_action :only_manager_users, only: %i[destroy]
@@ -20,10 +22,14 @@ class TravelsController < ApplicationController
     render :show
   end
 
+  def new
+    render 'travels/new'
+  end
+  
   def show
     render 'travels/viewrvs'
   end
-
+  
   def create
     @travel = nil
 
