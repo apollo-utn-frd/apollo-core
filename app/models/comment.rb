@@ -34,7 +34,7 @@ class Comment < ApplicationRecord
   ##
   # Devuelve si el comentario puede ser accedido por un determinado usuario.
   #
-  delegate :readable?, to: :travel
+  delegate :readable?, to: :travel, allow_nil: true
 
   private
 

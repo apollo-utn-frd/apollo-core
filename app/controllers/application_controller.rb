@@ -17,14 +17,14 @@ class ApplicationController < ActionController::Base
   def fetch_user
     if Rails.env.test?
       User.find_by(uid: request.headers['UID'])
-    elsif session[:user_id]
-      User.find(session[:user_id])
+    elsif session[:user_id].present?
+      User.find_by(id: session[:user_id])
     end
   end
 
   def authenticate_user!
     return if current_user.present?
 
-    raise Apollo::UserNotAuthorized.new
+    redirect_to root_path
   end
 end

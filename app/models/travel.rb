@@ -80,24 +80,7 @@ class Travel < ApplicationRecord
   # Devuelve la URL de la imagen de previsualización de un viaje dado.
   #
   def image_url
-    map = GoogleStaticMapsHelper::Map.new
-
-    places.each_with_index do |place, i|
-      map << GoogleStaticMapsHelper::Marker.new(
-        place,
-        label: (i + 65).chr
-      )
-    end
-
-    if places.many?
-      path = GoogleStaticMapsHelper::Path.new(color: :black)
-
-      places.each { |place| path << place }
-
-      map << path
-    end
-
-    map.url
+    ApolloGoogleMaps.image_url(self)
   end
 
   private
