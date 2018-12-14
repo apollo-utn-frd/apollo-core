@@ -38,7 +38,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show public travel' do
-    get travel_path(@public), env: auth_env
+    get travel_path(@public), env: auth_env,
+                              as: :json
 
     assert_response :ok
 
@@ -67,7 +68,7 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show public travel if user is not login' do
-    get travel_path(@public)
+    get travel_path(@public), as: :json
 
     assert_response :ok
 
@@ -96,7 +97,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show private travel if was created by user' do
-    get travel_path(@private), env: auth_env
+    get travel_path(@private), env: auth_env,
+                               as: :json
 
     assert_response :ok
 
@@ -125,7 +127,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show private travel if was authorized' do
-    get travel_path(@private), env: auth_env_as(@juan)
+    get travel_path(@private), env: auth_env_as(@juan),
+                               as: :json
 
     assert_response :ok
 
@@ -154,13 +157,15 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not show private travel if was not authorized' do
-    get travel_path(@private), env: auth_env_as(@fede)
+    get travel_path(@private), env: auth_env_as(@fede),
+                               as: :json
 
     assert_response :not_found
   end
 
   test 'should not show travel if not exists' do
-    get travel_path(1), env: auth_env
+    get travel_path(1), env: auth_env,
+                        as: :json
 
     assert_response :not_found
   end
@@ -168,7 +173,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   test 'should create public travel' do
     assert_difference('Travel.publicx.count') do
       post travels_path, env: auth_env,
-                         params: @params
+                         params: @params,
+                         as: :json
     end
 
     assert_response :created
@@ -224,7 +230,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Travel.privatex.count') do
       post travels_path, env: auth_env,
-                         params: @params
+                         params: @params,
+                         as: :json
     end
 
     assert_response :created
@@ -281,7 +288,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Travel.privatex.count') do
       post travels_path, env: auth_env,
-                         params: @params
+                         params: @params,
+                         as: :json
     end
 
     assert_response :created
@@ -338,7 +346,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference('Travel.privatex.count') do
       post travels_path, env: auth_env,
-                         params: @params
+                         params: @params,
+                         as: :json
     end
 
     assert_response :not_found
@@ -354,7 +363,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference('Travel.privatex.count') do
       post travels_path, env: auth_env,
-                         params: @params
+                         params: @params,
+                         as: :json
     end
 
     assert_response :unprocessable_entity
@@ -362,7 +372,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should destroy travel' do
     assert_difference('Travel.count', -1) do
-      delete travel_path(@public.id), env: auth_env
+      delete travel_path(@public.id), env: auth_env,
+                                      as: :json
     end
 
     assert_response :no_content
@@ -372,7 +383,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should not destroy travel if user is not the creator of travel' do
     assert_no_difference('Travel.count') do
-      delete travel_path(@public.id), env: auth_env_as(@fede)
+      delete travel_path(@public.id), env: auth_env_as(@fede),
+                                      as: :json
     end
 
     assert_response :forbidden
@@ -383,7 +395,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   test 'should comment public travel' do
     assert_difference('Comment.count') do
       post travel_comments_path(@public), env: auth_env_as(@fede),
-                                          params: @comment_params
+                                          params: @comment_params,
+                                          as: :json
     end
 
     assert_response :created
@@ -405,7 +418,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   test 'should comment private travel if was created by user' do
     assert_difference('Comment.count') do
       post travel_comments_path(@private), env: auth_env,
-                                           params: @comment_params
+                                           params: @comment_params,
+                                           as: :json
     end
 
     assert_response :created
@@ -427,7 +441,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   test 'should comment private travel if was authorized' do
     assert_difference('Comment.count') do
       post travel_comments_path(@private), env: auth_env_as(@juan),
-                                           params: @comment_params
+                                           params: @comment_params,
+                                           as: :json
     end
 
     assert_response :created
@@ -449,7 +464,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   test 'should not comment private travel if was not authorized' do
     assert_no_difference('Comment.count') do
       post travel_comments_path(@private), env: auth_env_as(@fede),
-                                           params: @comment_params
+                                           params: @comment_params,
+                                           as: :json
     end
 
     assert_response :not_found
@@ -462,7 +478,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should favorite public travel' do
     assert_difference('Favorite.count') do
-      post travel_favorites_path(@public), env: auth_env_as(@fede)
+      post travel_favorites_path(@public), env: auth_env_as(@fede),
+                                           as: :json
     end
 
     assert_response :ok
@@ -480,7 +497,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should favorite private travel if was created by user' do
     assert_difference('Favorite.count') do
-      post travel_favorites_path(@private), env: auth_env
+      post travel_favorites_path(@private), env: auth_env,
+                                            as: :json
     end
 
     assert_response :ok
@@ -498,7 +516,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should favorite private travel if was authorized' do
     assert_difference('Favorite.count') do
-      post travel_favorites_path(@private), env: auth_env_as(@juan)
+      post travel_favorites_path(@private), env: auth_env_as(@juan),
+                                            as: :json
     end
 
     assert_response :ok
@@ -516,7 +535,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should not favorite private travel if was not authorized' do
     assert_no_difference('Favorite.count') do
-      post travel_favorites_path(@private), env: auth_env_as(@fede)
+      post travel_favorites_path(@private), env: auth_env_as(@fede),
+                                            as: :json
     end
 
     assert_response :not_found
@@ -529,7 +549,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should unfavorite public travel' do
     assert_difference('Favorite.count', -1) do
-      delete travel_favorites_path(@public), env: auth_env_as(@juan)
+      delete travel_favorites_path(@public), env: auth_env_as(@juan),
+                                            as: :json
     end
 
     assert_response :no_content
@@ -542,7 +563,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should unfavorite private travel if was created by user' do
     assert_difference('Favorite.count', -1) do
-      delete travel_favorites_path(@atlantis), env: auth_env
+      delete travel_favorites_path(@atlantis), env: auth_env,
+                                               as: :json
     end
 
     assert_response :no_content
@@ -555,7 +577,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should unfavorite private travel if was authorized' do
     assert_difference('Favorite.count', -1) do
-      delete travel_favorites_path(@atlantis), env: auth_env_as(@juan)
+      delete travel_favorites_path(@atlantis), env: auth_env_as(@juan),
+                                               as: :json
     end
 
     assert_response :no_content
@@ -568,7 +591,8 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should not unfavorite private travel if was not authorized' do
     assert_no_difference('Favorite.count') do
-      delete travel_favorites_path(@private), env: auth_env_as(@fede)
+      delete travel_favorites_path(@private), env: auth_env_as(@fede),
+                                              as: :json
     end
 
     assert_response :not_found

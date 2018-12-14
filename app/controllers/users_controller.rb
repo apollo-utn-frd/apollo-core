@@ -22,7 +22,10 @@ class UsersController < ApplicationController
   ]
 
   def show
-    render :show
+    respond_to do |format|
+      format.html { render 'users/show.html' }
+      format.json { render 'users/show.json' }
+    end
   end
 
   def update
@@ -52,16 +55,13 @@ class UsersController < ApplicationController
     render :show
   end
 
-  def index_travels_json
-    @travels = @user.travels
-
-    render '/travels/index'
-  end
-
   def index_travels
     @travels = @user.travels
 
-    render '/travels/list'
+    respond_to do |format|
+      format.html { render '/travels/list' }
+      format.json { render '/travels/index' }
+    end
   end
 
   def index_authorizations
@@ -71,39 +71,42 @@ class UsersController < ApplicationController
   end
 
   def index_favorites
-    @travels = @user.favorites_travels
-
-    render '/travels/list'
-  end
-
-  def index_favorites_json
-    @favorites = @user.favorites
-
-    render '/favorites/index'
+    respond_to do |format|
+      format.html do
+        @travels = @user.favorites_travels
+        render '/favorites/list'
+      end
+      format.json do
+        @favorites = @user.favorites
+        render '/favorites/index'
+      end
+    end
   end
 
   def index_followings
-    @followings = @user.followings_users
-
-    render '/followings/list'
-  end
-
-  def index_followings_json
-    @followings = @user.followings
-
-    render '/followings/index'
+    respond_to do |format|
+      format.html do
+        @followings = @user.followings_users
+        render '/followings/list'
+      end
+      format.json do
+        @followings = @user.followings
+        render '/followings/index'
+      end
+    end
   end
 
   def index_followers
-    @followings = @user.followers_users
-
-    render '/followings/list'
-  end
-
-  def index_followers_json
-    @followings = @user.followers
-
-    render '/followings/index'
+    respond_to do |format|
+      format.html do
+        @followings = @user.followers_users
+        render '/followings/list'
+      end
+      format.json do
+        @followings = @user.followers
+        render '/followings/index'
+      end
+    end
   end
 
   def create_followers

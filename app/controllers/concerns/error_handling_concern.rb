@@ -31,9 +31,9 @@ module ErrorHandlingConcern
     resource = e.resource
 
     message = 'Not authorized'
-    message << " to #{action}" if action.present?
-    message << " #{resource.class.to_s.downcase}" if resource.present?
-    message << " with id = '#{resource.id}'" if resource.try(:id).present?
+    message += " to #{action}" if action.present?
+    message += " #{resource.class.to_s.downcase}" if resource.present?
+    message += " with id = '#{resource.id}'" if resource.try(:id).present?
 
     @error = {
       status: 403,

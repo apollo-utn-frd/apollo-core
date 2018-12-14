@@ -15,7 +15,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show public profile of user' do
-    get user_path(@fede), env: auth_env
+    get user_path(@fede), env: auth_env,
+                          as: :json
 
     assert_response :ok
 
@@ -33,7 +34,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show private profile of user' do
-    get user_path(@mati), env: auth_env
+    get user_path(@mati), env: auth_env,
+                          as: :json
 
     assert_response :ok
 
@@ -53,7 +55,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update user if it is login' do
     put user_path(@mati), env: auth_env,
-                          params: @params
+                          params: @params,
+                          as: :json
 
     assert_response :ok
 
@@ -78,7 +81,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should not update user if it is not login' do
     put user_path(@fede), env: auth_env,
-                          params: @params
+                          params: @params,
+                          as: :json
 
     assert_response :forbidden
 
@@ -89,7 +93,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show travels' do
-    get user_travels_path(@fede), env: auth_env
+    get user_travels_path(@fede), env: auth_env,
+                                  as: :json
 
     assert_response :ok
 
@@ -118,7 +123,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show authorizations of user if it is login' do
-    get user_authorizations_path(@juan), env: auth_env_as(@juan)
+    get user_authorizations_path(@juan), env: auth_env_as(@juan),
+                                         as: :json
 
     assert_response :ok
 
@@ -136,13 +142,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not show authorizations of user if it is not login' do
-    get user_authorizations_path(@juan), env: auth_env
+    get user_authorizations_path(@juan), env: auth_env,
+                                         as: :json
 
     assert_response :forbidden
   end
 
   test 'should show favorites' do
-    get user_favorites_path(@juan), env: auth_env_as(@juan)
+    get user_favorites_path(@juan), env: auth_env_as(@juan),
+                                    as: :json
 
     assert_response :ok
 
@@ -160,7 +168,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show followings' do
-    get user_followings_path(@juan), env: auth_env_as(@juan)
+    get user_followings_path(@juan), env: auth_env_as(@juan),
+                                     as: :json
 
     assert_response :ok
 
@@ -178,7 +187,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show followers' do
-    get user_followers_path(@juan), env: auth_env_as(@juan)
+    get user_followers_path(@juan), env: auth_env_as(@juan),
+                                    as: :json
 
     assert_response :ok
 
@@ -197,7 +207,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should follow user' do
     assert_difference('Following.count') do
-      post user_followers_path(@juan), env: auth_env
+      post user_followers_path(@juan), env: auth_env,
+                                       as: :json
     end
 
     assert_response :ok
@@ -215,7 +226,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should unfollow user' do
     assert_difference('Following.count', -1) do
-      delete user_followers_path(@mati), env: auth_env_as(@juan)
+      delete user_followers_path(@mati), env: auth_env_as(@juan),
+                                         as: :json
     end
 
     assert_response :no_content
@@ -228,7 +240,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should not follow himself' do
     assert_no_difference('Following.count') do
-      post user_followers_path(@mati), env: auth_env
+      post user_followers_path(@mati), env: auth_env,
+                                       as: :json
     end
 
     assert_response :unprocessable_entity

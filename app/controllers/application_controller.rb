@@ -11,7 +11,15 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= fetch_user
+  end
+
+  def fetch_user
+    if Rails.env.test?
+      User.find_by(uid: request.headers['UID'])
+    elsif session[:user_id]
+      User.find(session[:user_id])
+    end
   end
 
   def authenticate_user!
