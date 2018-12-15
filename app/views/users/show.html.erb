@@ -1,14 +1,14 @@
 <div class="row">
-  <div class="col-2">
-    <%= render partial: 'users/partials/following_lateral',
+  <div class="col-3">
+    <%= render partial: 'users/partials/user_lateral',
                locals: {
                  user: @user
                }
     %>
   </div>
-  
+
   <% if false %>
-  <div class="col-10">
+  <div class="col-9">
       <% @posts.each do |post| %>
         <%= render partial: "posts/partials/#{post.type}_post",
                   locals: {

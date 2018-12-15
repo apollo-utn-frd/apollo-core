@@ -112,13 +112,29 @@ class UsersController < ApplicationController
   def create_followers
     @following = current_user.follow!(@user)
 
-    render '/followings/show'
+    respond_to do |format|
+      format.html do
+        redirect_back fallback_location: user_path(@user.id)
+      end
+
+      format.json do
+        render '/followings/show'
+      end
+    end
   end
 
   def destroy_followers
     current_user.unfollow!(@user)
 
-    head :no_content
+    respond_to do |format|
+      format.html do
+        redirect_back fallback_location: user_path(@user.id)
+      end
+
+      format.json do
+        head :no_content
+      end
+    end
   end
 
   def index_posts

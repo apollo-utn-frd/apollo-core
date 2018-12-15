@@ -3,7 +3,14 @@
         <%= image_tag @travel.image_public_url, class: 'w-100' %>
 
         <h3 class="d-inline"><%= @travel.title %></h3>
-        <p class="m-0">Por: @<%= @travel.user.username %><span class="date"> el <%= @travel.created_at %></span></p>
+        <p class="m-0">
+            Por: <%= link_to user_path(@travel.user_id) do %>
+                @<%= @travel.user.username %>
+            <% end %>
+
+            <span class="date"> el <%= @travel.created_at %></span>
+        </p>
+
         <p><%= @travel.description %></p>
         <div class="actions">
             <button class="btn btn-warning m-2" title="Mandar a favoritos">
@@ -41,7 +48,7 @@
                         index:index
                     }
             %>
-        <% end %>    
+        <% end %>
     </div>
 
 </div>
