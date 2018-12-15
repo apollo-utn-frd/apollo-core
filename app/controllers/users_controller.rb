@@ -74,7 +74,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do
         @travels = @user.favorites_travels
-        render '/favorites/list'
+        render '/travels/list'
       end
       format.json do
         @favorites = @user.favorites
