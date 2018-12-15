@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: %i[
+  before_action :authenticate_unconfirmed_user!, only: %i[
+    edit
     update
-    validate
     update_image
+    validate
+  ]
+
+  before_action :authenticate_user!, only: %i[
     index_authorizations
     create_followers
     destroy_followers
@@ -15,6 +19,7 @@ class UsersController < ApplicationController
   ]
 
   before_action :only_manager_users, only: %i[
+    edit
     update
     validate
     update_image
@@ -28,6 +33,10 @@ class UsersController < ApplicationController
       format.html { render '/travels/list' }
       format.json { render 'users/show.json' }
     end
+  end
+
+  def edit
+    render 'users/edit'
   end
 
   def update

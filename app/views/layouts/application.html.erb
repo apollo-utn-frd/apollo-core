@@ -55,10 +55,12 @@
           <% end %>
 
           <div class="collapse navbar-collapse">
-            <span class="badge text-white" style="font-size: 115%;"><i class="fas fa-search mr-1"></i></span>
-            
-            <%= select("search", "user_id", User.all.collect {|u| [ "@"+u.username, u.format_id ] }, {include_blank: 'Search...'}, class:"w-100") %>
-            
+            <% if current_user.confirmed? %>
+              <span class="badge text-white" style="font-size: 115%;"><i class="fas fa-search mr-1"></i></span>
+
+              <%= select("search", "user_id", User.all.collect {|u| [ "@"+u.username, u.format_id ] }, {include_blank: 'Search...'}, class:"w-100") %>
+            <% end %>
+
             <ul class="navbar-nav w-100  d-flex flex-row-reverse">
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,11 +68,15 @@
                     <strong><%= current_user.name %></strong>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
-                    <%= link_to "Cerrar sesion", signout_path, id: "sign_out", class:"dropdown-item d-inline text-dark" %>
+                    <%= link_to "Editar usuario", edit_user_path(current_user.format_id), class:"dropdown-item text-dark" %>
+                    <%= link_to "Cerrar sesion", signout_path, id: "sign_out", class:"dropdown-item text-dark" %>
                   </div>
               </li>
-              <%= link_to new_travel_path, class:"btn btn-success rounded" do %>
-                <i class="fas fa-plus mr-1"></i>Ruta de Viaje
+
+              <% if current_user.confirmed? %>
+                  <%= link_to new_travel_path, class:"btn btn-success rounded" do %>
+                    <i class="fas fa-plus mr-1"></i>Ruta de Viaje
+                  <% end %>
               <% end %>
             </ul>
           </div>

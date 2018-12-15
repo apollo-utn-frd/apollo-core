@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: %i[create destroy]
 
-  resources :users, only: %i[show update] do
+  resources :users, only: %i[show edit update] do
     controller 'users' do
       post 'validate'
       get 'travels', action: 'index_travels'

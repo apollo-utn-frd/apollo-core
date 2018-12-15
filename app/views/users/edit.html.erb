@@ -1,0 +1,85 @@
+<div class="row mt-4">
+  <div class="col-4 offset-1 mt-4">
+    <a title="Apollo es una nueva forma de viajar" class="polaroid" href="">
+      <%= image_tag 'travelplan.jpg', class: "img-fluid" %>
+    </a>
+  </div>
+
+  <div class="offset-1 col-6">
+    <% if @user.confirmed? %>
+      <h5>Editar usuario</h3>
+    <% else %>
+      <h5>Bienvenido a Apollo</h3>
+    <% end %>
+
+    <%= form_for @user, url: user_path(@user.format_id), method: 'put' do |f| %>
+      <% unless @user.confirmed? %>
+        <div class="form-group">
+          <%= f.label 'Nombre de usuario' %>:
+          <%= f.text_field :username, name: :username, class: "form-control" %>
+          <small class="form-text text-muted">Sólo podrás cambiarlo esta vez así que elige bien!</small>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label 'Nombre' %>:
+        <%= f.text_field :name, name: :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label 'Apellido' %>:
+        <%= f.text_field :lastname, name: :lastname, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label 'Cuéntanos sobre ti' %>:
+        <%= f.text_area :description, name: :description, class: "form-control" %>
+      </div>
+
+      <%= f.submit 'Guardar', class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<style type="text/css">
+a.polaroid {
+  background: white;
+  display: inline;
+  float: left;
+  margin: 0 15px 30px;
+  padding: 10px 10px 70px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: all .15s linear;
+  z-index: 0;
+  position: relative;
+  transform: rotate(4deg);
+}
+
+a.polaroid:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+a.polaroid::after {
+  color: #333;
+  font-size: 20px;
+  content: attr(title);
+  position: relative;
+  top: 30px;
+  font-family: 'Indie Flower', cursive;
+}
+
+a.polaroid img {
+  display: block;
+  width: inherit;
+}
+
+@font-face {
+  font-family: 'Indie Flower';
+  font-style: normal;
+  font-weight: 400;
+  src: local('IndieFlower'), url(https://fonts.gstatic.com/s/indieflower/v8/10JVD_humAd5zP2yrFqw6ugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+</style>
