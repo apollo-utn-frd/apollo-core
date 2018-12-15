@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8 p-2">
-        <%= image_tag @travel.image_public_url, class: 'w-100' %>
+        <div id="rv_map"></div>
 
         <h3 class="my-2"><%= @travel.title %></h3>
         <p>
@@ -66,3 +66,49 @@
     </div>
 
 </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.secrets.google_maps_key%>&libraries=places&language=es&region=AR"></script>
+<script>
+    var places = <%= @travel.places.map do |place|
+                     place.slice(:lat, :lng)
+                 end.to_json.html_safe %>;
+    var line = null;
+    var map = new google.maps.Map(document.getElementById('rv_map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    rotateControl: false,
+    fullscreenControl: false
+    });
+
+    const put_places = () =>
+        places.map((place, index) => {
+            return new google.maps.Marker({
+                position: {lat: place.lat, lng: place.lng},
+                map: map,
+                label: String.fromCharCode(65 + index)
+            })
+        });
+
+
+
+    const good_markers = put_places();
+
+    const draw_line = (markers) => {
+        line ? line.setMap(null) : null;
+        line = new google.maps.Polyline({
+            path: markers.map(marker => marker.position),
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        line.setMap(map);
+    }
+
+    draw_line(good_markers)
+</script>

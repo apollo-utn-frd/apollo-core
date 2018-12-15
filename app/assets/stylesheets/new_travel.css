@@ -10,6 +10,11 @@
   height: 100%;
 }
 
+#rv_map {
+  width: 100%;
+  height: 100%;
+}
+
 .title-row {
   font-weight: bold;
   text-align: center;
