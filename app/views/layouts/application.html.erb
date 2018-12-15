@@ -55,17 +55,21 @@
           <% end %>
 
           <div class="collapse navbar-collapse">
-              <ul class="navbar-nav w-100">
-                  <li class="nav-item dropdown ml-auto">
-                      <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <%= image_tag current_user.thumbnail_public_url, style: "height: 30px;", class: 'mr-1' %>
-                        <strong><%= current_user.name %></strong>
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <%= link_to "Cerrar sesion", signout_path, id: "sign_out", class:"dropdown-item d-inline text-dark" %>
-                      </div>
-                  </li>
-              </ul>
+            <span class="badge text-white" style="font-size: 115%;"><i class="fas fa-search mr-1"></i></span>
+            
+            <%= select("search", "user_id", User.all.collect {|u| [ "@"+u.username, u.format_id ] }, {include_blank: 'Search...'}, class:"w-100") %>
+            
+            <ul class="navbar-nav w-100">
+              <li class="nav-item dropdown ml-auto">
+                  <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= image_tag current_user.thumbnail_public_url, style: "height: 30px;", class: 'mr-1' %>
+                    <strong><%= current_user.name %></strong>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <%= link_to "Cerrar sesion", signout_path, id: "sign_out", class:"dropdown-item d-inline text-dark" %>
+                  </div>
+              </li>
+            </ul>
           </div>
         <% else %>
         <a href="/" class="navbar-brand">
@@ -97,5 +101,16 @@
     <div class="container-fluid">
       <%= yield %>
     </div>
+
+    <script>
+      $(document).ready(function() {
+        $("#search_user_id").select2();
+      });
+
+      $("#search_user_id").on("change", function(){
+        var id = $(this).val();
+        window.location = "/users/" + id;
+      })
+    </script>
   </body>
 </html>
