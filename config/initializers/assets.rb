@@ -16,4 +16,5 @@ Rails.application.config.assets.precompile += %w[
   moment-with-locales.min.js
   application.css
   new_travel.css
+  navbar.css
 ]

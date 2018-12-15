@@ -16,12 +16,16 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     <%= javascript_include_tag 'moment-with-locales.min.js' %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'new_travel', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
 
   </head>
 
@@ -44,23 +48,27 @@
   <body class="bg-light">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-primary mb-2">
-        <% if current_user %>              
-          <a class="navbar-brand text-white" href="../home">APOLLO</a>
+        <% if current_user %>
+          <%= link_to home_path, class: "navbar-brand text-white", id: "logo" do %>
+            <%= image_tag 'logo.png', style: "height: 30px;", class: 'mr-1' %>
+            <strong>APOLLO</strong>
+
           <div class="collapse navbar-collapse">
               <ul class="navbar-nav w-100">
                   <li class="nav-item dropdown ml-auto">
                       <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <%= image_tag current_user.thumbnail_public_url, style: "height: 30px;", class: 'mr-1' %>
                         <strong><%= current_user.name %></strong>
                       </a>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <%= link_to "Cerrar sesion", signout_path, id: "sign_out", class:"dropdown-item d-inline text-dark" %>                        
+                        <%= link_to "Cerrar sesion", signout_path, id: "sign_out", class:"dropdown-item d-inline text-dark" %>
                       </div>
                   </li>
               </ul>
           </div>
         <% else %>
         <a href="/" class="navbar-brand">
-            
+
               <div class="titulo text-white">APOLLO</div>
           </a>
       </a>
