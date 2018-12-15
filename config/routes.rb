@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
@@ -70,6 +72,7 @@ Rails.application.routes.draw do
   end
 
   get '/home', to: 'home#home'
+  get '/posts', to: 'home#posts'
 
   root 'home#root'
 end

@@ -267,6 +267,7 @@ DEPENDENCIES
   activerecord-postgis-adapter
   annotate
   ar-uuid
+  bcrypt
   bootsnap
   cloudinary (= 1.10.1.pre.rc)
   devise

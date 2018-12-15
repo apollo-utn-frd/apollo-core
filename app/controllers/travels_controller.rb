@@ -47,7 +47,7 @@ class TravelsController < ApplicationController
   end
 
   def search
-    @travels = Travel.search(search_params)
+    @travels = Travel.search(search_params).order(created_at: :desc)
 
     render :index
   end

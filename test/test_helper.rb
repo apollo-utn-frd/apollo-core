@@ -29,7 +29,7 @@ class ActiveSupport::TestCase
 
     {
       'UID' => user.uid,
-      'Access-Token' => token&.second&.dig('token'),
+      'Authorization' => "Bearer #{user.uid}",
       'Client' => token&.first
     }
   end

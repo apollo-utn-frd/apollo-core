@@ -14,16 +14,23 @@ class ApplicationController < ActionController::Base
     @current_user ||= fetch_user
   end
 
+  def authorization_token
+    token = ActionController::HttpAuthentication::Token
+    token.token_and_options(request)&.first
+  end
+
   def fetch_user
-    if Rails.env.test?
-      User.find_by(uid: request.headers['UID'])
-    elsif session[:user_id].present?
+    if session[:user_id].present?
       User.find_by(id: session[:user_id])
+    elsif authorization_token.present?
+      User.find_by(uid: authorization_token)
     end
   end
 
   def authenticate_user!
     return if current_user.present?
+
+    raise Apollo::UserNotAuthorized if request.content_type == 'application/json'
 
     redirect_to root_path
   end

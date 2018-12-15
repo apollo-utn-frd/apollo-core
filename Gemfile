@@ -85,6 +85,8 @@ gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 
+gem 'bcrypt'
+
 group :development do
   # Annotate Rails classes with schema and routes info
   # https://github.com/ctran/annotate_models

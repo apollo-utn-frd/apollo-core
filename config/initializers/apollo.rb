@@ -14,3 +14,5 @@ require Rails.root.join('lib', 'apollo_auth')
 
 # Apollo Google Maps
 require Rails.root.join('lib', 'apollo_google_maps')
+
+require Rails.root.join('app', 'controllers', 'users', 'omniauth_callbacks')

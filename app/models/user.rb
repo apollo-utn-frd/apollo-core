@@ -42,7 +42,8 @@ class User < ApplicationRecord
     other
   ].freeze
 
-  devise :omniauthable
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
+  has_secure_token :uid
 
   include Imageable
   include Searchable::User
@@ -77,8 +78,6 @@ class User < ApplicationRecord
   before_validation :set_username, on: :create
   before_validation :downcase_username
   before_validation :set_confirmed_at
-
-  after_create :set_uid!
 
   after_create_commit :create_event!
   after_create_commit :download_image!
@@ -291,15 +290,6 @@ class User < ApplicationRecord
     return unless username_changed?
 
     self.username = username.downcase
-  end
-
-  ##
-  # Asigna el uid.
-  #
-  def set_uid!
-    return if uid?
-
-    update!(uid: format_id)
   end
 
   ##

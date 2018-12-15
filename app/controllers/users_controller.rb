@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.search(search_params)
+    @users = User.search(search_params).order(created_at: :desc)
 
     render :index
   end

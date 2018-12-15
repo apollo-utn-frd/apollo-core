@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   end
 
   def search
-    @comments = Comment.search(search_params)
+    @comments = Comment.search(search_params).order(created_at: :desc)
 
     render :index
   end

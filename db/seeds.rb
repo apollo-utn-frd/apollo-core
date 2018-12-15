@@ -154,7 +154,7 @@ triangulo_bermudas = Travel.create!(
       coordinates: 'POINT(-64.781380 32.294887)'
     },
     {
-      title: 'Primer vertice',
+      title: 'Primer vertice otra vez',
       coordinates: 'POINT(-80.226529 25.789106)'
     }
   ]
