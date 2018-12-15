@@ -5,9 +5,10 @@
         <div class="d-inline p-2">
             <a class="d-block">
                 <strong class="user-nombre"><%= comment.user.name.to_s + ' ' + comment.user.lastname.to_s %></strong>
-                <%= link_to user_path(comment.user.format_id) do %><span class="username">@<%= comment.user.username %></span><% end %>
             </a>
-            <span class="d-block"><%= comment.created_at %></span>
+            Por <%= link_to user_path(comment.user.format_id) do %>
+                @<%= comment.user.username %>
+            <% end %> hace <%= time_ago_in_words comment.created_at %>
         </div>
     </div>
     </section>

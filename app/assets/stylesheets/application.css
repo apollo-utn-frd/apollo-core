@@ -369,7 +369,8 @@ img::-moz-selection {
 
 .marker-name {
   border-radius: 50%;
-  background-color: #ff8181;
+  color: #fff;
+  background-color: #e94335;
   width: 40px;
   height: 40px;
   align-items: center;

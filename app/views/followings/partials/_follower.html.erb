@@ -5,7 +5,10 @@
         </div>
         <div class="col-10 pl-5">
             <h6 class="d-inline"><%= follower.name + " " + follower.lastname %></h6>
-            <%= link_to user_path(follower.format_id) do %><span class="d-inline">@<%= follower.username %></span><% end %>
+
+            <%= link_to user_path(follower.format_id) do %>
+              <span class="d-inline">@<%= follower.username %></span>
+            <% end %>
         </div>
     </div>
 </li>
