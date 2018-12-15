@@ -1,14 +1,13 @@
 <div class="row">
-  <div class="col-3">
+  <div class="col-3 mt-2">
     <%= render partial: 'users/partials/user_lateral',
                locals: {
                  user: @user
                }
     %>
-    <a class="btn btn-success w-100" href="#" role="button"><i class="fas fa-plus"></i> Agregar ruta de viaje</a>
   </div>
 
-  <div class="col-9">
+  <div class="col-7 mt-2">
       <% @posts.each do |post| %>
         <%= render partial: "posts/partials/#{post.type}_post",
                   locals: {
@@ -18,4 +17,20 @@
         %>
       <% end %>
   </div>
+
+  <div class="col-2 mt-2">
+    <h6 class="mb-1 text-center">Ultimos viajes creados</h6>
+    <% Travel.publicx.where.not(user_id:current_user.id).order(created_at: :desc).first(3).each do |travel| %>
+      <div class="card mb-2">
+        <div class="card-header p-0">
+          <%= image_tag travel.user.image_url, class: 'img-comentario p-2 d-inline' %> 
+          <%= link_to travel_path(travel.format_id), class:"text-dark d-inline text-truncate" do %> <%= travel.title %> <% end %> 
+        </div>
+        <div class="card-body">
+          <p class="card-text text-truncate"> <%= travel.description %> </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
 </div>

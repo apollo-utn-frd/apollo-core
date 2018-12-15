@@ -22,13 +22,19 @@
           <%= @travel.comments.count %>
         </button>
 
-        <% favorite_class = 'active' if current_user&.favorite?(@travel) %>
-
-        <button type="button" class="btn btn-favorite btn-link no-decoration <%= favorite_class %>">
-          <i class="far fa-fw fa-star"></i>
-          <i class="fas fa-fw fa-star"></i>
-          <%= @travel.favorites.count %>
-        </button>
+        <% if current_user.favorite?(@travel) %>
+          <%= button_to travel_favorites_path(travel_id: @travel.id), method: :delete, class: 'btn btn-favorite btn-link no-decoration active' do %>
+              <i class="far fa-fw fa-star"></i>
+              <i class="fas fa-fw fa-star"></i>
+              <%= @travel.favorites.count %>
+          <% end %>
+        <% else %>
+          <%= button_to travel_favorites_path(travel_id: @travel.id), class: "btn btn-favorite btn-link no-decoration" do %>
+              <i class="far fa-fw fa-star"></i>
+              <i class="fas fa-fw fa-star"></i>
+              <%= @travel.favorites.count %>
+          <% end %>
+        <% end %>
       </div>
 
         <% @travel.comments.each do |comment| %>

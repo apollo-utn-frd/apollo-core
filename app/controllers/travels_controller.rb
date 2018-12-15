@@ -24,7 +24,7 @@ class TravelsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html { render 'travels/viewrvs' }
+      format.html { render 'travels/show.html' }
       format.json { render :show }
     end
   end
@@ -37,7 +37,10 @@ class TravelsController < ApplicationController
       @travel.authorize_all!(authorizations_users) unless @travel.publicx?
     end
 
-    render :show, status: :created
+    respond_to do |format|
+      format.html { render 'travels/show.html' }
+      format.json { render 'travels/show.json', status: :created }
+    end
   end
 
   def destroy
@@ -82,13 +85,29 @@ class TravelsController < ApplicationController
   def create_favorites
     @favorite = current_user.favorite!(@travel)
 
-    render 'favorites/show'
+    respond_to do |format|
+      format.html do
+        redirect_back fallback_location: travel_path(@travel.id)
+      end
+
+      format.json do
+        render '/favorites/show'
+      end
+    end
   end
 
   def destroy_favorites
     current_user.unfavorite!(@travel)
 
-    head :no_content
+    respond_to do |format|
+      format.html do
+        redirect_back fallback_location: travel_path(@travel.id)
+      end
+
+      format.json do
+        head :no_content
+      end
+    end
   end
 
   private
