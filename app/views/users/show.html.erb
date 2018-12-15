@@ -6,17 +6,4 @@
                }
     %>
   </div>
-
-  <% if false %>
-  <div class="col-9">
-      <% @posts.each do |post| %>
-        <%= render partial: "posts/partials/#{post.type}_post",
-                  locals: {
-                    user: @user,
-                    post: post
-                  }
-        %>
-      <% end %>
-  </div>
-  <% end %>
 </div>

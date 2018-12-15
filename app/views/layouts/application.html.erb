@@ -59,8 +59,8 @@
             
             <%= select("search", "user_id", User.all.collect {|u| [ "@"+u.username, u.format_id ] }, {include_blank: 'Search...'}, class:"w-100") %>
             
-            <ul class="navbar-nav w-100">
-              <li class="nav-item dropdown ml-auto">
+            <ul class="navbar-nav w-100  d-flex flex-row-reverse">
+              <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <%= image_tag current_user.thumbnail_public_url, style: "height: 30px;", class: 'mr-1' %>
                     <strong><%= current_user.name %></strong>
@@ -69,6 +69,9 @@
                     <%= link_to "Cerrar sesion", signout_path, id: "sign_out", class:"dropdown-item d-inline text-dark" %>
                   </div>
               </li>
+              <%= link_to new_travel_path, class:"btn btn-success rounded" do %>
+                <i class="fas fa-plus mr-1"></i>Ruta de Viaje
+              <% end %>
             </ul>
           </div>
         <% else %>
