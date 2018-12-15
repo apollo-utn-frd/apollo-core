@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   redis:
@@ -8,9 +8,9 @@ services:
     ports:
       - 6379:6379
   db:
-    image:  mdillon/postgis:10
+    image: mdillon/postgis:10
     volumes:
-      - 'volume_db:/var/lib/postgresql/db-data'
+      - "volume_db:/var/lib/postgresql/db-data"
       - ./tmp:/tmp
       - ./scripts/docker/import:/docker-entrypoint-initdb.d
   jobs:
@@ -28,6 +28,7 @@ services:
       - APOLLO_GOOGLE_CLIENT_ID
       - APOLLO_GOOGLE_CLIENT_SECRET
       - APOLLO_GOOGLE_STATIC_MAPS_KEY
+      - APOLLO_GOOGLE_MAPS_KEY
       - APOLLO_CLOUDINARY_KEY
       - APOLLO_CLOUDINARY_SECRET
       - APOLLO_CLOUDINARY_URL
