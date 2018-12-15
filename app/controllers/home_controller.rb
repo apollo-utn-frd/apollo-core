@@ -15,6 +15,10 @@ class HomeController < ApplicationController
   end
 
   def root
-    render 'root/root'
+    if current_user
+      redirect_to home_path
+    else
+      render 'root/root'
+    end
   end
 end
