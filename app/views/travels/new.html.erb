@@ -2,18 +2,18 @@
     <div class="col-4">
       <div class="title-row row">Creacion de Ruta de Viaje</div>
       <div class="option-row row">
-        <%= form_with url: travels_url do |form| %>
+        <%= form_with url: travels_url, id: "rvform" do |form| %>
           <%= form.label :titulo %><br/>
           <%= form.text_field :title, class: "form-control" %><br/>
           <%= form.label "Descripción" %><br/>
           <%= form.text_area :description, class: "form-control" %>
-          <%= form.submit %>
+          <div>Lugares:</div><br/>
+
+          <div id="places-list">
+
+          </div>
+          <%= form.submit "Enviar", id: "submitBtn", class: "btn btn-light" %>
         <% end %>
-      </div>
-      <div id="place-list" class="option-row row">
-        <div>Lugares:</div><br/>
-        <ul id="plist">
-        </ul>
       </div>
     </div>
     <div class="col-8">
@@ -38,6 +38,8 @@
 
 
 <script>
+// tamanio maximo de titulo de place 30 caracteres
+// tamanio maximo de description de place fijarse en modelo
 var markers = []
 const mkMarker = (map, lat, lang, title) => {
   return new google.maps.Marker({
@@ -63,38 +65,35 @@ map.addListener('mousedown', e => {
   }
 });
 
+const send_rv = () => {
+  var rvTitle = $('#title').value
+  var rvDesc = $('#description').value
+  console.log(rvTitle)
+  console.log(rvDesc)
+
+}
+
 const add_place = (lat, lng) => {
-  var li = document.createElement('li');
-  var plist = document.getElementById('plist');
   var newPlaceCoords = newPlaceForm(lat, lng);
   var newItem = document.createTextNode(newPlaceCoords);
-  li.appendChild(newPlaceCoords);
-  plist.appendChild(li);
+  $("#places-list").append(newPlaceCoords)
 }
 
 
 const newPlaceForm = (lat, lng) => {
   var node = `
-  <div class="place-item">
-    <p >Lat: ${lat}, Lng: ${lng}</p>
-    <input id="place-item-title" class="form-control" placeholder="Titulo" type="text" />
-    <input id="place-item-desc" class="form-control" placeholder="Descripción" type="textarea" />
+  <div id="place-${markers.length}" class="place-item">
+    <input type="hidden" name="places[][latitude]" value="${lat}" />
+    <input type="hidden" name="places[][longitude]" value="${lng}" />
+    <input id="place-item-title" name="places[][title]" class="form-control" placeholder="Titulo" type="text" />
+    <input id="place-item-desc" name="places[][description]" class="form-control" placeholder="Descripción" type="textarea" />
   </div>
   `
-
-  return createElementFromHTML(node);
-}
-
-const createElementFromHTML = htmlString => {
-  var div = document.createElement('div');
-  div.innerHTML = htmlString.trim();
-
-  // Change this to div.childNodes to support multiple top-level nodes
-  return div.firstChild;
+  return node;
 }
 
 const remove_place = () => {
-  $('li:last-child', $('#plist')).remove();
+  $('div:last-child', $('#places-list')).remove();
 }
 
 const draw_line = (map, markers) => {

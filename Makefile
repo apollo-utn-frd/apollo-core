@@ -15,3 +15,9 @@ seed_db:
 
 routes:
 	docker-compose run app rake routes
+
+bundle_app:
+	docker-compose run bundle install
+
+bundle_job:
+	docker-compose run bundle install
