@@ -1,0 +1,33 @@
+<% resource = post.resource %>
+
+<div class="row mb-4">
+  <div class="col-2">
+    <%= image_tag resource.follower.image_url, class: 'img-thumbnail' %>
+  </div>
+
+  <div class="col-10">
+    <div class="mb-2">
+      <%= link_to user_path(resource.follower.format_id), class: 'no-decoration' do %>
+        <strong class="text-body">
+          <%= resource.follower.username %>
+        </strong>
+      <% end %>
+
+      empezó a seguir a
+
+      <%= link_to user_path(resource.following.format_id), class: 'no-decoration' do %>
+        <strong class="text-body">
+          <%= resource.following.username %>
+        </strong>
+      <% end %>
+
+      <span class="date"> hace <%= time_ago_in_words resource.created_at %></span>
+    </div>
+
+    <%= render partial: 'followings/partials/follower',
+              locals: {
+                follower: resource.following
+              }
+    %>
+  </div>
+</div>

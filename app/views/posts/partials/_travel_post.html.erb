@@ -1,6 +1,35 @@
-<%= render partial: 'travels/partials/travel_min',
-          locals: {
-            user: user,
-            travel: post.resource
-          }
-%>
+<% resource = post.resource %>
+<% resource_user = resource.user %>
+
+<div class="row mb-4">
+  <div class="col-2">
+    <%= image_tag resource_user.image_url, class: 'img-thumbnail' %>
+  </div>
+
+  <div class="col-10">
+    <div class="mb-2">
+      <%= link_to user_path(resource_user.format_id), class: 'no-decoration' do %>
+        <strong class="text-body">
+          <%= resource_user.username %>
+        </strong>
+      <% end %>
+
+      creó
+
+      <%= link_to travel_path(resource.format_id), class: 'no-decoration' do %>
+        <strong class="text-body">
+          <%= resource.title %>
+        </strong>
+      <% end %>
+
+      <span class="date"> hace <%= time_ago_in_words resource.created_at %></span>
+    </div>
+
+    <%= render partial: 'travels/partials/travel_min',
+              locals: {
+                user: user,
+                travel: resource
+              }
+    %>
+  </div>
+</div>

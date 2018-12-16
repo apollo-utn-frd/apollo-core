@@ -1,0 +1,27 @@
+<% resource = post.resource %>
+
+<div class="row mb-4">
+  <div class="col-2">
+    <%= image_tag resource.image_url, class: 'img-thumbnail' %>
+  </div>
+
+  <div class="col-10">
+    <div class="mb-2">
+      <%= link_to user_path(resource.format_id), class: 'no-decoration' do %>
+        <strong class="text-body">
+          <%= resource.username %>
+        </strong>
+      <% end %>
+
+      se unió a Apollo
+
+      <span class="date"> hace <%= time_ago_in_words resource.created_at %></span>
+    </div>
+
+    <%= render partial: 'followings/partials/follower',
+              locals: {
+                follower: resource
+              }
+    %>
+  </div>
+</div>

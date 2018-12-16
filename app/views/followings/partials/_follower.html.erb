@@ -1,14 +1,15 @@
-<li class="list-group-item">
-    <div class="row float-left">
-        <div class="col-2">
-            <%= image_tag follower.image_url, style:"height:100px; width:100px" %>
+<div class="card">
+    <div class="row">
+        <div class="col-2" style="height: 100px">
+            <%= image_tag follower.image_url, class: 'p-2', style:"width:100px" %>
         </div>
-        <div class="col-10 pl-5">
-            <h6 class="d-inline"><%= follower.name + " " + follower.lastname %></h6>
+
+        <div class="col-10 py-2 pr-2">
+            <h6 class="d-inline"><%= follower.full_name %></h6>
 
             <%= link_to user_path(follower.format_id) do %>
               <span class="d-inline">@<%= follower.username %></span>
             <% end %>
         </div>
     </div>
-</li>
+</div>
