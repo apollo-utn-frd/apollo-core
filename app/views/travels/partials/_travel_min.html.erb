@@ -16,7 +16,7 @@
   <div class="d-flex flex-row-reverse travel-buttons">
     <% comment_class = 'active' if user.comment?(travel) %>
 
-    <%= link_to travel_path(travel.format_id), class: "btn btn-favorite btn-link no-decoration active #{comment_class}" do %>
+    <%= link_to travel_path(travel.format_id), class: "btn btn-comment btn-link no-decoration active #{comment_class}" do %>
       <i class="far fa-fw fa-comment"></i>
       <i class="fas fa-fw fa-comment"></i>
       <%= travel.comments.count %>
