@@ -48,6 +48,7 @@ class TravelsController < ApplicationController
 
     respond_to do |format|
       format.html do
+        flash[:icon] = 'fas fa-fw fa-map-marker-alt'
         flash[:success] = 'El viaje fue eliminado correctamente.'
         redirect_to home_path
       end

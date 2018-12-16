@@ -49,8 +49,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do
         if @user.confirmed_before_last_save
+          flash[:icon] = 'far fa-fw fa-user'
           flash[:success] = 'Tu usuario fue actualizado correctamente.'
         else
+          flash[:icon] = 'far fa-fw fa-smile-beam'
           flash[:success] = 'Bienvenido a Apollo! Ya puedes crear algunos viajes o' \
                             ' buscar otros usuarios para seguir.'
         end
