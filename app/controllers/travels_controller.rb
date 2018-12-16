@@ -164,26 +164,7 @@ class TravelsController < ApplicationController
   end
 
   def authorizations_users
-    params.fetch(:authorizations, []).map do |param|
-      id = {
-        id: param[:id],
-        username: param[:username]
-      }.compact
-
-      id = Hash[*id.first]
-
-      if id.blank?
-        raise ActionController::ParameterMissing, '\'id\' or \'username\' in authorizations'
-      end
-
-      user = User.find_by(id)
-
-      if user.blank?
-        raise ActiveRecord::RecordNotFound.new(nil, User, id.keys.first, id.values.first)
-      end
-
-      user
-    end
+    User.where(id: params.fetch(:authorizations, []))
   end
 
   def only_manager_users

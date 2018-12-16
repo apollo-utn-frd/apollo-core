@@ -11,7 +11,12 @@
             <div id="rv_map" style="height:75vh;"></div>
         </div>
 
-        <h3 class="my-2"><%= @travel.title %></h3>
+        <h3 class="my-2">
+            <%= @travel.title %>
+            <% unless @travel.publicx? %>
+                <i class="fas fa-lock"></i>
+            <% end %>
+        </h3>
         <p>
             Por <%= link_to user_path(@travel.user_id) do %>
                 @<%= @travel.user.username %>

@@ -6,6 +6,9 @@
   <div class="card-body">
     <h5 class="card-title">
       <%= travel.title %>
+      <% unless travel.publicx? %>
+        <i class="fas fa-lock"></i>
+      <% end %>
     </h5>
 
     <p class="card-text">
