@@ -19,7 +19,7 @@
     <div class="col-8">
       <input id="pac-input" class="form-control controls" type="text" placeholder="Buscar">
       <div id="map"></div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.secrets.google_maps_key%>&libraries=places&language=es&region=AR"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.secrets.apollo_google_maps_key %>&libraries=places&language=es&region=AR"></script>
         <script>
           var line = null;
           var map = new google.maps.Map(document.getElementById('map'), {

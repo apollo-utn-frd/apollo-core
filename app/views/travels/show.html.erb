@@ -67,14 +67,14 @@
 
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.secrets.google_maps_key%>&libraries=places&language=es&region=AR"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.secrets.apollo_google_maps_key %>&libraries=places&language=es&region=AR"></script>
 <script>
     var places = <%= @travel.places.map do |place|
                      place.slice(:lat, :lng)
                  end.to_json.html_safe %>;
     var line = null;
     var map = new google.maps.Map(document.getElementById('rv_map'), {
-    center: {lat: -34.397, lng: 150.644},
+    center: {lat: places[0].lat, lng: places[0].lng},
     zoom: 8,
     zoomControl: true,
     mapTypeControl: false,
