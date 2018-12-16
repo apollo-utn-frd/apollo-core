@@ -74,7 +74,7 @@
                  end.to_json.html_safe %>;
     var line = null;
     var map = new google.maps.Map(document.getElementById('rv_map'), {
-    center: {lat: -34.397, lng: 150.644},
+    center: {lat: places[0].lat, lng: places[0].lng},
     zoom: 8,
     zoomControl: true,
     mapTypeControl: false,
