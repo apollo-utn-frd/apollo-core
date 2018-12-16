@@ -11,7 +11,7 @@
 
           <%= form.label "Descripción" %>
           <%= form.text_area :description, class: "form-control mb-2" %>
-          
+
           <!-- <div class="form-group row">
             <label class="col-sm-2 col-form-label">Visibilidad</label>
             <div class="col-sm-10">
@@ -28,7 +28,7 @@
               <%= select("private", "users", User.all.collect {|u| [ "@"+u.username, u.format_id ] }, {include_blank: ""}, style:"width:100%", name:"users[]", multiple:"multiple") %>
             </div>
           </div> -->
-     
+
           <label >Lugares</label>
           <div id="places-list"></div>
 
@@ -76,7 +76,8 @@ const mkMarker = (map, lat, lang, title) => {
   return new google.maps.Marker({
     position: {lat: lat, lng: lang},
     map: map,
-    title: title
+    title: title,
+    label: String.fromCharCode(65 + markers.length)
   })
 }
 
@@ -96,14 +97,6 @@ map.addListener('mousedown', e => {
   }
 });
 
-const send_rv = () => {
-  var rvTitle = $('#title').value
-  var rvDesc = $('#description').value
-  console.log(rvTitle)
-  console.log(rvDesc)
-
-}
-
 const add_place = (lat, lng) => {
   var newPlaceCoords = newPlaceForm(lat, lng);
   var newItem = document.createTextNode(newPlaceCoords);
@@ -116,7 +109,7 @@ const newPlaceForm = (lat, lng) => {
   <div id="place-${markers.length}" class="place-item border rounded p-2 mb-2">
     <input type="hidden" name="places[][latitude]" value="${lat}" />
     <input type="hidden" name="places[][longitude]" value="${lng}" />
-    <div class="alert alert-info w-100 d-flex justify-content-center"> Lugar ${markers.length} </div>
+    <div class="alert alert-info w-100 d-flex justify-content-center"> <strong>${String.fromCharCode(64 + markers.length)}</strong> </div>
     <input id="place-item-title" name="places[][title]" class="form-control mb-2" placeholder="Titulo" type="text" />
     <textarea id="place-item-desc" name="places[][description]" class="form-control mb-2" placeholder="Descripción" type="textarea" />
   </div>
