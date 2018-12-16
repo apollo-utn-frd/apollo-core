@@ -23,13 +23,13 @@
         </button>
 
         <% if current_user.favorite?(@travel) %>
-          <%= button_to travel_favorites_path(travel_id: @travel.id), method: :delete, class: 'btn btn-favorite btn-link no-decoration active' do %>
+          <%= button_to travel_favorites_path(travel_id: @travel.format_id), method: :delete, class: 'btn btn-favorite btn-link no-decoration active' do %>
               <i class="far fa-fw fa-star"></i>
               <i class="fas fa-fw fa-star"></i>
               <%= @travel.favorites.count %>
           <% end %>
         <% else %>
-          <%= button_to travel_favorites_path(travel_id: @travel.id), class: "btn btn-favorite btn-link no-decoration" do %>
+          <%= button_to travel_favorites_path(travel_id: @travel.format_id), class: "btn btn-favorite btn-link no-decoration" do %>
               <i class="far fa-fw fa-star"></i>
               <i class="fas fa-fw fa-star"></i>
               <%= @travel.favorites.count %>
@@ -45,7 +45,7 @@
             %>
         <% end %>
 
-        <%= form_for :comment, url: travel_comments_path(travel_id: @travel.id) do |f|%>
+        <%= form_for :comment, url: travel_comments_path(travel_id: @travel.format_id) do |f|%>
             <div class="form-group">
                 <textarea class="form-control" name="content" rows="3" maxlength="300" placeholder="Agrear comentario...", required></textarea>
             </div>

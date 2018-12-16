@@ -42,7 +42,10 @@ class UsersController < ApplicationController
   def update
     @user.update!(update_params)
 
-    render :show
+    respond_to do |format|
+      format.html { redirect_to user_path(@user.format_id) }
+      format.json { render 'users/show.json' }
+    end
   end
 
   def validate
@@ -125,7 +128,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_back fallback_location: user_path(@user.id)
+        redirect_back fallback_location: user_path(@user.format_id)
       end
 
       format.json do
@@ -139,7 +142,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_back fallback_location: user_path(@user.id)
+        redirect_back fallback_location: user_path(@user.format_id)
       end
 
       format.json do

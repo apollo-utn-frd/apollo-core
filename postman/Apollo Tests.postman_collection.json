@@ -1,0 +1,2075 @@
+{
+	"info": {
+		"_postman_id": "cbd4c4d5-1f71-4b23-8726-861668f47e41",
+		"name": "Apollo Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Comentarios",
+			"description": "",
+			"item": [
+				{
+					"name": "Comentario RV",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4abc0739-1466-425e-a7aa-0131f04bdabc",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 201\"] = responseCode.code === 201;",
+									"",
+									"if (tests[\"Codigo de respuesta es 201\"]) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    ",
+									"    tests[\"Creador concuerda\"] = jsonData.user.id === postman.getEnvironmentVariable(\"USER_ID\");",
+									"    tests[\"Contenido concuerda\"] = jsonData.content === \"Primer comentario\";",
+									"    tests[\"Ruta de viaje concuerda\"] = jsonData.travel.id === postman.getEnvironmentVariable(\"FOREIGN_PUBLIC_TRAVEL_ID\");",
+									"    ",
+									"    postman.setEnvironmentVariable(\"COMENTARIO_ID\", jsonData.id);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"Primer comentario\"\n}"
+						},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{FOREIGN_PUBLIC_TRAVEL_ID}}/comments",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{FOREIGN_PUBLIC_TRAVEL_ID}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vista Comentario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71b9f678-e82b-49d5-91a5-2e87c35adf2d",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"if (tests[\"Codigo de respuesta es 200\"]) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    ",
+									"    tests[\"Creador concuerda\"] = jsonData.user.id === postman.getEnvironmentVariable(\"USER_ID\");",
+									"    tests[\"Contenido concuerda\"] = jsonData.content === \"Primer comentario\";",
+									"    tests[\"Ruta de viaje concuerda\"] = jsonData.travel.id === postman.getEnvironmentVariable(\"FOREIGN_PUBLIC_TRAVEL_ID\");",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/comments/{{COMENTARIO_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"comments",
+								"{{COMENTARIO_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda Comentario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Lista no vacia\"] = jsonData.length !== 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/comments/search?query=primer+comentario&offset=0&max=10",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"comments",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "primer+comentario"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favoritos",
+			"description": "",
+			"item": [
+				{
+					"name": "Favorito RV",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "413daa2d-dec9-4700-b161-6790b1a4650f",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"if (tests[\"Codigo de respuesta es 200\"]) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    ",
+									"    tests[\"Usuario concuerda\"] = jsonData.user.id === postman.getEnvironmentVariable(\"USER_ID\");",
+									"    tests[\"Ruta de viaje concuerda\"] = jsonData.travel.id === postman.getEnvironmentVariable(\"FOREIGN_PUBLIC_TRAVEL_ID\");",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{FOREIGN_PUBLIC_TRAVEL_ID}}/favorites",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{FOREIGN_PUBLIC_TRAVEL_ID}}",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrado Favorito RV",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a9ad080a-8f80-4b16-8b87-c3ea7de620ec",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 204\"] = responseCode.code === 204;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{FOREIGN_PUBLIC_TRAVEL_ID}}/favorites",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{FOREIGN_PUBLIC_TRAVEL_ID}}",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Publicaciones",
+			"description": "",
+			"item": [
+				{
+					"name": "Vista Últimas Publicaciones",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Lista no vacia\"] = jsonData.length !== 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/posts?offset=0&max=10",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rutas de Viaje",
+			"description": "",
+			"item": [
+				{
+					"name": "Creación RV Pública",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7aa3fb0d-aa99-446e-bd02-33e1ac36f2a1",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"tests[\"Codigo de respuesta es 201\"] = responseCode.code === 201;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Creador concuerda\"] = jsonData.user.id === postman.getEnvironmentVariable(\"USER_ID\");",
+									"tests[\"Nombre concuerda\"] = jsonData.title === \"Mi mapa\";",
+									"tests[\"Descripcion concuerda\"] = jsonData.description === \"El mapa de mi viaje por el mundo\";",
+									"tests[\"Longitud de los sitios concuerda\"] = jsonData.places.length === 4;",
+									"",
+									"tests[\"Primer sitio concuerda latitude\"] = jsonData.places[0].latitude === 40.748432;",
+									"tests[\"Primer sitio concuerda longitude\"] = jsonData.places[0].longitude === -73.985418;",
+									"tests[\"Primer sitio concuerda title\"] = jsonData.places[0].title === \"Primer lugar\";",
+									"tests[\"Primer sitio concuerda description\"] = jsonData.places[0].description === \"Primera description\";",
+									"",
+									"tests[\"Ultimo sitio concuerda latitude\"] = jsonData.places[3].latitude === -13.163329;",
+									"tests[\"Ultimo sitio concuerda longitude\"] = jsonData.places[3].longitude === -72.544834;",
+									"tests[\"Ultimo sitio concuerda title\"] = jsonData.places[3].title === \"Cuarto lugar\";",
+									"tests[\"Ultimo sitio concuerda description\"] = jsonData.places[3].description === \"Cuarto description\";",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"tests[\"Ruta de viaje es publica\"] = jsonData.public === true;",
+									"tests[\"Comentarios vacios\"] = jsonData.comments.count === 0;",
+									"tests[\"Favoritos vacios\"] = jsonData.favorites.count === 0;",
+									"tests[\"Sin usuarios autorizados\"] = jsonData.authorizations.count === 0;",
+									"",
+									"postman.setEnvironmentVariable(\"RUTA_VIAJE_PUBLICA_ID\", jsonData.id);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Mi mapa\",\n    \"description\": \"El mapa de mi viaje por el mundo\",\n    \"places\": [\n    \t{\"latitude\": \"40.748432\", \"longitude\": \"-73.985418\", \"title\": \"Primer lugar\", \"description\": \"Primera description\"},\n    \t{\"latitude\": \"48.858406\", \"longitude\": \"2.294514\", \"title\": \"Segundo lugar\", \"description\": \"Segunda description\"},\n    \t{\"latitude\": \"41.403630\", \"longitude\": \"2.174377\", \"title\": \"Tercer lugar\", \"description\": \"Tercer description\"},\n    \t{\"latitude\": \"-13.163329\", \"longitude\": \"-72.544834\", \"title\": \"Cuarto lugar\", \"description\": \"Cuarto description\"}\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{URL_API}}/travels",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creación RV Privada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d3c32653-11e7-40ca-aa40-9d1a16ba6da5",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"tests[\"Codigo de respuesta es 201\"] = responseCode.code === 201;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Creador concuerda\"] = jsonData.user.id === postman.getEnvironmentVariable(\"USER_ID\");",
+									"tests[\"Nombre concuerda\"] = jsonData.title === \"Mi super mapa privado\";",
+									"tests[\"Descripcion concuerda\"] = jsonData.description === \"Mi super mapa de mi super viaje secreto\";",
+									"tests[\"Longitud de los sitios concuerda\"] = jsonData.places.length === 2;",
+									"",
+									"tests[\"Primer sitio concuerda latitude\"] = jsonData.places[0].latitude === -34.178700;",
+									"tests[\"Primer sitio concuerda longitude\"] = jsonData.places[0].longitude === -58.962062;",
+									"tests[\"Primer sitio concuerda title\"] = jsonData.places[0].title === \"Primer lugar\";",
+									"tests[\"Primer sitio concuerda description\"] = jsonData.places[0].description === \"Primera description\";",
+									"",
+									"tests[\"Ultimo sitio concuerda latitude\"] = jsonData.places[1].latitude ===-34.112823;",
+									"tests[\"Ultimo sitio concuerda longitude\"] = jsonData.places[1].longitude === -59.020135;",
+									"tests[\"Ultimo sitio concuerda title\"] = jsonData.places[1].title === \"Segundo lugar\";",
+									"tests[\"Ultimo sitio concuerda description\"] = jsonData.places[1].description === \"Segunda description\";",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"tests[\"Ruta de viaje es privada\"] = jsonData.public === false;",
+									"tests[\"Comentarios vacios\"] = jsonData.comments.count === 0;",
+									"tests[\"Favoritos vacios\"] = jsonData.favorites.count === 0;",
+									"tests[\"Un usuario autorizado\"] = jsonData.authorizations.count === 1;",
+									"",
+									"postman.setEnvironmentVariable(\"RUTA_VIAJE_PRIVADA_ID\", jsonData.id);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Mi super mapa privado\",\n    \"description\": \"Mi super mapa de mi super viaje secreto\",\n    \"public\": false,\n    \"places\": [\n    \t{\"latitude\": \"-34.178700\", \"longitude\": \"-58.962062\", \"title\": \"Primer lugar\", \"description\": \"Primera description\"},\n    \t{\"latitude\": \"-34.112823\", \"longitude\": \"-59.020135\", \"title\": \"Segundo lugar\", \"description\": \"Segunda description\"}\n    ],\n    \"authorizations\": [\n        {\n            \"id\": \"{{FOLLOWER_USER_ID}}\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{URL_API}}/travels",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vista RV Pública Propia",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2f610a4f-d21a-4f2f-8922-c1674f2e60a2",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Creador concuerda\"] = jsonData.user.id === postman.getEnvironmentVariable(\"USER_ID\");",
+									"tests[\"Nombre concuerda\"] = jsonData.title === \"Mi entrenamiento diario\";",
+									"tests[\"Descripcion concuerda\"] = jsonData.description === \"Descripcion de prueba\";",
+									"tests[\"Longitud de los sitios concuerda\"] = jsonData.places.length === 2;",
+									"",
+									"tests[\"Primer sitio concuerda latitude\"] = jsonData.places[0].latitude === 40.716014;",
+									"tests[\"Primer sitio concuerda longitude\"] = jsonData.places[0].longitude === -74.004044;",
+									"tests[\"Primer sitio concuerda title\"] = jsonData.places[0].title == \"Federal Bureau of Investigation\";",
+									"",
+									"tests[\"Ultimo sitio concuerda latitude\"] = jsonData.places[1].latitude === 30.333877;",
+									"tests[\"Ultimo sitio concuerda longitude\"] = jsonData.places[1].longitude === -81.653448;",
+									"tests[\"Ultimo sitio concuerda title\"] = jsonData.places[1].title == \"Confederate Park\";",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"tests[\"Ruta de viaje es publica\"] = jsonData.public === true;",
+									"tests[\"Comentarios\"] = jsonData.comments.count > 0;",
+									"tests[\"Favoritos\"] = jsonData.favorites.count > 0;",
+									"tests[\"Sin usuarios autorizados\"] = jsonData.authorizations.count === 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{SELF_PUBLIC_TRAVEL_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{SELF_PUBLIC_TRAVEL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vista RV Privada Propia",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c0ecb0b8-e2e2-45fb-9a60-d9bfd06663f0",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Creador concuerda\"] = jsonData.user.id === postman.getEnvironmentVariable(\"USER_ID\");",
+									"tests[\"Nombre concuerda\"] = jsonData.title === \"Ubicacion de la Flashcueva\";",
+									"tests[\"Descripcion concuerda\"] = jsonData.description === \"Otra descripcion mas de prueba\";",
+									"tests[\"Longitud de los sitios concuerda\"] = jsonData.places.length === 1;",
+									"",
+									"tests[\"Primer sitio concuerda latitude\"] = jsonData.places[0].latitude === 50.335556;",
+									"tests[\"Primer sitio concuerda longitude\"] = jsonData.places[0].longitude === 6.9475;",
+									"tests[\"Primer sitio concuerda title\"] = jsonData.places[0].title === \"Flashcueva\";",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"tests[\"Ruta de viaje es publica\"] = jsonData.public === false;",
+									"tests[\"Un comentario\"] = jsonData.comments.count === 1;",
+									"tests[\"Un favorito\"] = jsonData.favorites.count === 1;",
+									"tests[\"Un usuario autorizado\"] = jsonData.authorizations.count === 1;",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{SELF_PRIVATE_TRAVEL_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{SELF_PRIVATE_TRAVEL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vista RV Pública de Otro Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb493880-f891-44e1-943d-a7b25455f82c",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Nombre concuerda\"] = jsonData.title === \"Triangulo de las Bermudas\";",
+									"tests[\"Descripcion concuerda\"] = jsonData.description === \"La 5ta descripcion de prueba\";",
+									"tests[\"Longitud de los sitios concuerda\"] = jsonData.places.length === 4;",
+									"",
+									"tests[\"Primer sitio concuerda latitude\"] = jsonData.places[0].latitude === 25.789106;",
+									"tests[\"Primer sitio concuerda longitude\"] = jsonData.places[0].longitude === -80.226529;",
+									"tests[\"Primer sitio concuerda title\"] = jsonData.places[0].title == \"Primer vertice\";",
+									"",
+									"tests[\"Segundo sitio concuerda latitude\"] = jsonData.places[1].latitude === 18.4663188;",
+									"tests[\"Segundo sitio concuerda longitude\"] = jsonData.places[1].longitude === -66.1057427;",
+									"tests[\"Segundo sitio concuerda title\"] = jsonData.places[1].title == \"Segundo vertice\";",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"tests[\"Ruta de viaje es publica\"] = jsonData.public === true;",
+									"tests[\"Comentarios\"] = jsonData.comments.count > 1;",
+									"tests[\"Favoritos\"] = jsonData.favorites.count > 1;",
+									"tests[\"Sin usuarios autorizados\"] = jsonData.authorizations.count === 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{FOREIGN_PUBLIC_TRAVEL_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{FOREIGN_PUBLIC_TRAVEL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vista RV Privada de Otro Usuario Con Acceso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3468d12-b794-4371-8bf8-358ae3d4e796",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Nombre concuerda\"] = jsonData.title === \"Ubicacion de la Arrowcueva\";",
+									"tests[\"Descripcion concuerda\"] = jsonData.description === \"La 4ta descripcion de prueba\";",
+									"tests[\"Longitud de los sitios concuerda\"] = jsonData.places.length === 1;",
+									"",
+									"tests[\"Primer sitio concuerda latitude\"] = jsonData.places[0].latitude === 32.627778;",
+									"tests[\"Primer sitio concuerda longitude\"] = jsonData.places[0].longitude === 129.738333;",
+									"tests[\"Primer sitio concuerda title\"] = jsonData.places[0].title === \"Arrowcueva\";",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"tests[\"Ruta de viaje es publica\"] = jsonData.public === false;",
+									"tests[\"Comentarios\"] = jsonData.comments.count === 1;",
+									"tests[\"Favoritos\"] = jsonData.favorites.count === 0;",
+									"tests[\"AutorizadoS\"] = jsonData.authorizations.count === 1;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{AUTH_PRIVATE_TRAVEL_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{AUTH_PRIVATE_TRAVEL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vista RV Privada de Otro Usuario Sin Acceso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fd4ed7e1-2fd1-4a54-8336-3582bcb5814a",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 404\"] = responseCode.code === 404;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Mensaje correcto\"] = jsonData.errors.detail === \"Not Found\";",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{NOT_AUTH_PRIVATE_TRAVEL_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{NOT_AUTH_PRIVATE_TRAVEL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vista RV Inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d0fd3bb-7113-4fac-a594-3b4550146704",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 404\"] = responseCode.code === 404;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Mensaje correcto\"] = jsonData.errors.detail === \"Not Found\";",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/9999",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"9999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda RV Pública Propia",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Lista no vacia\"] = jsonData.length !== 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/search?query=entrenamiento+diario&offset=0&max=10",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "entrenamiento+diario"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados."
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda RV Privada Propia",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Lista no vacia\"] = jsonData.length !== 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/search?query=flashcueva&offset=0&max=10",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "flashcueva"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados."
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda RV Pública de Otro Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Lista no vacia\"] = jsonData.length !== 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/search?query=Bermudas&offset=0&max=10",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "Bermudas"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados."
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda RV Privada de Otro Usuario Con Acceso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Lista no vacia\"] = jsonData.length !== 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/search?query=Arrowcueva&offset=0&max=10",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "Arrowcueva"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados."
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda RV Privada de Otro Usuario Sin Acceso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Lista vacia\"] = jsonData.length === 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/search?query=Baticueva&offset=0&max=10",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "Baticueva"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados."
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda RV Inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Lista vacia\"] = jsonData.length === 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/search?query=mapa+no+existente&offset=0&max=10",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "mapa+no+existente"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados."
+					},
+					"response": []
+				},
+				{
+					"name": "Borrado RV Pública Propia",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5386fb1d-a9c3-41ba-af6f-e8ef02a4aa22",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 204\"] = responseCode.code === 204;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{RUTA_VIAJE_PUBLICA_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{RUTA_VIAJE_PUBLICA_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrado RV Privada Propia",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "063644d2-d71d-47e5-a54c-9d1a30fbace1",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 204\"] = responseCode.code === 204;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{RUTA_VIAJE_PRIVADA_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{RUTA_VIAJE_PRIVADA_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrado RV Pública de Otro Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6f8d7b8a-b172-46d1-b10b-4f9eca437b32",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 403\"] = responseCode.code === 403;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Mensaje correcto\"] = jsonData.errors.detail === \"Forbidden\";",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{FOREIGN_PUBLIC_TRAVEL_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{FOREIGN_PUBLIC_TRAVEL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrado RV Privada de Otro Usuario Con Acceso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cc4fcf66-b743-4d1b-9a6e-61a4628e8339",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 403\"] = responseCode.code === 403;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Mensaje correcto\"] = jsonData.errors.detail === \"Forbidden\";",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{AUTH_PRIVATE_TRAVEL_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{AUTH_PRIVATE_TRAVEL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrado RV Privada de Otro Usuario Sin Acceso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f3584a04-702a-4412-9b27-5238afa042a9",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 404\"] = responseCode.code === 404;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Mensaje correcto\"] = jsonData.errors.detail === \"Not Found\";",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/{{NOT_AUTH_PRIVATE_TRAVEL_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"{{NOT_AUTH_PRIVATE_TRAVEL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrado RV Inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fae86b60-244c-494c-9020-211da540ad92",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 404\"] = responseCode.code === 404;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Mensaje correcto\"] = jsonData.errors.detail === \"Not Found\";",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{URL_API}}/travels/9999",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"travels",
+								"9999"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Seguimientos",
+			"description": "",
+			"item": [
+				{
+					"name": "Seguimiento Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64bbf85f-ceb5-4f4b-86c1-4dcb99b2dc0f",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Seguidor concuerda\"] = jsonData.follower.id === postman.getEnvironmentVariable(\"USER_ID\");",
+									"tests[\"Seguido concuerda\"] = jsonData.following.id === postman.getEnvironmentVariable(\"NOT_FOLLOWER_USER_ID\");",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/users/{{NOT_FOLLOWER_USER_ID}}/followers",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"users",
+								"{{NOT_FOLLOWER_USER_ID}}",
+								"followers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrado Seguimiento Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "585f56af-8002-49fc-8368-8e25f04f62f2",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 204\"] = responseCode.code === 204;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/users/{{NOT_FOLLOWER_USER_ID}}/followers",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"users",
+								"{{NOT_FOLLOWER_USER_ID}}",
+								"followers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"description": "",
+			"item": [
+				{
+					"name": "Ver Perfil Propio [Usuarios]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "46eb54ad-709e-40c6-ad72-5e3e49f9dc68",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Username concuerda\"] = jsonData.username === \"flash\";",
+									"tests[\"Name concuerda\"] = jsonData.name === \"Jon\";",
+									"tests[\"Lastname concuerda\"] = jsonData.lastname === \"Snow\";",
+									"tests[\"Description concuerda\"] = jsonData.description === \"Hijo de Lyanna Stark y Rhaegar Targaryen.\";",
+									"tests[\"Email concuerda\"] = jsonData.email === \"flash@gmail.com\";",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"",
+									"tests[\"Confirmado\"] = jsonData.confirmed === true;",
+									"tests[\"Viajes\"] = jsonData.travels.count > 0;",
+									"tests[\"Favoritos\"] = jsonData.favorites.count > 0;",
+									"tests[\"Autorizados\"] = jsonData.authorizations.count > 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/users/me",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Perfil Según Id [Público]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d188780-8005-4983-90bf-3f62f00fcd48",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Username concuerda\"] = jsonData.username === \"arrow\";",
+									"tests[\"Name concuerda\"] = jsonData.name === \"Oliver\";",
+									"tests[\"Lastname concuerda\"] = jsonData.lastname === \"Queen\";",
+									"tests[\"Description concuerda\"] = jsonData.description === \"You have failed this city\"",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"",
+									"tests[\"Viajes\"] = jsonData.travels.count > 0;",
+									"tests[\"Favoritos\"] = jsonData.favorites.count > 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/users/{{NOT_FOLLOWER_USER_ID}}",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"users",
+								"{{NOT_FOLLOWER_USER_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Perfil Según Username [Público]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4e1654d-77cf-4ffb-9efc-8d8f078160bf",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Username concuerda\"] = jsonData.username === \"arrow\";",
+									"tests[\"Name concuerda\"] = jsonData.name === \"Oliver\";",
+									"tests[\"Lastname concuerda\"] = jsonData.lastname === \"Queen\";",
+									"tests[\"Description concuerda\"] = jsonData.description === \"You have failed this city\"",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"",
+									"tests[\"Viajes\"] = jsonData.travels.count > 0;",
+									"tests[\"Favoritos\"] = jsonData.favorites.count > 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/users/arrow",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"users",
+								"arrow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Perfil [Público]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6a702ec5-87ec-41ee-a858-d1d9710be8ec",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Lista no vacia\"] = jsonData.length !== 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL_API}}/users/search?query=arrow&offset=0&max=10",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "arrow"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados."
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Perfil [Usuarios]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "199786ba-1bd7-47bb-b025-75cbc838e53e",
+								"type": "text/javascript",
+								"exec": [
+									"function isURL(str) {",
+									"  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ // protocol",
+									"  '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.?)+[a-z]{2,}|'+ // domain name",
+									"  '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ // OR ip (v4) address",
+									"  '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ // port and path",
+									"  '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ // query string",
+									"  '(\\\\#[-a-z\\\\d_]*)?$','i'); // fragment locator",
+									"  return pattern.test(str);",
+									"}",
+									"",
+									"tests[\"Codigo de respuesta es 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Username concuerda\"] = jsonData.username === \"flash\";",
+									"tests[\"Name concuerda\"] = jsonData.name === \"Jon\";",
+									"tests[\"Lastname concuerda\"] = jsonData.lastname === \"Snow\";",
+									"tests[\"Description concuerda\"] = jsonData.description === \"Hijo de Lyanna Stark y Rhaegar Targaryen.\";",
+									"tests[\"Email concuerda\"] = jsonData.email === \"flash@gmail.com\";",
+									"",
+									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
+									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
+									"",
+									"tests[\"Confirmado\"] = jsonData.confirmed === true;",
+									"tests[\"Viajes\"] = jsonData.travels.count > 0;",
+									"tests[\"Favoritos\"] = jsonData.favorites.count > 0;",
+									"tests[\"Autorizados\"] = jsonData.authorizations.count > 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"jon.snow\",\n\t\"name\": \"Jon\",\n\t\"lastname\": \"Snow\",\n\t\"description\": \"Hijo de Lyanna Stark y Rhaegar Targaryen.\"\n}"
+						},
+						"url": {
+							"raw": "{{URL_API}}/users/me",
+							"host": [
+								"{{URL_API}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

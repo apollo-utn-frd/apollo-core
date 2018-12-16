@@ -1,19 +1,3 @@
-# == Schema Information
-#
-# Table name: favorites
-#
-#  id         :uuid             not null, primary key
-#  user_id    :uuid             not null
-#  travel_id  :uuid             not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-# Foreign Keys
-#
-#  fk_rails_...  (travel_id => travels.id) ON DELETE => cascade
-#  fk_rails_...  (user_id => users.id) ON DELETE => cascade
-#
-
 juan_public:
   travel: public
   user: juan

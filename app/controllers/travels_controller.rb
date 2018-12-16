@@ -87,7 +87,7 @@ class TravelsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_back fallback_location: travel_path(@travel.id)
+        redirect_back fallback_location: travel_path(@travel.format_id)
       end
 
       format.json do
@@ -101,7 +101,7 @@ class TravelsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_back fallback_location: travel_path(@travel.id)
+        redirect_back fallback_location: travel_path(@travel.format_id)
       end
 
       format.json do
