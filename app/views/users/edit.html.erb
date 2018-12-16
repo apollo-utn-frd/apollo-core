@@ -16,24 +16,24 @@
       <% unless @user.confirmed? %>
         <div class="form-group">
           <%= f.label 'Nombre de usuario' %>:
-          <%= f.text_field :username, name: :username, class: "form-control" %>
+          <%= f.text_field :username, name: :username, class: "form-control", required: true, minlength: 4, maxlength: 30 %>
           <small class="form-text text-muted">Sólo podrás cambiarlo esta vez así que elige bien!</small>
         </div>
       <% end %>
 
       <div class="form-group">
         <%= f.label 'Nombre' %>:
-        <%= f.text_field :name, name: :name, class: "form-control" %>
+        <%= f.text_field :name, name: :name, class: "form-control", required: true, maxlength: 30 %>
       </div>
 
       <div class="form-group">
         <%= f.label 'Apellido' %>:
-        <%= f.text_field :lastname, name: :lastname, class: "form-control" %>
+        <%= f.text_field :lastname, name: :lastname, class: "form-control", required: true, maxlength: 30 %>
       </div>
 
       <div class="form-group">
         <%= f.label 'Cuéntanos sobre ti' %>:
-        <%= f.text_area :description, name: :description, class: "form-control" %>
+        <%= f.text_area :description, name: :description, class: "form-control", maxlength: 150 %>
       </div>
 
       <%= f.submit 'Guardar', class: "btn btn-primary" %>
