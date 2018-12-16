@@ -22,19 +22,13 @@
           <%= @travel.comments.count %>
         </button>
 
-        <% if current_user.favorite?(@travel) %>
-          <%= button_to travel_favorites_path(travel_id: @travel.id), method: :delete, class: 'btn btn-favorite btn-link no-decoration active' do %>
-              <i class="far fa-fw fa-star"></i>
-              <i class="fas fa-fw fa-star"></i>
-              <%= @travel.favorites.count %>
-          <% end %>
-        <% else %>
-          <%= button_to travel_favorites_path(travel_id: @travel.id), class: "btn btn-favorite btn-link no-decoration" do %>
-              <i class="far fa-fw fa-star"></i>
-              <i class="fas fa-fw fa-star"></i>
-              <%= @travel.favorites.count %>
-          <% end %>
-        <% end %>
+        <% favorite_class = 'active' if current_user&.favorite?(@travel) %>
+
+        <button type="button" class="btn btn-favorite btn-link no-decoration <%= favorite_class %>">
+          <i class="far fa-fw fa-star"></i>
+          <i class="fas fa-fw fa-star"></i>
+          <%= @travel.favorites.count %>
+        </button>
       </div>
 
         <% @travel.comments.each do |comment| %>
@@ -67,14 +61,14 @@
 
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.secrets.apollo_google_maps_key %>&libraries=places&language=es&region=AR"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.secrets.apollo_google_maps_key%>&libraries=places&language=es&region=AR"></script>
 <script>
     var places = <%= @travel.places.map do |place|
                      place.slice(:lat, :lng)
                  end.to_json.html_safe %>;
     var line = null;
     var map = new google.maps.Map(document.getElementById('rv_map'), {
-    center: {lat: -34.397, lng: 150.644},
+    center: {lat: places[0].lat, lng: places[0].lng},
     zoom: 8,
     zoomControl: true,
     mapTypeControl: false,
