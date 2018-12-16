@@ -526,7 +526,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Mi super mapa privado\",\n    \"description\": \"Mi super mapa de mi super viaje secreto\",\n    \"public\": false,\n    \"places\": [\n    \t{\"latitude\": \"-34.178700\", \"longitude\": \"-58.962062\", \"title\": \"Primer lugar\", \"description\": \"Primera description\"},\n    \t{\"latitude\": \"-34.112823\", \"longitude\": \"-59.020135\", \"title\": \"Segundo lugar\", \"description\": \"Segunda description\"}\n    ],\n    \"authorizations\": [\n        {\n            \"id\": \"{{FOLLOWER_USER_ID}}\"\n        }\n    ]\n}"
+							"raw": "{\n    \"title\": \"Mi super mapa privado\",\n    \"description\": \"Mi super mapa de mi super viaje secreto\",\n    \"public\": false,\n    \"places\": [\n    \t{\"latitude\": \"-34.178700\", \"longitude\": \"-58.962062\", \"title\": \"Primer lugar\", \"description\": \"Primera description\"},\n    \t{\"latitude\": \"-34.112823\", \"longitude\": \"-59.020135\", \"title\": \"Segundo lugar\", \"description\": \"Segunda description\"}\n    ],\n    \"authorizations\": [\n        \"{{FOLLOWER_USER_ID}}\"\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{URL_API}}/travels",
@@ -695,7 +695,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "eb493880-f891-44e1-943d-a7b25455f82c",
+								"id": "956937c8-c255-4fea-a42e-23aaf28c91d9",
 								"type": "text/javascript",
 								"exec": [
 									"function isURL(str) {",
@@ -727,8 +727,8 @@
 									"tests[\"ImagenUrl correcta\"] = isURL(jsonData.imagen_url);",
 									"tests[\"Thumb correcta\"] = isURL(jsonData.thumbnail_url);",
 									"tests[\"Ruta de viaje es publica\"] = jsonData.public === true;",
-									"tests[\"Comentarios\"] = jsonData.comments.count > 1;",
-									"tests[\"Favoritos\"] = jsonData.favorites.count > 1;",
+									"tests[\"Comentarios\"] = jsonData.comments.count > 0;",
+									"tests[\"Favoritos\"] = jsonData.favorites.count > 0;",
 									"tests[\"Sin usuarios autorizados\"] = jsonData.authorizations.count === 0;",
 									""
 								]

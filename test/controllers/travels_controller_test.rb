@@ -223,9 +223,7 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
   test 'should create private travel with authorization with id' do
     @params[:public] = false
     @params[:authorizations] = [
-      {
-        id: @juan.format_id
-      }
+      @juan.format_id
     ]
 
     assert_difference('Travel.privatex.count') do
@@ -265,7 +263,7 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
     assert_equal travel.description, @params[:description]
     assert_equal travel.publicx, @params[:public]
     assert_equal travel.user, @mati
-    assert travel.authorizations.first.user_id, @params[:authorizations].first[:id]
+    assert travel.authorizations.first.user_id, @params[:authorizations].first
     assert_equal travel.places.count, @params[:places].count
 
     travel.places.each_with_index do |place, index|
@@ -276,89 +274,12 @@ class TravelsControllerTest < ActionDispatch::IntegrationTest
       assert_equal params_place[:longitude], place.lng.to_s
       assert_equal params_place[:latitude], place.lat.to_s
     end
-  end
-
-  test 'should create private travel with authorization with username' do
-    @params[:public] = false
-    @params[:authorizations] = [
-      {
-        username: @juan.username
-      }
-    ]
-
-    assert_difference('Travel.privatex.count') do
-      post travels_path, env: auth_env,
-                         params: @params,
-                         as: :json
-    end
-
-    assert_response :created
-
-    response = response_body
-
-    assert_not_nil response[:id]
-    assert_equal response[:title], @params[:title]
-    assert_equal response[:description], @params[:description]
-    assert_equal response[:public], @params[:public]
-    assert_equal response[:user][:id], @mati.format_id
-    assert_equal response[:favorites][:count], 0
-    assert_not_nil response[:favorites][:href]
-    assert_equal response[:comments][:count], 0
-    assert_not_nil response[:comments][:href]
-    assert_equal response[:authorizations][:count], 1
-    assert_not_nil response[:authorizations][:href]
-    assert_equal response[:places].count, @params[:places].count
-
-    @params[:places].each_with_index do |place, index|
-      response_place = response[:places][index]
-
-      assert_equal response_place[:title], place[:title]
-      assert_equal response_place[:longitude].to_s, place[:longitude]
-      assert_equal response_place[:latitude].to_s, place[:latitude]
-    end
-
-    travel = Travel.find(response[:id])
-
-    assert_equal travel.title, @params[:title]
-    assert_equal travel.description, @params[:description]
-    assert_equal travel.publicx, @params[:public]
-    assert_equal travel.user, @mati
-    assert travel.authorizations.first.user_id, @params[:authorizations].first[:id]
-    assert_equal travel.places.count, @params[:places].count
-
-    travel.places.each_with_index do |place, index|
-      params_place = @params[:places][index]
-
-      assert_equal params_place[:title], place.title
-      assert_equal params_place[:description], place.description
-      assert_equal params_place[:longitude], place.lng.to_s
-      assert_equal params_place[:latitude], place.lat.to_s
-    end
-  end
-
-  test 'should not create private travel if any user not exists' do
-    @params[:public] = false
-    @params[:authorizations] = [
-      {
-        username: 'not exits'
-      }
-    ]
-
-    assert_no_difference('Travel.privatex.count') do
-      post travels_path, env: auth_env,
-                         params: @params,
-                         as: :json
-    end
-
-    assert_response :not_found
   end
 
   test 'should not create private travel if any user not follow to login user' do
     @params[:public] = false
     @params[:authorizations] = [
-      {
-        username: @fede.username
-      }
+      @fede.format_id
     ]
 
     assert_no_difference('Travel.privatex.count') do
