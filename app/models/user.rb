@@ -203,16 +203,21 @@ class User < ApplicationRecord
   # Crea el evento de la creación del usuario.
   #
   def create_event!
-    EventCreationJob.new.perform(
-      source: self,
-      resource: self
-    )
+    # EventCreationJob.new.perform(
+    #  source: self,
+    #  resource: self
+    # )
   end
 
   ##
   # Descarga la imagen de perfil y ajusta la ruta de destino de la imagen.
   #
   def download_image!
+    EventCreationJob.new.perform(
+      source: self,
+      resource: self
+    )
+
     UserImageCreationJob.new.perform(self)
   end
 
