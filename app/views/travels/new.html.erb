@@ -5,7 +5,7 @@
         <div class="alert alert-primary w-100 d-flex justify-content-center">
           <strong>Nueva Ruta de Viaje</strong>
         </div>
-        <%= form_with url: travels_url, id: "rvform", class:"w-100 border rounded shadow p-3 mb-5 bg-white" do |form| %>
+        <%= form_with url: travels_url, id: "rvform", html: { autocomplete: "off" }, class:"w-100 border rounded shadow p-3 mb-5 bg-white" do |form| %>
           <%= form.label :titulo %>
           <%= form.text_field :title, class: "form-control mb-2", required: true, minlength: 2, maxlength: 30 %>
 
