@@ -47,8 +47,20 @@ class UsersController < ApplicationController
     @user.update!(update_params)
 
     respond_to do |format|
-      format.html { redirect_to user_path(@user.format_id) }
-      format.json { render 'users/show.json' }
+      format.html do
+        if @user.confirmed_before_last_save
+          flash[:success] = 'Tu usuario fue actualizado correctamente.'
+        else
+          flash[:success] = 'Bienvenido a Apollo! Ya puedes crear algunos viajes o' \
+                            ' buscar otros usuarios para seguir.'
+        end
+
+        redirect_to home_path
+      end
+
+      format.json do
+        render 'users/show.json'
+      end
     end
   end
 

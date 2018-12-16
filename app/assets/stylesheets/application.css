@@ -334,6 +334,10 @@ img::-moz-selection {
   text-decoration: none;
 }
 
+.no-decoration:focus {
+  text-decoration: none;
+}
+
 .travel-buttons .btn {
   color: #6c757d!important;
 }
@@ -387,4 +391,12 @@ img::-moz-selection {
 
 .comentario {
   background-color: #d0d3f633;
+}
+
+.btn-delete {
+    top: 1px;
+    right: 1px;
+    z-index: 100;
+    font-weight: bolder;
+    font-size: x-large;
 }

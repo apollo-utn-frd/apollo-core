@@ -38,7 +38,7 @@ class TravelsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render 'travels/show.html' }
+      format.html { redirect_to travel_path(@travel.format_id) }
       format.json { render 'travels/show.json', status: :created }
     end
   end
@@ -46,7 +46,16 @@ class TravelsController < ApplicationController
   def destroy
     @travel.destroy!
 
-    head :no_content
+    respond_to do |format|
+      format.html do
+        flash[:success] = 'El viaje fue eliminado correctamente.'
+        redirect_to home_path
+      end
+
+      format.json do
+        head :no_content
+      end
+    end
   end
 
   def search

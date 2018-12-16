@@ -1,6 +1,15 @@
 <div class="row">
     <div class="col-md-8 p-2">
-        <div id="rv_map" style="height:75vh;"></div>
+        <div id="travel-wrapper" class="position-relative">
+            <% if @travel.manageable?(current_user) %>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-link btn-delete position-absolute no-decoration" data-toggle="modal" data-target="#deleteTravel" title="Eliminar viaje">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+            <% end %>
+
+            <div id="rv_map" style="height:75vh;"></div>
+        </div>
 
         <h3 class="my-2"><%= @travel.title %></h3>
         <p>
@@ -66,6 +75,29 @@
     </div>
 
 </div>
+
+<% if @travel.manageable?(current_user) %>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteTravel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Eliminar viaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de querer eliminar este viaje? Esta acción no se puede deshacer.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <%= button_to 'Eliminar', travel_path(@travel.format_id), method: :delete, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.secrets.apollo_google_maps_key %>&libraries=places&language=es&region=AR"></script>
 <script>

@@ -8,6 +8,15 @@
   </div>
 
   <div class="col-7 mt-2">
+      <% if flash[:success] %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= flash[:success] %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+
       <% @posts.each do |post| %>
         <%= render partial: "posts/partials/#{post.type}_post",
                   locals: {
@@ -24,11 +33,14 @@
       <div class="card mb-2">
         <div class="card-header p-0">
           <%= image_tag travel.user.image_url, class: 'img-comentario p-2 d-inline' %>
-          <%= link_to travel_path(travel.format_id), class:"text-dark d-inline text-truncate" do %> <%= travel.title %> <% end %>
+          <%= link_to travel.title, travel_path(travel.format_id), class:"text-dark d-inline text-truncate" %>
         </div>
-        <div class="card-body">
-          <p class="card-text text-truncate"> <%= travel.description %> </p>
-        </div>
+
+        <% if travel.description? %>
+          <div class="card-body">
+            <p class="card-text text-truncate"> <%= travel.description %> </p>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
