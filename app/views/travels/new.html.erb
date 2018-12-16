@@ -7,10 +7,10 @@
         </div>
         <%= form_with url: travels_url, id: "rvform", class:"w-100 border rounded shadow p-3 mb-5 bg-white" do |form| %>
           <%= form.label :titulo %>
-          <%= form.text_field :title, class: "form-control mb-2" %>
+          <%= form.text_field :title, class: "form-control mb-2", required: true, minlength: 2, maxlength: 30 %>
 
           <%= form.label "Descripción" %>
-          <%= form.text_area :description, class: "form-control mb-2" %>
+          <%= form.text_area :description, class: "form-control mb-2", maxlength: 1000 %>
 
           <!-- <div class="form-group row">
             <label class="col-sm-2 col-form-label">Visibilidad</label>
@@ -110,8 +110,8 @@ const newPlaceForm = (lat, lng) => {
     <input type="hidden" name="places[][latitude]" value="${lat}" />
     <input type="hidden" name="places[][longitude]" value="${lng}" />
     <div class="alert alert-info w-100 d-flex justify-content-center"> <strong>${String.fromCharCode(64 + markers.length)}</strong> </div>
-    <input id="place-item-title" name="places[][title]" class="form-control mb-2" placeholder="Titulo" type="text" />
-    <textarea id="place-item-desc" name="places[][description]" class="form-control mb-2" placeholder="Descripción" type="textarea" />
+    <input id="place-item-title" name="places[][title]" class="form-control mb-2" placeholder="Titulo" type="text" maxlength=65 required>
+    <textarea id="place-item-desc" name="places[][description]" class="form-control mb-2" placeholder="Descripción" type="textarea" maxlength=150 />
   </div>
   `
   return node;

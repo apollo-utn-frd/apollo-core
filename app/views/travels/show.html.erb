@@ -47,7 +47,7 @@
 
         <%= form_for :comment, url: travel_comments_path(travel_id: @travel.format_id) do |f|%>
             <div class="form-group">
-                <textarea class="form-control" name="content" rows="3" maxlength="300" placeholder="Agrear comentario...", required></textarea>
+                <textarea class="form-control" name="content" rows="3" maxlength="300" placeholder="Agregar comentario...", required></textarea>
             </div>
             <%= f.submit "Comentar", class:"btn btn-secondary" %>
         <% end %>
