@@ -27,11 +27,15 @@ class UsersController < ApplicationController
   ]
 
   def show
-    @travels = @user.travels
-
     respond_to do |format|
-      format.html { render '/travels/list' }
-      format.json { render 'users/show.json' }
+      format.html do
+        @posts = @user.posts
+        render 'users/show.html'
+      end
+
+      format.json do
+        render 'users/show.json'
+      end
     end
   end
 

@@ -6,7 +6,11 @@
       <%= user.full_name %>
     </h5>
 
-    <span class="text-muted">@<%= user.username %></span>
+    <span class="text-muted">
+      <%= link_to user_path(user.format_id) do %>
+        @<%= user.username %>
+      <% end %>
+    </span>
 
     <p class="card-text text-body pt-2">
       <%= user.description %>
