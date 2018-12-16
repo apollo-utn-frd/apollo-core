@@ -1,22 +1,43 @@
-<div class="travel_create row">
-    <div class="col-4">
-      <div class="title-row row">Creacion de Ruta de Viaje</div>
-      <div class="option-row row">
-        <%= form_with url: travels_url, id: "rvform" do |form| %>
-          <%= form.label :titulo %><br/>
-          <%= form.text_field :title, class: "form-control" %><br/>
-          <%= form.label "Descripción" %><br/>
-          <%= form.text_area :description, class: "form-control" %>
-          <div>Lugares:</div><br/>
+<div class="row p-4">
 
-          <div id="places-list">
+    <div class="col-4 w-100">
+      <div class="row w-100">
+        <div class="alert alert-primary w-100 d-flex justify-content-center">
+          <strong>Nueva Ruta de Viaje</strong>
+        </div>
+        <%= form_with url: travels_url, id: "rvform", class:"w-100 border rounded shadow p-3 mb-5 bg-white" do |form| %>
+          <%= form.label :titulo %>
+          <%= form.text_field :title, class: "form-control mb-2" %>
 
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control mb-2" %>
+          
+          <!-- <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Visibilidad</label>
+            <div class="col-sm-10">
+              <select class="form-control">
+                <option value="publica">Publica</option>
+                <option value="privada">Privada</option>
+              </select>
+            </div>
           </div>
-          <%= form.submit "Enviar", id: "submitBtn", class: "btn btn-light" %>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Usuarios</label>
+            <div class="col-sm-10">
+              <%= select("private", "users", User.all.collect {|u| [ "@"+u.username, u.format_id ] }, {include_blank: ""}, style:"width:100%", name:"users[]", multiple:"multiple") %>
+            </div>
+          </div> -->
+     
+          <label >Lugares</label>
+          <div id="places-list"></div>
+
+          <%= form.submit "Enviar", id: "submitBtn", class: "btn btn-primary rounded" %>
         <% end %>
       </div>
     </div>
-    <div class="col-8">
+
+    <div class="col-8" style="height:75vh;">
       <input id="pac-input" class="form-control controls" type="text" placeholder="Buscar">
       <div id="map"></div>
         <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.secrets.apollo_google_maps_key %>&libraries=places&language=es&region=AR"></script>
@@ -34,10 +55,20 @@
           });
         </script>
     </div>
+
 </div>
 
 
 <script>
+//Instanciar el select de los usuarios que podran ver la rv privada
+$(document).ready(function() {
+    $("#private_users").select2({
+      width: 'element',
+     minimumResultsForSearch: Infinity
+   });
+});
+
+
 // tamanio maximo de titulo de place 30 caracteres
 // tamanio maximo de description de place fijarse en modelo
 var markers = []
@@ -82,11 +113,12 @@ const add_place = (lat, lng) => {
 
 const newPlaceForm = (lat, lng) => {
   var node = `
-  <div id="place-${markers.length}" class="place-item">
+  <div id="place-${markers.length}" class="place-item border rounded p-2 mb-2">
     <input type="hidden" name="places[][latitude]" value="${lat}" />
     <input type="hidden" name="places[][longitude]" value="${lng}" />
-    <input id="place-item-title" name="places[][title]" class="form-control" placeholder="Titulo" type="text" />
-    <input id="place-item-desc" name="places[][description]" class="form-control" placeholder="Descripción" type="textarea" />
+    <div class="alert alert-info w-100 d-flex justify-content-center"> Lugar ${markers.length} </div>
+    <input id="place-item-title" name="places[][title]" class="form-control mb-2" placeholder="Titulo" type="text" />
+    <textarea id="place-item-desc" name="places[][description]" class="form-control mb-2" placeholder="Descripción" type="textarea" />
   </div>
   `
   return node;
