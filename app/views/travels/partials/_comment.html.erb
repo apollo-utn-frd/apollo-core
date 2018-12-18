@@ -10,8 +10,8 @@
                     @<%= comment.user.username %>
                 <% end %> hace <%= time_ago_in_words comment.created_at %>
             </div>
-            
-            <% if true %>
+
+            <% if comment.manageable?(current_user) %>
                 <button type="button" class="btn btn-link btn-delete no-decoration" data-toggle="modal" data-target="#deleteComment" title="Eliminar comentario">
                     <i class="fas fa-trash-alt"></i>
                 </button>
@@ -25,7 +25,7 @@
     </section>
 </div>
 
-<% if true %>
+<% if comment.manageable?(current_user) %>
     <!-- Modal -->
     <div class="modal fade" id="deleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -39,9 +39,10 @@
             <div class="modal-body">
             ¿Estás seguro de querer eliminar este comentario? Esta acción no se puede deshacer.
             </div>
+
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <%= button_to 'Eliminar', class: "btn btn-danger" %>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <%= button_to 'Eliminar', comment_path(comment.format_id), method: :delete, class: "btn btn-danger" %>
             </div>
         </div>
         </div>

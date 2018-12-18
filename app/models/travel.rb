@@ -52,14 +52,14 @@ class Travel < ApplicationRecord
   # Devuelve si el viaje puede ser accedido por un determinado usuario.
   #
   def readable?(user)
-    publicx || user == self.user || authorizations_users.include?(user)
+    publicx || user == self.user || authorizations_users.include?(user) || user&.admin?
   end
 
   ##
   # Devuelve si el viaje puede ser gestionado por un determinado usuario.
   #
   def manageable?(user)
-    user == self.user
+    user == self.user || user&.admin?
   end
 
   ##

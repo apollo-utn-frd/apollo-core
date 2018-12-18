@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_08_26_171917) do
+ActiveRecord::Schema.define(version: 2018_12_18_012142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -109,6 +109,8 @@ ActiveRecord::Schema.define(version: 2017_08_26_171917) do
     t.text "oauth_refresh_token"
     t.datetime "oauth_expires_at"
     t.json "tokens"
+    t.string "role", null: false
+    t.boolean "enabled", default: true, null: false
     t.index ["email"], name: "index_users_on_email"
     t.index ["google_id", "provider"], name: "index_users_on_google_id_and_provider", unique: true
     t.index ["uid"], name: "index_users_on_uid", unique: true

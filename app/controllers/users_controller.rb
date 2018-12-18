@@ -50,14 +50,18 @@ class UsersController < ApplicationController
       format.html do
         if @user.confirmed_before_last_save
           flash[:icon] = 'far fa-fw fa-user'
-          flash[:success] = 'Tu usuario fue actualizado correctamente.'
+          flash[:success] = 'El usuario fue actualizado correctamente.'
         else
           flash[:icon] = 'far fa-fw fa-smile-beam'
           flash[:success] = 'Bienvenido a Apollo! Ya puedes crear algunos viajes o' \
                             ' buscar otros usuarios para seguir.'
         end
 
-        redirect_to home_path
+        if @user == current_user
+          redirect_to home_path
+        else
+          redirect_to user_path(@user.format_id)
+        end
       end
 
       format.json do
@@ -197,7 +201,8 @@ class UsersController < ApplicationController
     update_params = params.permit(
       :name,
       :lastname,
-      :description
+      :description,
+      :enabled
     ).to_h
 
     unless @user.confirmed?

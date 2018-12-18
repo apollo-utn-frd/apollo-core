@@ -37,7 +37,12 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     if current_user.present?
-      redirect_to edit_user_path(current_user.format_id) unless current_user.confirmed?
+      if current_user.enabled?
+        redirect_to edit_user_path(current_user.format_id) unless current_user.confirmed?
+      else
+        session[:user_id] = nil
+        redirect_to root_path
+      end
     elsif request.content_type == 'application/json'
       raise Apollo::UserNotAuthorized
     else

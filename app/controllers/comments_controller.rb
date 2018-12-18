@@ -7,6 +7,20 @@ class CommentsController < ApplicationController
     render :show
   end
 
+  def destroy
+    @comment.destroy!
+
+    respond_to do |format|
+      format.html do
+        redirect_to travel_path(@comment.travel.format_id)
+      end
+
+      format.json do
+        head :no_content
+      end
+    end
+  end
+
   def search
     @comments = Comment.search(search_params).order(created_at: :desc)
 

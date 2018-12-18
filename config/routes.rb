@@ -63,7 +63,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :comments, only: %i[show] do
+  resources :comments, only: %i[show destroy] do
     get 'search', on: :collection
   end
 

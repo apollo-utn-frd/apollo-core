@@ -4,28 +4,30 @@
 #
 # Table name: users
 #
-#  id                   :uuid             not null, primary key
-#  username             :string           not null
-#  email                :string           not null
-#  name                 :string
-#  lastname             :string
-#  google_id            :string
-#  gender               :string
-#  image_url            :text
-#  image_public_url     :text
-#  thumbnail_public_url :text
-#  description          :text             default(""), not null
 #  confirmed            :boolean          default(FALSE), not null
 #  confirmed_at         :datetime
-#  extra                :jsonb            not null
 #  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  uid                  :text
-#  provider             :string
-#  oauth_token          :text
-#  oauth_refresh_token  :text
+#  description          :text             default(""), not null
+#  email                :string           not null
+#  enabled              :boolean          default(TRUE), not null
+#  extra                :jsonb            not null
+#  gender               :string
+#  google_id            :string
+#  id                   :uuid             not null, primary key
+#  image_public_url     :text
+#  image_url            :text
+#  lastname             :string
+#  name                 :string
 #  oauth_expires_at     :datetime
+#  oauth_refresh_token  :text
+#  oauth_token          :text
+#  provider             :string
+#  role                 :string           not null
+#  thumbnail_public_url :text
 #  tokens               :json
+#  uid                  :text
+#  updated_at           :datetime         not null
+#  username             :string           not null
 #
 # Indexes
 #
@@ -42,11 +44,18 @@ class User < ApplicationRecord
     other
   ].freeze
 
+  ROLES = %w[
+    regular
+    admin
+  ].freeze
+
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   has_secure_token :uid
 
   include Imageable
   include Searchable::User
+
+  enum role: ROLES.map { |t| [t, t] }.to_h
 
   has_one :event, as: :resource, dependent: :destroy
 
@@ -76,6 +85,7 @@ class User < ApplicationRecord
   validate :validate_username_reserved
 
   before_validation :set_username, on: :create
+  before_validation :set_role, on: :create
   before_validation :downcase_username
   before_validation :set_confirmed_at
 
@@ -179,7 +189,7 @@ class User < ApplicationRecord
   # Devuelve si el usuario puede ser gestionado por un determinado usuario.
   #
   def manageable?(user)
-    self == user
+    self == user || user&.admin?
   end
 
   ##
@@ -286,6 +296,15 @@ class User < ApplicationRecord
     base = email.partition('@').first.tr('.', '_')
 
     self.username = generate_username(base)
+  end
+
+  ##
+  # Asigna el rol de usuario.
+  #
+  def set_role
+    return if role?
+
+    self.role = 'regular'
   end
 
   ###

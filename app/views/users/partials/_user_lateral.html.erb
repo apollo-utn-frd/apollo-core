@@ -17,14 +17,25 @@
     </p>
 
     <div class="d-flex justify-content-center">
-      <% if true %>
-        <%= button_to "disable", class: 'btn btn-info' do %>
-          <i class="fas fa-minus-circle mr-1"></i>Deshabilitar usuario
+      <% if current_user&.admin? && current_user != user %>
+        <% if user.enabled? %>
+          <%= form_for user_path(user.format_id), method: :put do |f| %>
+            <input name="enabled" value="false" hidden>
+            <%= button_tag type: :submit, class: 'btn btn-info' do %>
+              <i class="fas fa-minus-circle mr-1"></i>Deshabilitar usuario
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= form_for user_path(user.format_id), method: :put do |f| %>
+            <input name="enabled" value="true" hidden>
+            <%= button_tag type: :submit, class: 'btn btn-info' do %>
+              <i class="fas fa-minus-circle mr-1"></i>Habilitar usuario
+            <% end %>
+          <% end %>
         <% end %>
-
       <% else %>
-        <% if user.id != current_user.id %>
-          <% if current_user.follow?(user) %>
+        <% if current_user.present? && current_user != user %>
+          <% if current_user&.follow?(user) %>
             <%= button_to user_followers_path(user_id: user.format_id), method: :delete, class: 'btn btn-danger' do %>
               <i class="fas fa-user-times mr-1"></i>Dejar de seguir
             <% end %>
@@ -34,7 +45,6 @@
             <% end %>
           <% end %>
         <% end %>
-        
       <% end %>
     </div>
   </div>

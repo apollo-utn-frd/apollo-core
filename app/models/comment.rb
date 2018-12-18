@@ -36,6 +36,13 @@ class Comment < ApplicationRecord
   #
   delegate :readable?, to: :travel, allow_nil: true
 
+  ##
+  # Devuelve si el comentario puede ser gestionado por un determinado usuario.
+  #
+  def manageable?(user)
+    user&.admin?
+  end
+
   private
 
   ##
