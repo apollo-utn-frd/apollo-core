@@ -1,0 +1,50 @@
+Suite/Test/Step Name,Browser,Description,Start time,End time,Duration,Status
+apollo,Firefox 64.0,,2018-12-15 10:51:42,2018-12-15 10:54:10,2m - 28.560s,PASSED
+,,,,,,
+Test Cases/login,Firefox 64.0,,2018-12-15 10:51:43,2018-12-15 10:52:16,32.752s,PASSED
+"openBrowser("""")",Firefox 64.0,,2018-12-15 10:51:45,2018-12-15 10:52:02,17.211s,PASSED
+"navigateToUrl(""http://localhost:3000/"")",Firefox 64.0,,2018-12-15 10:52:02,2018-12-15 10:52:10,7.703s,PASSED
+"ck = new org.openqa.selenium.Cookie(_interslice_session, 7XCZXW9bsD60Xr5DDWFqYr6Q8CVKwPoGh8KzzD%2Fcyu8BYnTpQVCMWlSXHJ9%2BlrME40hykVhXdAz7pkOSXz3%2BUXNmJOcDY4m6oX6mUMWSRPfi%2Be9iUe9Bh2PmCEJP76TBgHcefIlO7Q5ifg39zDHvO0KT8aqd3ylxnyb5Ysi23M4tM0bPa4YHAqG8UACWY%2Fuepi8nV9ewN9jy%2BeVF1J5L--Tw%2FoMrMMwV8SGVKX--omw8p%2BmEdSzBOWSiPt6lDA%3D%3D)",Firefox 64.0,,2018-12-15 10:52:10,2018-12-15 10:52:10,0.059s,PASSED
+driver = getWebDriver(),Firefox 64.0,,2018-12-15 10:52:10,2018-12-15 10:52:10,0.044s,PASSED
+manage().addCookie(ck),Firefox 64.0,,2018-12-15 10:52:10,2018-12-15 10:52:10,0.165s,PASSED
+"navigateToUrl(""http://localhost:3000/home"")",Firefox 64.0,,2018-12-15 10:52:10,2018-12-15 10:52:13,3.660s,PASSED
+closeBrowser(),Firefox 64.0,,2018-12-15 10:52:13,2018-12-15 10:52:16,2.224s,PASSED
+,,,,,,
+Test Cases/funcionalidad_barra_usuario,Firefox 64.0,Se tiene que poder acceder a las 4 opciones de la barra del usuario,2018-12-15 10:52:16,2018-12-15 10:52:50,33.961s,PASSED
+"openBrowser("""")",Firefox 64.0,,2018-12-15 10:52:16,2018-12-15 10:52:27,10.457s,PASSED
+"navigateToUrl(""http://localhost:3000/"")",Firefox 64.0,,2018-12-15 10:52:27,2018-12-15 10:52:34,7.509s,PASSED
+"ck = new org.openqa.selenium.Cookie(_interslice_session, 7XCZXW9bsD60Xr5DDWFqYr6Q8CVKwPoGh8KzzD%2Fcyu8BYnTpQVCMWlSXHJ9%2BlrME40hykVhXdAz7pkOSXz3%2BUXNmJOcDY4m6oX6mUMWSRPfi%2Be9iUe9Bh2PmCEJP76TBgHcefIlO7Q5ifg39zDHvO0KT8aqd3ylxnyb5Ysi23M4tM0bPa4YHAqG8UACWY%2Fuepi8nV9ewN9jy%2BeVF1J5L--Tw%2FoMrMMwV8SGVKX--omw8p%2BmEdSzBOWSiPt6lDA%3D%3D)",Firefox 64.0,,2018-12-15 10:52:34,2018-12-15 10:52:34,0.021s,PASSED
+driver = getWebDriver(),Firefox 64.0,,2018-12-15 10:52:34,2018-12-15 10:52:34,0.016s,PASSED
+manage().addCookie(ck),Firefox 64.0,,2018-12-15 10:52:34,2018-12-15 10:52:34,0.092s,PASSED
+"navigateToUrl(""http://localhost:3000/home"")",Firefox 64.0,,2018-12-15 10:52:34,2018-12-15 10:52:38,3.188s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo/li_Viajes creados""))",Firefox 64.0,,2018-12-15 10:52:38,2018-12-15 10:52:40,2.799s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo/li_Seguidos""))",Firefox 64.0,,2018-12-15 10:52:40,2018-12-15 10:52:44,3.333s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo/li_Seguidores""))",Firefox 64.0,,2018-12-15 10:52:44,2018-12-15 10:52:47,2.708s,PASSED
+closeBrowser(),Firefox 64.0,,2018-12-15 10:52:47,2018-12-15 10:52:50,3.128s,PASSED
+,,,,,,
+Test Cases/vista_usuario,Firefox 64.0,,2018-12-15 10:52:50,2018-12-15 10:53:34,44.287s,PASSED
+"openBrowser("""")",Firefox 64.0,,2018-12-15 10:52:50,2018-12-15 10:53:03,12.771s,PASSED
+"navigateToUrl(""http://localhost:3000/"")",Firefox 64.0,,2018-12-15 10:53:03,2018-12-15 10:53:12,9.263s,PASSED
+"ck = new org.openqa.selenium.Cookie(_interslice_session, 7XCZXW9bsD60Xr5DDWFqYr6Q8CVKwPoGh8KzzD%2Fcyu8BYnTpQVCMWlSXHJ9%2BlrME40hykVhXdAz7pkOSXz3%2BUXNmJOcDY4m6oX6mUMWSRPfi%2Be9iUe9Bh2PmCEJP76TBgHcefIlO7Q5ifg39zDHvO0KT8aqd3ylxnyb5Ysi23M4tM0bPa4YHAqG8UACWY%2Fuepi8nV9ewN9jy%2BeVF1J5L--Tw%2FoMrMMwV8SGVKX--omw8p%2BmEdSzBOWSiPt6lDA%3D%3D)",Firefox 64.0,,2018-12-15 10:53:12,2018-12-15 10:53:12,0.012s,PASSED
+driver = getWebDriver(),Firefox 64.0,,2018-12-15 10:53:12,2018-12-15 10:53:12,0.013s,PASSED
+manage().addCookie(ck),Firefox 64.0,,2018-12-15 10:53:12,2018-12-15 10:53:12,0.121s,PASSED
+"navigateToUrl(""http://localhost:3000/home"")",Firefox 64.0,,2018-12-15 10:53:12,2018-12-15 10:53:16,3.629s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidos""))",Firefox 64.0,,2018-12-15 10:53:16,2018-12-15 10:53:19,3.137s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo_Users/Page_Apollo/span_flash""))",Firefox 64.0,,2018-12-15 10:53:19,2018-12-15 10:53:23,3.716s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo_Users/Page_Apollo/li_Viajes creados""))",Firefox 64.0,,2018-12-15 10:53:23,2018-12-15 10:53:27,3.772s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidos                   _1""))",Firefox 64.0,,2018-12-15 10:53:27,2018-12-15 10:53:29,2.801s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidores""))",Firefox 64.0,,2018-12-15 10:53:29,2018-12-15 10:53:32,2.468s,PASSED
+closeBrowser(),Firefox 64.0,,2018-12-15 10:53:32,2018-12-15 10:53:34,2.061s,PASSED
+,,,,,,
+Test Cases/vista_rv,Firefox 64.0,Ir a la rv creada por un usuario y comentar,2018-12-15 10:53:34,2018-12-15 10:54:10,36.398s,PASSED
+"openBrowser("""")",Firefox 64.0,,2018-12-15 10:53:34,2018-12-15 10:53:45,10.373s,PASSED
+"navigateToUrl(""http://localhost:3000/"")",Firefox 64.0,,2018-12-15 10:53:45,2018-12-15 10:53:54,8.853s,PASSED
+"ck = new org.openqa.selenium.Cookie(_interslice_session, 7XCZXW9bsD60Xr5DDWFqYr6Q8CVKwPoGh8KzzD%2Fcyu8BYnTpQVCMWlSXHJ9%2BlrME40hykVhXdAz7pkOSXz3%2BUXNmJOcDY4m6oX6mUMWSRPfi%2Be9iUe9Bh2PmCEJP76TBgHcefIlO7Q5ifg39zDHvO0KT8aqd3ylxnyb5Ysi23M4tM0bPa4YHAqG8UACWY%2Fuepi8nV9ewN9jy%2BeVF1J5L--Tw%2FoMrMMwV8SGVKX--omw8p%2BmEdSzBOWSiPt6lDA%3D%3D)",Firefox 64.0,,2018-12-15 10:53:54,2018-12-15 10:53:54,0.006s,PASSED
+driver = getWebDriver(),Firefox 64.0,,2018-12-15 10:53:54,2018-12-15 10:53:54,0.006s,PASSED
+manage().addCookie(ck),Firefox 64.0,,2018-12-15 10:53:54,2018-12-15 10:53:54,0.042s,PASSED
+"navigateToUrl(""http://localhost:3000/home"")",Firefox 64.0,,2018-12-15 10:53:54,2018-12-15 10:53:57,3.110s,PASSED
+"navigateToUrl(""http://localhost:3000/users/79b1768579db49f0b61a789249219335/travels"")",Firefox 64.0,,2018-12-15 10:53:57,2018-12-15 10:54:00,3.076s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo/img_Seguidores_card-img-top""))",Firefox 64.0,,2018-12-15 10:54:00,2018-12-15 10:54:04,4.383s,PASSED
+"setText(findTestObject(""Object Repository/Page_Apollo/textarea_el 2018-12-08 180035""), ""Prueba Katalon"")",Firefox 64.0,,2018-12-15 10:54:04,2018-12-15 10:54:05,0.559s,PASSED
+"click(findTestObject(""Object Repository/Page_Apollo/input_el 2018-12-08 180035 UTC""))",Firefox 64.0,,2018-12-15 10:54:05,2018-12-15 10:54:08,3.430s,PASSED
+closeBrowser(),Firefox 64.0,,2018-12-15 10:54:08,2018-12-15 10:54:10,2.046s,PASSED

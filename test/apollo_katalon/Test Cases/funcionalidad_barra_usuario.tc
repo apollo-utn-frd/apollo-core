@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Se tiene que poder acceder a las 4 opciones de la barra del usuario</description>
+   <name>funcionalidad_barra_usuario</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>166a65ed-8805-4ad5-b89a-ca8f479a0adb</testCaseGuid>
+</TestCaseEntity>

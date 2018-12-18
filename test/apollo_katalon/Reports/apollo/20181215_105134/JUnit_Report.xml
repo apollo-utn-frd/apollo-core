@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="apollo" time="148" tests="4" failures="0" errors="0">
+   <testsuite name="apollo" tests="4" failures="0" errors="0" time="148" timestamp="2018-12-15 10:51:42" hostname="federico - ubuntu" id="Test Suites/apollo">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="/home/federico/Katalon Studio/apollo_katalon/Reports/apollo/20181215_105134"/>
+         <property name="logFiles" value="/home/federico/Katalon Studio/apollo_katalon/Reports/apollo/20181215_105134/execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="federico - ubuntu"/>
+         <property name="os" value="Linux 64bit"/>
+         <property name="katalonVersion" value="5.9.1.2"/>
+         <property name="browser" value="Firefox 64.0"/>
+         <property name="hostAddress" value="127.0.1.1"/>
+         <property name="sessionId" value="6c98e19c-eb07-4bb2-a216-ae2ef9ba2b9e"/>
+         <property name="seleniumVersion" value="3.7.1"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
+         <property name="platform" value="Linux"/>
+      </properties>
+      <testcase name="Test Cases/login" classname="Test Cases/login" status="PASSED">
+         <system-out><![CDATA[2018-12-15 10:51:43 - [TEST_CASE][PASSED] - Test Cases/login: Test Cases/login
+
+2018-12-15 10:51:45 - [TEST_STEP][PASSED] - openBrowser(""): Browser is opened with url: ''
+
+2018-12-15 10:51:47 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2018-12-15 10:51:47 - [MESSAGE][INFO] - Action delay is set to 0 seconds
+
+2018-12-15 10:52:02 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-12-15 10:52:02 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:3000/"): Navigate to 'http://localhost:3000/' successfully
+
+2018-12-15 10:52:09 - [MESSAGE][PASSED] - Navigate to 'http://localhost:3000/' successfully
+
+2018-12-15 10:52:10 - [TEST_STEP][PASSED] - ck = new org.openqa.selenium.Cookie(_interslice_session, 7XCZXW9bsD60Xr5DDWFqYr6Q8CVKwPoGh8KzzD%2Fcyu8BYnTpQVCMWlSXHJ9%2BlrME40hykVhXdAz7pkOSXz3%2BUXNmJOcDY4m6oX6mUMWSRPfi%2Be9iUe9Bh2PmCEJP76TBgHcefIlO7Q5ifg39zDHvO0KT8aqd3ylxnyb5Ysi23M4tM0bPa4YHAqG8UACWY%2Fuepi8nV9ewN9jy%2BeVF1J5L--Tw%2FoMrMMwV8SGVKX--omw8p%2BmEdSzBOWSiPt6lDA%3D%3D): null
+
+2018-12-15 10:52:10 - [TEST_STEP][PASSED] - driver = getWebDriver(): null
+
+2018-12-15 10:52:10 - [TEST_STEP][PASSED] - manage().addCookie(ck): null
+
+2018-12-15 10:52:10 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:3000/home"): Navigate to 'http://localhost:3000/home' successfully
+
+2018-12-15 10:52:13 - [MESSAGE][PASSED] - Navigate to 'http://localhost:3000/home' successfully
+
+2018-12-15 10:52:13 - [TEST_STEP][PASSED] - closeBrowser(): Browser is closed
+
+2018-12-15 10:52:16 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/funcionalidad_barra_usuario" classname="Test Cases/funcionalidad_barra_usuario" status="PASSED">
+         <system-out><![CDATA[2018-12-15 10:52:16 - [TEST_CASE][PASSED] - Test Cases/funcionalidad_barra_usuario: Test Cases/funcionalidad_barra_usuario
+
+2018-12-15 10:52:16 - [TEST_STEP][PASSED] - openBrowser(""): Browser is opened with url: ''
+
+2018-12-15 10:52:16 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2018-12-15 10:52:27 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-12-15 10:52:27 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:3000/"): Navigate to 'http://localhost:3000/' successfully
+
+2018-12-15 10:52:34 - [MESSAGE][PASSED] - Navigate to 'http://localhost:3000/' successfully
+
+2018-12-15 10:52:34 - [TEST_STEP][PASSED] - ck = new org.openqa.selenium.Cookie(_interslice_session, 7XCZXW9bsD60Xr5DDWFqYr6Q8CVKwPoGh8KzzD%2Fcyu8BYnTpQVCMWlSXHJ9%2BlrME40hykVhXdAz7pkOSXz3%2BUXNmJOcDY4m6oX6mUMWSRPfi%2Be9iUe9Bh2PmCEJP76TBgHcefIlO7Q5ifg39zDHvO0KT8aqd3ylxnyb5Ysi23M4tM0bPa4YHAqG8UACWY%2Fuepi8nV9ewN9jy%2BeVF1J5L--Tw%2FoMrMMwV8SGVKX--omw8p%2BmEdSzBOWSiPt6lDA%3D%3D): null
+
+2018-12-15 10:52:34 - [TEST_STEP][PASSED] - driver = getWebDriver(): null
+
+2018-12-15 10:52:34 - [TEST_STEP][PASSED] - manage().addCookie(ck): null
+
+2018-12-15 10:52:34 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:3000/home"): Navigate to 'http://localhost:3000/home' successfully
+
+2018-12-15 10:52:38 - [MESSAGE][PASSED] - Navigate to 'http://localhost:3000/home' successfully
+
+2018-12-15 10:52:38 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo/li_Viajes creados")): Object: 'Object Repository/Page_Apollo/li_Viajes creados' is clicked on
+
+2018-12-15 10:52:40 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo/li_Viajes creados' is clicked on
+
+2018-12-15 10:52:40 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo/li_Seguidos")): Object: 'Object Repository/Page_Apollo/li_Seguidos' is clicked on
+
+2018-12-15 10:52:44 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo/li_Seguidos' is clicked on
+
+2018-12-15 10:52:44 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo/li_Seguidores")): Object: 'Object Repository/Page_Apollo/li_Seguidores' is clicked on
+
+2018-12-15 10:52:47 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo/li_Seguidores' is clicked on
+
+2018-12-15 10:52:47 - [TEST_STEP][PASSED] - closeBrowser(): Browser is closed
+
+2018-12-15 10:52:50 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/vista_usuario" classname="Test Cases/vista_usuario" status="PASSED">
+         <system-out><![CDATA[2018-12-15 10:52:50 - [TEST_CASE][PASSED] - Test Cases/vista_usuario: Test Cases/vista_usuario
+
+2018-12-15 10:52:50 - [TEST_STEP][PASSED] - openBrowser(""): Browser is opened with url: ''
+
+2018-12-15 10:52:50 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2018-12-15 10:53:03 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-12-15 10:53:03 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:3000/"): Navigate to 'http://localhost:3000/' successfully
+
+2018-12-15 10:53:12 - [MESSAGE][PASSED] - Navigate to 'http://localhost:3000/' successfully
+
+2018-12-15 10:53:12 - [TEST_STEP][PASSED] - ck = new org.openqa.selenium.Cookie(_interslice_session, 7XCZXW9bsD60Xr5DDWFqYr6Q8CVKwPoGh8KzzD%2Fcyu8BYnTpQVCMWlSXHJ9%2BlrME40hykVhXdAz7pkOSXz3%2BUXNmJOcDY4m6oX6mUMWSRPfi%2Be9iUe9Bh2PmCEJP76TBgHcefIlO7Q5ifg39zDHvO0KT8aqd3ylxnyb5Ysi23M4tM0bPa4YHAqG8UACWY%2Fuepi8nV9ewN9jy%2BeVF1J5L--Tw%2FoMrMMwV8SGVKX--omw8p%2BmEdSzBOWSiPt6lDA%3D%3D): null
+
+2018-12-15 10:53:12 - [TEST_STEP][PASSED] - driver = getWebDriver(): null
+
+2018-12-15 10:53:12 - [TEST_STEP][PASSED] - manage().addCookie(ck): null
+
+2018-12-15 10:53:12 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:3000/home"): Navigate to 'http://localhost:3000/home' successfully
+
+2018-12-15 10:53:16 - [MESSAGE][PASSED] - Navigate to 'http://localhost:3000/home' successfully
+
+2018-12-15 10:53:16 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidos")): Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidos' is clicked on
+
+2018-12-15 10:53:19 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidos' is clicked on
+
+2018-12-15 10:53:19 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo_Users/Page_Apollo/span_flash")): Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/span_flash' is clicked on
+
+2018-12-15 10:53:23 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/span_flash' is clicked on
+
+2018-12-15 10:53:23 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo_Users/Page_Apollo/li_Viajes creados")): Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/li_Viajes creados' is clicked on
+
+2018-12-15 10:53:27 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/li_Viajes creados' is clicked on
+
+2018-12-15 10:53:27 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidos                   _1")): Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidos                   _1' is clicked on
+
+2018-12-15 10:53:29 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidos                   _1' is clicked on
+
+2018-12-15 10:53:29 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidores")): Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidores' is clicked on
+
+2018-12-15 10:53:32 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo_Users/Page_Apollo/li_Seguidores' is clicked on
+
+2018-12-15 10:53:32 - [TEST_STEP][PASSED] - closeBrowser(): Browser is closed
+
+2018-12-15 10:53:34 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/vista_rv" classname="Test Cases/vista_rv" status="PASSED">
+         <system-out><![CDATA[2018-12-15 10:53:34 - [TEST_CASE][PASSED] - Test Cases/vista_rv: Test Cases/vista_rv
+
+2018-12-15 10:53:34 - [TEST_STEP][PASSED] - openBrowser(""): Browser is opened with url: ''
+
+2018-12-15 10:53:34 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2018-12-15 10:53:45 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-12-15 10:53:45 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:3000/"): Navigate to 'http://localhost:3000/' successfully
+
+2018-12-15 10:53:54 - [MESSAGE][PASSED] - Navigate to 'http://localhost:3000/' successfully
+
+2018-12-15 10:53:54 - [TEST_STEP][PASSED] - ck = new org.openqa.selenium.Cookie(_interslice_session, 7XCZXW9bsD60Xr5DDWFqYr6Q8CVKwPoGh8KzzD%2Fcyu8BYnTpQVCMWlSXHJ9%2BlrME40hykVhXdAz7pkOSXz3%2BUXNmJOcDY4m6oX6mUMWSRPfi%2Be9iUe9Bh2PmCEJP76TBgHcefIlO7Q5ifg39zDHvO0KT8aqd3ylxnyb5Ysi23M4tM0bPa4YHAqG8UACWY%2Fuepi8nV9ewN9jy%2BeVF1J5L--Tw%2FoMrMMwV8SGVKX--omw8p%2BmEdSzBOWSiPt6lDA%3D%3D): null
+
+2018-12-15 10:53:54 - [TEST_STEP][PASSED] - driver = getWebDriver(): null
+
+2018-12-15 10:53:54 - [TEST_STEP][PASSED] - manage().addCookie(ck): null
+
+2018-12-15 10:53:54 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:3000/home"): Navigate to 'http://localhost:3000/home' successfully
+
+2018-12-15 10:53:57 - [MESSAGE][PASSED] - Navigate to 'http://localhost:3000/home' successfully
+
+2018-12-15 10:53:57 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:3000/users/79b1768579db49f0b61a789249219335/travels"): Navigate to 'http://localhost:3000/users/79b1768579db49f0b61a789249219335/travels' successfully
+
+2018-12-15 10:54:00 - [MESSAGE][PASSED] - Navigate to 'http://localhost:3000/users/79b1768579db49f0b61a789249219335/travels' successfully
+
+2018-12-15 10:54:00 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo/img_Seguidores_card-img-top")): Object: 'Object Repository/Page_Apollo/img_Seguidores_card-img-top' is clicked on
+
+2018-12-15 10:54:04 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo/img_Seguidores_card-img-top' is clicked on
+
+2018-12-15 10:54:04 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/Page_Apollo/textarea_el 2018-12-08 180035"), "Prueba Katalon"): Text 'Prueba Katalon' is set on object 'Object Repository/Page_Apollo/textarea_el 2018-12-08 180035'
+
+2018-12-15 10:54:05 - [MESSAGE][PASSED] - Text 'Prueba Katalon' is set on object 'Object Repository/Page_Apollo/textarea_el 2018-12-08 180035'
+
+2018-12-15 10:54:05 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Page_Apollo/input_el 2018-12-08 180035 UTC")): Object: 'Object Repository/Page_Apollo/input_el 2018-12-08 180035 UTC' is clicked on
+
+2018-12-15 10:54:08 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Apollo/input_el 2018-12-08 180035 UTC' is clicked on
+
+2018-12-15 10:54:08 - [TEST_STEP][PASSED] - closeBrowser(): Browser is closed
+
+2018-12-15 10:54:10 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2018-12-15 10:51:42 - [TEST_SUITE][PASSED] - apollo: Test Cases/vista_rv]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>
