@@ -1,19 +1,49 @@
 <div class="comentario border-top border-bottom">
     <section class="info">
-    <div class="d-flex">
-        <a class="d-inline"><%= image_tag comment.user.image_url, class: 'img-comentario p-2' %></a>
-        <div class="d-inline p-2">
-            <a class="d-block">
-                <strong class="user-nombre"><%= comment.user.name.to_s + ' ' + comment.user.lastname.to_s %></strong>
-            </a>
-            Por <%= link_to user_path(comment.user.format_id) do %>
-                @<%= comment.user.username %>
-            <% end %> hace <%= time_ago_in_words comment.created_at %>
+        <div class="d-flex">
+            <a class="d-inline"><%= image_tag comment.user.image_url, class: 'img-comentario p-2' %></a>
+            <div class="d-inline p-2">
+                <a class="d-block">
+                    <strong class="user-nombre"><%= comment.user.name.to_s + ' ' + comment.user.lastname.to_s %></strong>
+                </a>
+                Por <%= link_to user_path(comment.user.format_id) do %>
+                    @<%= comment.user.username %>
+                <% end %> hace <%= time_ago_in_words comment.created_at %>
+            </div>
+            
+            <% if true %>
+                <button type="button" class="btn btn-link btn-delete no-decoration" data-toggle="modal" data-target="#deleteComment" title="Eliminar comentario">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            <% end %>
+
         </div>
-    </div>
     </section>
 
     <section class="p-2">
         <p><%= comment.content %></p>
     </section>
 </div>
+
+<% if true %>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Eliminar comentario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ¿Estás seguro de querer eliminar este comentario? Esta acción no se puede deshacer.
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <%= button_to 'Eliminar', class: "btn btn-danger" %>
+            </div>
+        </div>
+        </div>
+    </div>
+<% end %>

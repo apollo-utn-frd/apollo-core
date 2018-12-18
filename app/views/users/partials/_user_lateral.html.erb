@@ -17,16 +17,24 @@
     </p>
 
     <div class="d-flex justify-content-center">
-      <% if user.id != current_user.id %>
-        <% if current_user.follow?(user) %>
-          <%= button_to user_followers_path(user_id: user.format_id), method: :delete, class: 'btn btn-danger' do %>
-            <i class="fas fa-user-times mr-1"></i>Dejar de seguir
-          <% end %>
-        <% else %>
-          <%= button_to user_followers_path(user_id: user.format_id), class: 'btn btn-primary' do %>
-            <i class="fas fa-user-plus mr-1"></i>Seguir
+      <% if true %>
+        <%= button_to "disable", class: 'btn btn-info' do %>
+          <i class="fas fa-minus-circle mr-1"></i>Deshabilitar usuario
+        <% end %>
+
+      <% else %>
+        <% if user.id != current_user.id %>
+          <% if current_user.follow?(user) %>
+            <%= button_to user_followers_path(user_id: user.format_id), method: :delete, class: 'btn btn-danger' do %>
+              <i class="fas fa-user-times mr-1"></i>Dejar de seguir
+            <% end %>
+          <% else %>
+            <%= button_to user_followers_path(user_id: user.format_id), class: 'btn btn-primary' do %>
+              <i class="fas fa-user-plus mr-1"></i>Seguir
+            <% end %>
           <% end %>
         <% end %>
+        
       <% end %>
     </div>
   </div>
